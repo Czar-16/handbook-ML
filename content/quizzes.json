@@ -1,0 +1,74 @@
+[
+  {
+    "id": "recipient-limit",
+    "question": "A Free user submits 15 recipients. What happens first?",
+    "options": [
+      "The campaign schema rejects the maximum.",
+      "It queues three and silently drops twelve.",
+      "It creates two Premium-sized campaigns."
+    ],
+    "answer": 0,
+    "why": "campaignSchema caps recipientIds at 10 for every plan. Free-specific checks come afterward.",
+    "chapter": "sending"
+  },
+  {
+    "id": "timeout",
+    "question": "Gmail may have accepted a request, but the response was lost. What is safe?",
+    "options": [
+      "Retry after the lease expires.",
+      "Retain uncertainty and block automatic resend.",
+      "Delete accounting because success is unproven."
+    ],
+    "answer": 1,
+    "why": "Unknown acceptance is not definite rejection. The implementation keeps the charge and the stable identity.",
+    "chapter": "sending"
+  },
+  {
+    "id": "return",
+    "question": "The browser returns from checkout with success-like parameters. What grants access?",
+    "options": [
+      "The query string.",
+      "The local plan badge.",
+      "Verified provider evidence and entitlement resolution."
+    ],
+    "answer": 2,
+    "why": "A return redirect is only a UI hint, not proof of payment.",
+    "chapter": "payments"
+  },
+  {
+    "id": "grace",
+    "question": "A paid subscription enters verified grace. Which usage period applies?",
+    "options": [
+      "A fresh second monthly allowance.",
+      "The same allowance with an extended operational end.",
+      "No retained usage evidence."
+    ],
+    "answer": 1,
+    "why": "Grace extends the original allowance identity rather than minting another one.",
+    "chapter": "database"
+  },
+  {
+    "id": "flag",
+    "question": "Paid gating is disabled. What legacy restriction remains?",
+    "options": [
+      "Rolling 200 emails in 24 hours.",
+      "No sending restriction at all.",
+      "Free 3/day and 15/month."
+    ],
+    "answer": 0,
+    "why": "Legacy rolling enforcement stays while ledger writes and duplicate protection remain.",
+    "chapter": "sending"
+  },
+  {
+    "id": "lease",
+    "question": "An ATTEMPTING lease expires without acceptance evidence. What does expiry establish?",
+    "options": [
+      "The provider rejected the message.",
+      "The user gets an automatic refund.",
+      "The active claim is stale; acceptance is still unknown."
+    ],
+    "answer": 2,
+    "why": "A lease measures local worker activity, not the provider outcome.",
+    "chapter": "security-reliability"
+  }
+]

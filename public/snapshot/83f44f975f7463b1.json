@@ -1,0 +1,1 @@
+{"path":"prisma/migrations/20261010000000_contact_follow_up/migration.sql","text":"ALTER TABLE \"Contact\" ADD COLUMN \"followUpRequestedAt\" TIMESTAMP(3);\n","hash":"bc304dff4972fdd72daf01185f813db710ad4600ac1553b933063a6f5ce2e4ad","originalHash":"bc304dff4972fdd72daf01185f813db710ad4600ac1553b933063a6f5ce2e4ad","lines":2}

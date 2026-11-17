@@ -1,0 +1,1 @@
+export default function NotFound(){return <main id="main" className="chapter-main"><div className="eyebrow">404 / OUTSIDE THE HANDBOOK</div><h1>That page isn’t here.</h1><p><a href="/">Return to the reading map →</a> or search for a topic in the top bar.</p></main>;}

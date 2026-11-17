@@ -1,0 +1,1 @@
+{"path":"src/app/(app)/loading.tsx","text":"import { WorkspaceLoading } from \"@/components/workspace-loading\";\n\nexport default function Loading() {\n  return <WorkspaceLoading />;\n}\n","hash":"73532820f38d027d367dffb482f586ae26a22808aa09d6572ed89c88923068a9","originalHash":"73532820f38d027d367dffb482f586ae26a22808aa09d6572ed89c88923068a9","lines":6}

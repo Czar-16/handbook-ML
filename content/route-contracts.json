@@ -1,0 +1,107 @@
+[
+  {
+    "path": "src/app/api/account/activity/route.ts",
+    "methods": "POST",
+    "inputs": "No application body; current session and same-origin request.",
+    "outputs": "{ ok: true }; 401 for no owner, 403 origin mismatch, 503 activity failure.",
+    "effects": "Updates bounded last-active evidence, not other users\u2019 activity."
+  },
+  {
+    "path": "src/app/api/account/export/route.ts",
+    "methods": "GET",
+    "inputs": "Current session; shared export request budget.",
+    "outputs": "Private no-store JSON attachment; safe failure responses.",
+    "effects": "Reads explicit owner-scoped projections including usage/subscription state; no refresh token."
+  },
+  {
+    "path": "src/app/api/account/notices/route.ts",
+    "methods": "POST",
+    "inputs": "Session plus strict JSON {noticeId: UUID}.",
+    "outputs": "{ dismissed: true }; 401/400 for authentication/input failures.",
+    "effects": "Dismisses only an owner notice via dismissAccountNotice."
+  },
+  {
+    "path": "src/app/api/auth/[...nextauth]/route.ts",
+    "methods": "GET, POST",
+    "inputs": "Auth.js-managed OAuth/session request and callback data.",
+    "outputs": "Framework-generated auth responses.",
+    "effects": "Delegates to handlers from auth.ts; OAuth entrypoints validate provider identity before a session exists."
+  },
+  {
+    "path": "src/app/api/billing/checkout/route.ts",
+    "methods": "POST",
+    "inputs": "Session, origin, checkout budget, body bounded to 4096 characters; paid_monthly and idempotency UUID.",
+    "outputs": "{checkoutUrl} or mapped BillingError; 413/400 for oversize/invalid JSON.",
+    "effects": "Creates durable attempt/customer/session with provider writes outside short owner transactions."
+  },
+  {
+    "path": "src/app/api/billing/cancel/route.ts",
+    "methods": "POST",
+    "inputs": "Session, origin, shared management budget and bounded JSON cancellation input.",
+    "outputs": "Cancellation workflow result or mapped failure.",
+    "effects": "Calls cancelBillingSubscription and retains provider cancellation recovery state."
+  },
+  {
+    "path": "src/app/api/billing/portal/route.ts",
+    "methods": "POST",
+    "inputs": "Session, origin and shared management budget; no application body.",
+    "outputs": "{portalUrl} or mapped failure.",
+    "effects": "Reads bound customer and calls provider portal creation; current host validation is test-specific."
+  },
+  {
+    "path": "src/app/api/billing/status/route.ts",
+    "methods": "GET",
+    "inputs": "Session and status request budget.",
+    "outputs": "Private billing/access observation including configured mode, deadlines and checkout state.",
+    "effects": "Reads durable observations without trusting return parameters."
+  },
+  {
+    "path": "src/app/api/inngest/route.ts",
+    "methods": "GET, POST, PUT",
+    "inputs": "Inngest-managed service request and signature protocol.",
+    "outputs": "serve framework responses.",
+    "effects": "Registers eight functions. Correct deployed signing/registration is external configuration."
+  },
+  {
+    "path": "src/app/api/quota/route.ts",
+    "methods": "GET",
+    "inputs": "Current session.",
+    "outputs": "Private no-store quota snapshot; 401 unauthenticated, 503 unavailable.",
+    "effects": "Reads fresh gated snapshot or a reduced legacy response including used/limit/notices/accessVersion."
+  },
+  {
+    "path": "src/app/api/resume/upload/route.ts",
+    "methods": "POST",
+    "inputs": "Session, same origin, bounded multipart File under key file.",
+    "outputs": "{ok:true}; 401/403/413/400 for denied, too-large or invalid upload.",
+    "effects": "Development local-storage branch validates PDF and activates it. Production/local-Blob mismatch is rejected by storage helper."
+  },
+  {
+    "path": "src/app/api/resume/blob/route.ts",
+    "methods": "POST",
+    "inputs": "User authorization/origin/path for token issuance; SDK-verified service completion branch.",
+    "outputs": "SDK upload-token/callback result; 503 cleanup failure or 400 safe failure.",
+    "effects": "Issues short-lived constrained PDF tokens; completion discards unavailable unactivated paths. finalizeResume performs normal activation."
+  },
+  {
+    "path": "src/app/api/resume/download/route.ts",
+    "methods": "GET",
+    "inputs": "Current session and current owner-selected attachment.",
+    "outputs": "Private PDF attachment; 401/403/404 for missing owner/file/read failure.",
+    "effects": "Reads only the owner path and supplies nosniff/no-store headers."
+  },
+  {
+    "path": "src/app/api/templates/[id]/export/route.ts",
+    "methods": "GET",
+    "inputs": "Session, shared export budget and UUID route parameter.",
+    "outputs": "Private JSON template attachment; 401/404 and limiter errors.",
+    "effects": "Reads owner/deletion-scoped selected template fields; no mutation of the template."
+  },
+  {
+    "path": "src/app/api/webhooks/dodo/route.ts",
+    "methods": "POST",
+    "inputs": "Exact raw body up to 256 KiB plus three Standard Webhooks headers.",
+    "outputs": "{received:true}; 401 signature, 413 size, 409 conflict, 503 config/storage failures.",
+    "effects": "Verifies signature, commits normalized receipt and schedules after() processing; durable jobs recover later."
+  }
+]

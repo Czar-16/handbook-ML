@@ -1,0 +1,242 @@
+[
+  {
+    "name": "submitCampaign",
+    "path": "src/lib/actions.ts",
+    "inputs": "Unknown campaign input; owner comes from requireUser.",
+    "outputs": "ActionResult with queued campaign identity or safe validation/business failure.",
+    "effects": "Admits campaign budget, commits campaign through createCampaign, dispatches events, revalidates workspace paths.",
+    "callers": "Compose invokes this authenticated action; Inngest publication failures are caught after commit."
+  },
+  {
+    "name": "createCampaign",
+    "path": "src/lib/campaigns.ts",
+    "inputs": "Authenticated userId and unknown input parsed by campaignSchema.",
+    "outputs": "Existing/new campaign ID, selected count and skipped count.",
+    "effects": "Locks owner, reads access/template/contacts/history, creates immutable Send snapshots and reserves daily/monthly capacity.",
+    "callers": "submitCampaign; also directly exercised by campaign/database tests."
+  },
+  {
+    "name": "deliverOne",
+    "path": "src/lib/inngest.ts",
+    "inputs": "Owner UUID and Send UUID.",
+    "outputs": "Outcome done/wait/uncertain/deferred with optional deadline.",
+    "effects": "Checks fresh controls, prepares credentials/PDF/MIME, claims usage, makes at most one submission and settles or retains accounting.",
+    "callers": "sendEmail step; test callers exercise failure boundaries."
+  },
+  {
+    "name": "gmailForUser",
+    "path": "src/lib/gmail.ts",
+    "inputs": "Owner ID.",
+    "outputs": "Restricted messages.send client plus sender email/name.",
+    "effects": "Reads User, decrypts refresh token and performs provider access-token preparation; clears refresh credentials from send client.",
+    "callers": "deliverOne. Failures occur before final send claim."
+  },
+  {
+    "name": "buildMime",
+    "path": "src/lib/gmail.ts",
+    "inputs": "Sender, recipient, subject/body, stable Message-ID and optional PDF bytes.",
+    "outputs": "Promise of a base64url MIME string.",
+    "effects": "Constructs in-memory text/HTML/attachment parts; sets date; composer URL/file fetching is disabled.",
+    "callers": "deliverOne and MIME tests."
+  },
+  {
+    "name": "withUsageTransaction",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Prisma client, owner ID and async work callback.",
+    "outputs": "The callback result, or propagated error after bounded retryable DB failures.",
+    "effects": "Starts short transaction, locks owner, brands valid transaction context; retries only retryable database work.",
+    "callers": "Campaign, delivery, cancellation and reconciliation helpers. Network calls must stay outside work."
+  },
+  {
+    "name": "reserveUsage",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Locked owner context, period specs, stable send/delivery identities and enforcement flag.",
+    "outputs": "Existing/new reservation rows.",
+    "effects": "Ensures/locks periods, checks full-batch capacity, creates only proven-unsubmitted reservations and refreshes counters.",
+    "callers": "createCampaign; internal database primitive rather than authenticated action."
+  },
+  {
+    "name": "claimUsage",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Locked owner, delivery key, current period specs, enforcement flag and time.",
+    "outputs": "Claimed boolean and reservation including claim token.",
+    "effects": "Checks availability/periods, rebinds unattempted reservation, records attempt time and two-minute lease on reservation/Send.",
+    "callers": "Final check in deliverOne. A non-RESERVED identity cannot be submitted again through this claim."
+  },
+  {
+    "name": "confirmUsage",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Locked owner, delivery key, claim token, provider acceptance IDs and sent time.",
+    "outputs": "Confirmed reservation.",
+    "effects": "Validates claim and acceptance, marks accounting CONFIRMED and linked Send SENT/DONE, rebuilds counters.",
+    "callers": "Delivery settlement and durable acceptance recovery."
+  },
+  {
+    "name": "releaseUsage",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Locked owner, delivery key, proof of UNSUBMITTED or matching DEFINITE_REJECTION, optional time.",
+    "outputs": "Released reservation or existing released row.",
+    "effects": "Rejects invalid proof; releases capacity, finalizes linked Send and refreshes counters.",
+    "callers": "Cancellation, delivery failure and reconciliation. Uncertain work is not refundable through an unsubmitted assertion."
+  },
+  {
+    "name": "markUsageUncertain",
+    "path": "src/lib/usage-ledger.ts",
+    "inputs": "Locked owner, key, claim token, time and optional expired-lease-only guard.",
+    "outputs": "Uncertain/already-confirmed reservation.",
+    "effects": "Requires the exact claim; marks ambiguity, leaves accounting retained and updates Send FAILED/UNCERTAIN.",
+    "callers": "deliverOne and lease reconciliation."
+  },
+  {
+    "name": "resolveUsagePeriods",
+    "path": "src/lib/usage-periods.ts",
+    "inputs": "Entitlement user and a valid instant.",
+    "outputs": "Half-open daily/monthly specs with stable keys and operational boundaries.",
+    "effects": "Pure calculation; throws when an active provider period is unresolved.",
+    "callers": "Campaign allocation, claims, entitlement-related accounting. Free uses calendar months; actual paid access uses exact provider periods."
+  },
+  {
+    "name": "getEffectivePlan",
+    "path": "src/lib/entitlements.ts",
+    "inputs": "Current entitlement-user fields and time.",
+    "outputs": "FREE or PAID.",
+    "effects": "Pure resolution: deletion/suspension, active override, grandfathering, then subscription lifecycle.",
+    "callers": "Server entitlement projection, policy and usage-period calculation."
+  },
+  {
+    "name": "canUser",
+    "path": "src/lib/entitlements.ts",
+    "inputs": "Entitlement user, feature, control row or null, optional time.",
+    "outputs": "Allowed decision or bounded denial code.",
+    "effects": "Pure decision using lifecycle and pause helpers; does not mutate the account.",
+    "callers": "requireEntitlement, client projection, createCampaign and worker checks."
+  },
+  {
+    "name": "requireEntitlement",
+    "path": "src/lib/entitlements.ts",
+    "inputs": "Authenticated caller-supplied owner ID, feature and optional transaction.",
+    "outputs": "Resolves void or throws EntitlementError.",
+    "effects": "Reads current owner and global controls; caller still owns resource checks and locking.",
+    "callers": "Actions/business operations, never a substitute for authentication."
+  },
+  {
+    "name": "encryptToken",
+    "path": "src/lib/crypto.ts",
+    "inputs": "Plaintext token and owner UUID.",
+    "outputs": "Owner-bound v2 AES-GCM envelope.",
+    "effects": "Reads keyring and generates random IV; generic safe error on failure.",
+    "callers": "Auth.js token persistence and rotation. No database write itself."
+  },
+  {
+    "name": "decryptToken",
+    "path": "src/lib/crypto.ts",
+    "inputs": "Stored envelope and owner UUID.",
+    "outputs": "Plaintext token or constant safe error.",
+    "effects": "Uses selected v2 key/AAD or legacy v1 key; no implicit fallback for v2.",
+    "callers": "gmailForUser, revocation workflow and key rotation."
+  },
+  {
+    "name": "rotateTokenPage",
+    "path": "src/lib/token-rotation.ts",
+    "inputs": "Optional apply, after UUID and bounded page size.",
+    "outputs": "Counts plus resumable owner cursor.",
+    "effects": "Dry-run reads and decrypts; apply re-encrypts using ciphertext/state compare-and-swap, covering retained deletion credentials.",
+    "callers": "Rotation CLI. It is not called by the handbook."
+  },
+  {
+    "name": "billingConfig",
+    "path": "src/lib/billing/config.ts",
+    "inputs": "Environment name/value map, defaulting to process.env.",
+    "outputs": "Validated explicit mode, API/product/webhook/business config and canonical origin.",
+    "effects": "Pure validation; rejects mode/origin/override mistakes with BillingError.",
+    "callers": "Billing client, ingress, checkout and scheduled jobs."
+  },
+  {
+    "name": "ensureBillingBinding",
+    "path": "src/lib/billing/store.ts",
+    "inputs": "Short owner-locked transaction.",
+    "outputs": "Void or BillingError.",
+    "effects": "Locks SystemControl and binds only a clean database; rejects environment/business mismatch or existing unbound provider data.",
+    "callers": "Checkout, provider lifecycle/recovery operations."
+  },
+  {
+    "name": "verifyBillingProduct",
+    "path": "src/lib/billing/store.ts",
+    "inputs": "Configured product/business.",
+    "outputs": "Verified provider product or BillingError.",
+    "effects": "Reads provider product and localized prices; checks exact recurring catalog shape.",
+    "callers": "Checkout readiness. Network calls are outside owner-lock assumptions for binding."
+  },
+  {
+    "name": "storeBillingEvent",
+    "path": "src/lib/billing/webhooks.ts",
+    "inputs": "Exact raw body, verified payload and webhook ID.",
+    "outputs": "Durable inbox receipt.",
+    "effects": "Validates business, normalizes/quarantines/ignores, hashes payload and upserts by unique webhook ID; conflicts fail.",
+    "callers": "Verified Dodo webhook route before after() processing."
+  },
+  {
+    "name": "processBillingEvent",
+    "path": "src/lib/billing/lifecycle.ts",
+    "inputs": "Internal inbox receipt ID.",
+    "outputs": "Processing outcome from the lifecycle workflow.",
+    "effects": "Reads durable receipt and provider evidence; commits reconciled subscription/payment observations and retry/failure state.",
+    "callers": "Webhook after() and billing recovery. Read full source for event-specific branches."
+  },
+  {
+    "name": "activateResume",
+    "path": "src/lib/storage.ts",
+    "inputs": "Owner, validated storage path and client filename.",
+    "outputs": "Void or failure.",
+    "effects": "Reads/validates PDF, locks owner, creates/selects attachment metadata, discards invalid activation and cleans eligible older files.",
+    "callers": "Local upload and verified Blob completion."
+  },
+  {
+    "name": "cleanupAttachments",
+    "path": "src/lib/storage.ts",
+    "inputs": "Owner ID.",
+    "outputs": "Void.",
+    "effects": "Locks owner, marks up to ten eligible files retired, deletes bytes outside transaction, then records physical completion; failure remains pending.",
+    "callers": "Resume activation and accountMaintenance."
+  },
+  {
+    "name": "requestAccountDeletion",
+    "path": "src/lib/account.ts",
+    "inputs": "Authenticated owner and exact confirmation email.",
+    "outputs": "Queued cancellation result.",
+    "effects": "Marks account unavailable, creates independent recovery job, clears normal credential, cancels eligible READY work and attempts billing-only recovery.",
+    "callers": "Account deletion action in launch-actions.ts."
+  },
+  {
+    "name": "exportAccount",
+    "path": "src/lib/account.ts",
+    "inputs": "Authenticated owner ID.",
+    "outputs": "Versioned profile/content/subscription/usage export object.",
+    "effects": "Reads owner-scoped data with explicit projections; does not include refresh-token material.",
+    "callers": "Authenticated export route with an export budget."
+  },
+  {
+    "name": "requireAdmin",
+    "path": "src/lib/admin/auth.ts",
+    "inputs": "Boolean selecting mutation freshness checks.",
+    "outputs": "Verified admin actor with auth timestamp.",
+    "effects": "Reads session, validates restricted database privileges and current actor; throws denied/unavailable/reauth codes.",
+    "callers": "Admin views and actions. Mutations require fresh Google reauthentication."
+  },
+  {
+    "name": "consumeBudgets",
+    "path": "src/lib/rate-limit.ts",
+    "inputs": "Owner/actor ID and named budgets.",
+    "outputs": "Admission result or structured denial/unavailable error.",
+    "effects": "Uses database time and stable budget row locks; records admissions before business work.",
+    "callers": "Protected billing/actions/export/admin entrypoints."
+  },
+  {
+    "name": "canReadGmail",
+    "path": "src/lib/capabilities.ts",
+    "inputs": "No arguments.",
+    "outputs": "Always false.",
+    "effects": "No side effects.",
+    "callers": "Compatibility reply helpers and capability checks. Scope/env changes cannot enable mailbox reading."
+  }
+]

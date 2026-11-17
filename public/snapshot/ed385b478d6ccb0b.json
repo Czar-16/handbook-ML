@@ -1,0 +1,1 @@
+{"path":"prisma/migrations/20261102000000_testing_usage_reset/migration.sql","text":"ALTER TABLE \"User\" ADD COLUMN \"testingUsageResetAt\" TIMESTAMP(3);\n","hash":"a182af4e625acb8523b8324ba3459d5a78a8508504532b8d175d35ccc81dd70d","originalHash":"a182af4e625acb8523b8324ba3459d5a78a8508504532b8d175d35ccc81dd70d","lines":2}

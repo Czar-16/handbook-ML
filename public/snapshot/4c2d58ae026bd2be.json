@@ -1,0 +1,1 @@
+{"path":"prisma/migrations/20261010020000_shortlist_removal/migration.sql","text":"ALTER TABLE \"Contact\" ADD COLUMN \"shortlistRemovedAt\" TIMESTAMP(3);\n","hash":"8b33ee8def9552147691a0d599230c4a62ecb69b9403796569ee60ac25c552a9","originalHash":"8b33ee8def9552147691a0d599230c4a62ecb69b9403796569ee60ac25c552a9","lines":2}

@@ -1,0 +1,5 @@
+import highlighted from '@/content/highlighted.json';
+import snapshot from '@/content/snapshot.json';
+import {type Ref,sourceHref} from '@/lib/content';
+import {CopyButton} from './learning';
+export function Evidence({reference,open=false}:{reference:Ref;open?:boolean}){const f=snapshot.find(f=>f.path===reference.path);if(!f)throw Error('Unresolved citation '+reference.path);const text=f.text.split('\n').slice(reference.start-1,reference.end).join('\n');const html=(highlighted as Record<string,string>)[[reference.path,reference.start,reference.end].join(':')];if(!html)throw Error('Missing highlighted excerpt');return <details className="evidence" open={open}><summary><span className="evidence-label">Source evidence</span><code>{reference.path}:L{reference.start}-L{reference.end}</code></summary><div className="snippet-toolbar"><a href={sourceHref(reference.path,reference.start)}>Open in source browser ↗</a><CopyButton text={text}/></div><div className="code-snippet" dangerouslySetInnerHTML={{__html:html}}/><div className="hash-note">SHA-256 excerpt {reference.hash.slice(0,16)} · sanitized snapshot · original line positions</div></details>;}

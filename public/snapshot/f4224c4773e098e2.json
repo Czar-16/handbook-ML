@@ -1,0 +1,1 @@
+{"path":"src/lib/params.ts","text":"export function pageNumber(value?: string) {\n  const n = Number(value);\n  return Number.isInteger(n) && n > 0 ? Math.min(n, 100000) : 1;\n}\n","hash":"d7a4cb34bb9a651b681f0c17757a84e3efe7841ec65bb353bf2d382b9585739f","originalHash":"d7a4cb34bb9a651b681f0c17757a84e3efe7841ec65bb353bf2d382b9585739f","lines":5}

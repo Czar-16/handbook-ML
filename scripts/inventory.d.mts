@@ -1,0 +1,2 @@
+export function extractFunctions(file:{path:string;text:string}): {id:string;path:string;name:string;start:number;end:number;kind:string;params:string[];returnType:string;returns:string[];calls:string[];category:string;async:boolean;action:boolean;hash:string;callerLimit:string;callers?:{name:string;path:string;start:number}[]}[];
+export function extractRoutes(files:{path:string;text:string}[]): {path:string;url:string;kind:string;methods:string[]}[];

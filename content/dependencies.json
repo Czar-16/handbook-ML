@@ -1,0 +1,174 @@
+{
+  "@next/third-parties": {
+    "declared": "16.4.3",
+    "installed": "16.4.3"
+  },
+  "@prisma/adapter-pg": {
+    "declared": "7.10.0",
+    "installed": "7.10.0"
+  },
+  "@prisma/client": {
+    "declared": "7.10.0",
+    "installed": "7.10.0"
+  },
+  "@radix-ui/react-dialog": {
+    "declared": "1.3.1",
+    "installed": "1.3.1"
+  },
+  "@radix-ui/react-slot": {
+    "declared": "1.4.0",
+    "installed": "1.4.0"
+  },
+  "@vercel/analytics": {
+    "declared": "^2.0.1",
+    "installed": "2.0.1"
+  },
+  "@vercel/blob": {
+    "declared": "2.8.1",
+    "installed": "2.8.1"
+  },
+  "@vercel/speed-insights": {
+    "declared": "^2.1.0",
+    "installed": "2.1.0"
+  },
+  "class-variance-authority": {
+    "declared": "0.7.1",
+    "installed": "0.7.1"
+  },
+  "clsx": {
+    "declared": "2.1.1",
+    "installed": "2.1.1"
+  },
+  "dodopayments": {
+    "declared": "2.55.0",
+    "installed": "2.55.0"
+  },
+  "dotenv": {
+    "declared": "18.0.6",
+    "installed": "18.0.6"
+  },
+  "gmail-mime": {
+    "declared": "npm:nodemailer@10.0.16",
+    "installed": "10.0.16"
+  },
+  "googleapis": {
+    "declared": "^183.0.0",
+    "installed": "183.0.0"
+  },
+  "inngest": {
+    "declared": "4.22.0",
+    "installed": "4.22.0"
+  },
+  "lucide-react": {
+    "declared": "1.52.0",
+    "installed": "1.52.0"
+  },
+  "next": {
+    "declared": "16.4.3",
+    "installed": "16.4.3"
+  },
+  "next-auth": {
+    "declared": "^5.0.0-beta.32",
+    "installed": "5.0.0-beta.32"
+  },
+  "papaparse": {
+    "declared": "5.7.0",
+    "installed": "5.7.0"
+  },
+  "pg": {
+    "declared": "8.23.1",
+    "installed": "8.23.1"
+  },
+  "react": {
+    "declared": "19.3.0",
+    "installed": "19.3.0"
+  },
+  "react-dom": {
+    "declared": "19.3.0",
+    "installed": "19.3.0"
+  },
+  "server-only": {
+    "declared": "0.0.1",
+    "installed": "0.0.1"
+  },
+  "standardwebhooks": {
+    "declared": "1.1.1",
+    "installed": "1.1.1"
+  },
+  "tailwind-merge": {
+    "declared": "3.7.0",
+    "installed": "3.7.0"
+  },
+  "zod": {
+    "declared": "4.6.5",
+    "installed": "4.6.5"
+  },
+  "@axe-core/playwright": {
+    "declared": "4.13.0",
+    "installed": "4.13.0"
+  },
+  "@playwright/test": {
+    "declared": "1.63.0",
+    "installed": "1.63.0"
+  },
+  "@tailwindcss/postcss": {
+    "declared": "^4.3.3",
+    "installed": "4.3.3"
+  },
+  "@types/node": {
+    "declared": "22.20.5",
+    "installed": "22.20.5"
+  },
+  "@types/nodemailer": {
+    "declared": "8.0.2",
+    "installed": "8.0.2"
+  },
+  "@types/papaparse": {
+    "declared": "5.5.2",
+    "installed": "5.5.2"
+  },
+  "@types/pg": {
+    "declared": "8.23.1",
+    "installed": "8.23.1"
+  },
+  "@types/react": {
+    "declared": "^19",
+    "installed": "19.3.0"
+  },
+  "@types/react-dom": {
+    "declared": "^19",
+    "installed": "19.3.0"
+  },
+  "eslint": {
+    "declared": "^9",
+    "installed": "9.39.5"
+  },
+  "eslint-config-next": {
+    "declared": "16.4.3",
+    "installed": "16.4.3"
+  },
+  "prettier": {
+    "declared": "3.9.9",
+    "installed": "3.9.9"
+  },
+  "prisma": {
+    "declared": "7.10.0",
+    "installed": "7.10.0"
+  },
+  "tailwindcss": {
+    "declared": "^4",
+    "installed": "4.3.3"
+  },
+  "tsx": {
+    "declared": "4.23.15",
+    "installed": "4.23.15"
+  },
+  "typescript": {
+    "declared": "^5",
+    "installed": "5.9.3"
+  },
+  "vitest": {
+    "declared": "5.0.3",
+    "installed": "5.0.3"
+  }
+}

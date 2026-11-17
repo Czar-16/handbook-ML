@@ -1,0 +1,1 @@
+{"path":"prisma/migrations/20261007202355_protect_resume_cleanup/migration.sql","text":"-- AlterTable\nALTER TABLE \"Attachment\" ADD COLUMN     \"deletedAt\" TIMESTAMP(3);\n","hash":"a885393e0216c1bf6eab9f5b914b9a55668dac01137d79b859a6dc3721a09dc8","originalHash":"a885393e0216c1bf6eab9f5b914b9a55668dac01137d79b859a6dc3721a09dc8","lines":3}

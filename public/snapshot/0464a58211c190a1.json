@@ -1,0 +1,1 @@
+{"path":"prisma/migrations/20261011000000_delete_history/migration.sql","text":"ALTER TABLE \"Send\" ADD COLUMN \"historyDeletedAt\" TIMESTAMP(3);\n","hash":"c0bbde291a3ce265244dd1013b4d9854a7a7e7084c30f613c77cc3e514e8bab1","originalHash":"c0bbde291a3ce265244dd1013b4d9854a7a7e7084c30f613c77cc3e514e8bab1","lines":2}

@@ -1,0 +1,1 @@
+{"path":"src/types/gmail-mime.d.ts","text":"declare module \"gmail-mime/lib/mail-composer\" {\n  import MailComposer from \"nodemailer/lib/mail-composer\";\n  export default MailComposer;\n}\n","hash":"c39d67ea234509bcd8bec824d1d22ea59af6ebc0fa18713756aec5da82df744f","originalHash":"c39d67ea234509bcd8bec824d1d22ea59af6ebc0fa18713756aec5da82df744f","lines":5}

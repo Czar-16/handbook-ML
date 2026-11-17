@@ -1,0 +1,1 @@
+{"path":"src/app/api/auth/[...nextauth]/route.ts","text":"import { handlers } from \"@/auth\";\nexport const { GET, POST } = handlers;\n","hash":"91e865e1ac44658a8eccaf2c3778c5013d2dd6fb126c92f44a6249559ad18924","originalHash":"91e865e1ac44658a8eccaf2c3778c5013d2dd6fb126c92f44a6249559ad18924","lines":3}

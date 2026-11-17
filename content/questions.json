@@ -1,0 +1,808 @@
+[
+  {
+    "id": "q01",
+    "question": "What does Mailloop do?",
+    "short": "It helps job seekers send personalized cold emails through their own Gmail.",
+    "deep": "Contacts and templates become individual per-recipient messages; sending, usage and billing state are durable.",
+    "chapter": "start-here",
+    "ref": {
+      "path": "src/lib/plans.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "64c1404ce67c447bab44dbb584521c9303dce907e1dabd4db046597c5ecbb858"
+    }
+  },
+  {
+    "id": "q02",
+    "question": "What are the current campaign limits?",
+    "short": "Free: 3 recipients. Premium: 10 recipients.",
+    "deep": "With gating enabled, daily caps are 3/20 and allowances are 15/300. Remaining reservations can reduce available capacity.",
+    "chapter": "start-here",
+    "ref": {
+      "path": "src/lib/plans.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "64c1404ce67c447bab44dbb584521c9303dce907e1dabd4db046597c5ecbb858"
+    }
+  },
+  {
+    "id": "q03",
+    "question": "What happens to a 15-recipient request?",
+    "short": "campaignSchema rejects it before plan enforcement.",
+    "deep": "Its maximum is the Premium campaign limit of 10. A four-recipient Free request instead reaches the plan-specific check.",
+    "chapter": "start-here",
+    "ref": {
+      "path": "src/lib/plans.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "64c1404ce67c447bab44dbb584521c9303dce907e1dabd4db046597c5ecbb858"
+    }
+  },
+  {
+    "id": "q04",
+    "question": "Is PAID a third product plan?",
+    "short": "No. PAID is the internal enum for Premium.",
+    "deep": "PLAN_LABELS maps the enum to public copy. Use this distinction when reading database records and UI text.",
+    "chapter": "start-here",
+    "ref": {
+      "path": "src/lib/plans.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "64c1404ce67c447bab44dbb584521c9303dce907e1dabd4db046597c5ecbb858"
+    }
+  },
+  {
+    "id": "q05",
+    "question": "Where does durable truth live?",
+    "short": "PostgreSQL stores campaigns, sends, usage and recovery state.",
+    "deep": "Inngest events trigger work, but committed queue rows are the durable intent when publication fails.",
+    "chapter": "architecture",
+    "ref": {
+      "path": "src/lib/actions.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "670c2d2b8163b7d2792db0453ac3b1cb27175f9db90d91fdb21c672723876467"
+    }
+  },
+  {
+    "id": "q06",
+    "question": "Why not send all mail inside a server action?",
+    "short": "The implementation commits durable work and dispatches background events.",
+    "deep": "This allows recovery after UI navigation or publication interruption; it adds orchestration and reconciliation complexity.",
+    "chapter": "architecture",
+    "ref": {
+      "path": "src/lib/actions.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "670c2d2b8163b7d2792db0453ac3b1cb27175f9db90d91fdb21c672723876467"
+    }
+  },
+  {
+    "id": "q07",
+    "question": "What is the outbox pattern here?",
+    "short": "Commit the queued intent before publishing an event.",
+    "deep": "submitCampaign catches dispatch failure; later reconciliation repairs publication without replacing the delivery identity.",
+    "chapter": "architecture",
+    "ref": {
+      "path": "src/lib/actions.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "670c2d2b8163b7d2792db0453ac3b1cb27175f9db90d91fdb21c672723876467"
+    }
+  },
+  {
+    "id": "q08",
+    "question": "Does package presence explain architectural motivation?",
+    "short": "No. It establishes implementation use.",
+    "deep": "Label a reason CONFIRMED only when a comment or decision document actually states it; otherwise use INFERRED.",
+    "chapter": "architecture",
+    "ref": {
+      "path": "src/lib/actions.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "670c2d2b8163b7d2792db0453ac3b1cb27175f9db90d91fdb21c672723876467"
+    }
+  },
+  {
+    "id": "q09",
+    "question": "Why snapshot recipient and template fields on Send?",
+    "short": "The queued message retains the approved values.",
+    "deep": "Editing a contact or template later does not rewrite the campaign snapshot. This also creates explicit content-retention duties.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q10",
+    "question": "What prevents duplicate campaign creation?",
+    "short": "An owner-scoped idempotency key and a unique constraint.",
+    "deep": "The owner transaction first checks for a previous campaign. Replays return its identity rather than inserting another.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q11",
+    "question": "Why separate reservations from Send rows?",
+    "short": "Accounting must survive history deletion.",
+    "deep": "UsageReservation has a stable delivery key and nullable Send link with SetNull behavior, while period evidence remains durable.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q12",
+    "question": "Why does AccountDeletionJob lack a User foreign key?",
+    "short": "Recovery must outlive removal of User content.",
+    "deep": "The job retains cleanup markers, deadlines, provider identities and bounded credentials independently.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q13",
+    "question": "What is a composite ownership constraint?",
+    "short": "A relation that includes tenant identity as part of its key.",
+    "deep": "Reservation period references use period ID plus userId, preventing cross-owner period association at the schema level.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q14",
+    "question": "Is deleting history the same as deleting an account?",
+    "short": "No. History removal preserves safeguards and accounting.",
+    "deep": "Receipts and delivery identities may remain after history deletion; account deletion has a separate recovery lifecycle.",
+    "chapter": "database",
+    "ref": {
+      "path": "prisma/schema.prisma",
+      "start": 1,
+      "end": 18,
+      "hash": "b61169fd087c20fcce55dad474eb8880abb2acf4a1d453f1f3ce75a3c409fb5e"
+    }
+  },
+  {
+    "id": "q15",
+    "question": "Which session strategy is configured?",
+    "short": "JWT sessions.",
+    "deep": "auth.ts configures strategy jwt and manually persists User rows in callbacks; it does not configure a Prisma adapter.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q16",
+    "question": "Why is verified email alone insufficient for automatic linking?",
+    "short": "The app must not silently join unrelated existing accounts.",
+    "deep": "The jwt callback resolves by Google subject and rejects an email owner whose ID differs from that identity.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q17",
+    "question": "Does login imply Gmail sending permission?",
+    "short": "No. Scope and a usable refresh credential are checked separately.",
+    "deep": "gmailAuthorized combines granted gmail.send permission with refresh-token availability, and send policy checks fresh state.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q18",
+    "question": "Where is the refresh token stored?",
+    "short": "Encrypted server-side on User, with bounded retention on deletion jobs.",
+    "deep": "The v2 envelope binds owner identity using authenticated encryption; plaintext is not projected into the session.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q19",
+    "question": "What happens when Google omits a new refresh token?",
+    "short": "An existing encrypted credential can be retained.",
+    "deep": "The callback updates encryptedRefreshToken only when account.refresh_token is present, while computing authorization from new scope evidence.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q20",
+    "question": "How does account deletion affect existing sessions?",
+    "short": "The session callback removes a usable owner ID for missing or deletion-pending users.",
+    "deep": "requireUser also queries current owner state; a still-present browser cookie does not restore account availability.",
+    "chapter": "authentication",
+    "ref": {
+      "path": "src/auth.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "c9c2273b4c0a604a7b390ada3a9a6ab48714d227b57b88eb8399b1ab74855c1b"
+    }
+  },
+  {
+    "id": "q21",
+    "question": "What are the delivery states?",
+    "short": "READY, ATTEMPTING, UNCERTAIN and DONE.",
+    "deep": "They complement the user-facing SendStatus. FAILED can coexist with UNCERTAIN and does not necessarily prove non-delivery.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q22",
+    "question": "When is network preparation performed?",
+    "short": "After preflight and before the final database claim, outside owner locks.",
+    "deep": "The worker prepares token, PDF bytes and MIME, then rechecks controls and usage at one fresh authorization time.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q23",
+    "question": "Why recheck after MIME preparation?",
+    "short": "Policy or quota boundaries may change while preparation is slow.",
+    "deep": "Suspension, pauses, period transitions and other owner activity can invalidate earlier permission; the final claim uses current state.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q24",
+    "question": "Can a timeout mean the email was sent?",
+    "short": "Yes. A lost response does not prove rejection.",
+    "deep": "The worker records uncertainty and retains usage rather than authorizing a duplicate submission.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q25",
+    "question": "Are Gmail requests automatically retried?",
+    "short": "The current email worker disables automatic retries and the send call sets retry false.",
+    "deep": "Pacing waits and publication repair occur before an attempt; they are different from repeating an ambiguous submission.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q26",
+    "question": "Does Message-ID guarantee provider deduplication?",
+    "short": "No. It is a stable identity in the message, not a Gmail acceptance guarantee.",
+    "deep": "Local uniqueness, state checks and claims prevent many duplicates, but the provider/database boundary remains non-atomic.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q27",
+    "question": "How does the app avoid CC/BCC batching?",
+    "short": "buildMime constructs one To recipient for each Send.",
+    "deep": "There is no CC/BCC population in the shown composer. Each recipient gets a separate rendered message.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q28",
+    "question": "Which template placeholders are supported?",
+    "short": "{{name}}, {{company}} and {{role}}.",
+    "deep": "Validation rejects unsupported or malformed tokens; campaign creation rechecks the rendered subject for newlines.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q29",
+    "question": "What happens after a definite provider rejection?",
+    "short": "The appropriate reservation is released and the send finishes without automatic resubmission.",
+    "deep": "Credential or throttle failures may pause other queued work; a definite rejection is not the same as an unknown send-time outcome.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q30",
+    "question": "What does normal pacing mean?",
+    "short": "Sends are normally spaced about five seconds apart.",
+    "deep": "Provider waits, preparation and orchestration add delay. The constant is not a measured end-to-end throughput claim.",
+    "chapter": "sending",
+    "ref": {
+      "path": "src/lib/inngest.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "2f316a1a4ac7001547abbec1cd1418c020e0f1873543299be21ec12eb1888168"
+    }
+  },
+  {
+    "id": "q31",
+    "question": "How many Inngest functions are registered?",
+    "short": "Eight in the source endpoint.",
+    "deep": "They cover sending, quota reconciliation, attachment discovery/cleanup, deletion sweep/worker, billing maintenance and rate-limit cleanup.",
+    "chapter": "inngest",
+    "ref": {
+      "path": "src/app/api/inngest/route.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5330dba6fd13fdf3c176e6585d0ab7189c60d46d12aa80a758394694a22ecc82"
+    }
+  },
+  {
+    "id": "q32",
+    "question": "How is per-user delivery concurrency limited?",
+    "short": "sendEmail uses concurrency limit 1 keyed by event.data.userId.",
+    "deep": "Database claims are still needed because orchestration configuration alone cannot provide atomic provider acceptance.",
+    "chapter": "inngest",
+    "ref": {
+      "path": "src/app/api/inngest/route.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5330dba6fd13fdf3c176e6585d0ab7189c60d46d12aa80a758394694a22ecc82"
+    }
+  },
+  {
+    "id": "q33",
+    "question": "What does hourly reconciliation repair?",
+    "short": "Accounting evidence, abandoned claims and interrupted publication.",
+    "deep": "It must not turn an uncertain delivery into a fresh send. Deferred work is republished only when eligible.",
+    "chapter": "inngest",
+    "ref": {
+      "path": "src/app/api/inngest/route.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5330dba6fd13fdf3c176e6585d0ab7189c60d46d12aa80a758394694a22ecc82"
+    }
+  },
+  {
+    "id": "q34",
+    "question": "Why is billing maintenance every four hours?",
+    "short": "The source comment explicitly cites the Inngest Free execution allowance.",
+    "deep": "This is confirmed decision evidence. Its recovery delay is a consequence, while actual provider pricing/capacity remains external.",
+    "chapter": "inngest",
+    "ref": {
+      "path": "src/app/api/inngest/route.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5330dba6fd13fdf3c176e6585d0ab7189c60d46d12aa80a758394694a22ecc82"
+    }
+  },
+  {
+    "id": "q35",
+    "question": "Does this snapshot support live billing?",
+    "short": "Yes, with an explicit live_mode configuration and rollout guards.",
+    "deep": "Older test-only guidance is stale. This says nothing about whether a deployed account has live checkout enabled.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q36",
+    "question": "Can switching environment variables convert test customers into live ones?",
+    "short": "No. The database binds to one Dodo environment and business.",
+    "deep": "A mismatch fails closed; existing unbound provider data requires review. Product/customer/session identities do not cross modes.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q37",
+    "question": "Does a checkout return URL prove payment?",
+    "short": "No. Access requires verified provider evidence.",
+    "deep": "The return page displays state; signed events and server-side reconciliation maintain subscription observations.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q38",
+    "question": "What is verified by Standard Webhooks?",
+    "short": "The exact raw body against the signature headers and timestamp tolerance.",
+    "deep": "Verification precedes normalization/storage. Reserializing parsed JSON before verification would change the signed bytes.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q39",
+    "question": "How are duplicate billing callbacks handled?",
+    "short": "A unique webhook ID and stored payload hash.",
+    "deep": "Identical redelivery retains the first receipt; a different payload using the same ID raises a conflict.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q40",
+    "question": "Why commit the receipt before processing?",
+    "short": "A processing interruption remains recoverable.",
+    "deep": "after() attempts processing, while scheduled recovery can find committed RECEIVED/RETRY receipts later.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q41",
+    "question": "How can paid access remain after cancellation?",
+    "short": "Verified cancellation at period end can preserve access until the deadline.",
+    "deep": "Entitlement resolution uses lifecycle status and half-open period boundaries rather than simply testing a CANCELLED string.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q42",
+    "question": "What is grace-period usage?",
+    "short": "An extension of the same allowance operational end.",
+    "deep": "It must not create a second monthly allowance. Unresolved active provider boundaries pause sending rather than inventing dates.",
+    "chapter": "payments",
+    "ref": {
+      "path": "src/lib/billing/config.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "427253abd36b442842943af4192ec1d418ea0bad6086cedeb5a93b480b5b9a48"
+    }
+  },
+  {
+    "id": "q43",
+    "question": "Where are plan restrictions enforced?",
+    "short": "Server actions, policy helpers and final worker checks.",
+    "deep": "Client feature locks and allowance cards explain restrictions but cannot authorize a stale request.",
+    "chapter": "frontend",
+    "ref": {
+      "path": "src/components/compose.tsx",
+      "start": 1,
+      "end": 18,
+      "hash": "8cb47c8fdf82620a262cb6cc8bf9a57b6a56333b11a416ab28dc61b2b6f26c82"
+    }
+  },
+  {
+    "id": "q44",
+    "question": "What does a progress timer prove?",
+    "short": "It presents an estimate or state projection, not provider delivery.",
+    "deep": "Read committed send state and the provider evidence path; browser timing cannot determine acceptance.",
+    "chapter": "frontend",
+    "ref": {
+      "path": "src/components/compose.tsx",
+      "start": 1,
+      "end": 18,
+      "hash": "8cb47c8fdf82620a262cb6cc8bf9a57b6a56333b11a416ab28dc61b2b6f26c82"
+    }
+  },
+  {
+    "id": "q45",
+    "question": "How do page and component files divide work?",
+    "short": "Server pages prepare data; focused client components handle interactions.",
+    "deep": "Trace Compose through its page, component, submit action and business function to follow both rendering and mutation.",
+    "chapter": "frontend",
+    "ref": {
+      "path": "src/components/compose.tsx",
+      "start": 1,
+      "end": 18,
+      "hash": "8cb47c8fdf82620a262cb6cc8bf9a57b6a56333b11a416ab28dc61b2b6f26c82"
+    }
+  },
+  {
+    "id": "q46",
+    "question": "What binds v2 credentials to the owner?",
+    "short": "AES-GCM additional authenticated data includes the owner UUID.",
+    "deep": "The envelope also authenticates version, key ID and Gmail credential purpose; moving ciphertext to another owner fails.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q47",
+    "question": "How does rotation avoid overwriting reconnect credentials?",
+    "short": "It updates only when the old ciphertext still matches.",
+    "deep": "Compare-and-swap conditions include current deletion/expiry state. A concurrent reconnect or erasure wins.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q48",
+    "question": "Can old keys be removed immediately after rotation?",
+    "short": "Not safely without checking retained credentials and backups.",
+    "deep": "A restored backup may still hold v1 or older v2 envelopes. Repository instructions call for a restore/decrypt exercise.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q49",
+    "question": "Are PDF magic-byte checks malware scanning?",
+    "short": "No. They check size, type and a PDF prefix.",
+    "deep": "Treat harmful document content as a possible risk; do not claim the shown validation proves harmlessness.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q50",
+    "question": "What does fail closed mean here?",
+    "short": "Unavailable controls or limiting infrastructure block protected operations.",
+    "deep": "A missing SystemControl row or limiter error must not silently grant sending or expensive requests.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q51",
+    "question": "Are automatic operator alerts present?",
+    "short": "The documented alert delivery/monitoring jobs were removed.",
+    "deep": "Safe logs and persisted recovery remain. An external operational process must observe them; production monitoring is unknown.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q52",
+    "question": "Does reconnecting Gmail reset usage?",
+    "short": "No. It can clear credential/domain-policy pause state.",
+    "deep": "It does not erase app accounting, remove suspension or revive cancelled work.",
+    "chapter": "security-reliability",
+    "ref": {
+      "path": "src/lib/crypto.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "35176eae1a7baffb03cf64623f363b07c4cb59374631b6dba8227506f5499045"
+    }
+  },
+  {
+    "id": "q53",
+    "question": "What would you measure before scaling workers?",
+    "short": "Queue age, publication delay, lock waits, provider latency and uncertainty rate.",
+    "deep": "Per-owner serialization and provider limits are distinct constraints. A global worker increase may not improve one owner\u2019s throughput.",
+    "chapter": "scaling",
+    "ref": {
+      "path": "src/lib/usage-ledger.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "92017fe622244dd402cebc962094feca0c9d25230748a9c04140efca3f341b56"
+    }
+  },
+  {
+    "id": "q54",
+    "question": "Why not replace reservations with count-then-send?",
+    "short": "Concurrent requests can each see capacity and over-admit.",
+    "deep": "The owner transaction reserves the full batch and coordinates claim/settlement with durable identities.",
+    "chapter": "scaling",
+    "ref": {
+      "path": "src/lib/usage-ledger.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "92017fe622244dd402cebc962094feca0c9d25230748a9c04140efca3f341b56"
+    }
+  },
+  {
+    "id": "q55",
+    "question": "What is the risk of removing owner locks?",
+    "short": "Quota, cancellation and claim decisions can race.",
+    "deep": "A replacement needs proven concurrency invariants, not just a higher parallelism setting.",
+    "chapter": "scaling",
+    "ref": {
+      "path": "src/lib/usage-ledger.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "92017fe622244dd402cebc962094feca0c9d25230748a9c04140efca3f341b56"
+    }
+  },
+  {
+    "id": "q56",
+    "question": "Can the repository prove production capacity?",
+    "short": "No. It provides constraints and test scenarios, not production measurements.",
+    "deep": "Use disposable data and fake providers to measure representative workloads, then verify provider quotas separately.",
+    "chapter": "scaling",
+    "ref": {
+      "path": "src/lib/usage-ledger.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "92017fe622244dd402cebc962094feca0c9d25230748a9c04140efca3f341b56"
+    }
+  },
+  {
+    "id": "q57",
+    "question": "Are all caller links exact?",
+    "short": "No. Static call candidates are navigation evidence with explicit limits.",
+    "deep": "Framework invocation, JSX references, aliases and dynamic properties can evade or confuse name-based caller matching.",
+    "chapter": "function-reference",
+    "ref": {
+      "path": "src/lib/session.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5693c0c186ec843ca978c581e13a957cb8e4661e1f13713c69ed9cda434c5839"
+    }
+  },
+  {
+    "id": "q58",
+    "question": "What should a function explanation include?",
+    "short": "Inputs, result, side effects, callers and failure behavior.",
+    "deep": "Follow the exact source contract. Pure helpers, internal database primitives and authenticated actions have different assumptions.",
+    "chapter": "function-reference",
+    "ref": {
+      "path": "src/lib/session.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "5693c0c186ec843ca978c581e13a957cb8e4661e1f13713c69ed9cda434c5839"
+    }
+  },
+  {
+    "id": "q59",
+    "question": "Why disable normal credentials before cleanup completes?",
+    "short": "Deletion immediately makes the account unavailable while recovery continues independently.",
+    "deep": "The deletion job retains only deadline-limited revocation material and tracks incomplete external work.",
+    "chapter": "walkthrough-deletion",
+    "ref": {
+      "path": "src/lib/account.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "e9b0d38aecc5310ad7192e15f00fcb13a2af6532459d2e77a60e98757079260a"
+    }
+  },
+  {
+    "id": "q60",
+    "question": "What if billing cancellation fails during deletion?",
+    "short": "The durable deletion workflow retains unfinished billing recovery.",
+    "deep": "It should not falsely mark completion or depend on an already-deleted User relation.",
+    "chapter": "walkthrough-deletion",
+    "ref": {
+      "path": "src/lib/account.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "e9b0d38aecc5310ad7192e15f00fcb13a2af6532459d2e77a60e98757079260a"
+    }
+  },
+  {
+    "id": "q61",
+    "question": "Why retain an obsolete PDF for an uncertain send?",
+    "short": "The unresolved campaign can still depend on that selected attachment.",
+    "deep": "Cleanup protects current and queued/attempting/uncertain references; replacement is not permission to delete every previous file.",
+    "chapter": "walkthrough-attachment",
+    "ref": {
+      "path": "src/lib/storage.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "a0b3f4549ff43f7d5b9dd53e567828dc38c9db5b987e3547994a165f36202f12"
+    }
+  },
+  {
+    "id": "q62",
+    "question": "Why have both deletedAt and storageDeletedAt?",
+    "short": "Logical retirement and physical deletion can fail independently.",
+    "deep": "The remaining pending marker allows a later cleanup pass to retry external storage deletion without losing metadata.",
+    "chapter": "walkthrough-attachment",
+    "ref": {
+      "path": "src/lib/storage.ts",
+      "start": 1,
+      "end": 18,
+      "hash": "a0b3f4549ff43f7d5b9dd53e567828dc38c9db5b987e3547994a165f36202f12"
+    }
+  }
+]

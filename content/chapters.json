@@ -1,0 +1,2270 @@
+[
+  {
+    "slug": "start-here",
+    "title": "Start Here",
+    "description": "A source-grounded guide to Mailloop, from first sign-in to the delivery boundary.",
+    "interview": "Explain the product in one sentence, then name the hardest consistency boundary: a database transaction cannot include Gmail accepting a message.",
+    "sections": [
+      {
+        "title": "The 30-second pitch",
+        "paragraphs": [
+          "Mailloop helps job seekers send personalized cold emails through their own Gmail account. A template and selected contacts become a campaign, with one separate message per recipient. The app adds contact management, PDF attachments, usage controls and Premium billing.",
+          "This handbook documents a dated source snapshot. It does not establish observed production behavior, Google verification, customer outcomes, or interview mastery. Start with Architecture, trace Sending, then use Walkthroughs to rehearse an explanation."
+        ],
+        "refs": [
+          {
+            "path": "AGENTS.md",
+            "start": 5,
+            "end": 20,
+            "hash": "ac6433d13871b0bd13f7a4244f51518e16d4aa0c4a51b21cf8f2e90d07a7112c"
+          }
+        ]
+      },
+      {
+        "title": "The two-minute pitch",
+        "paragraphs": [
+          "A signed-in user prepares contacts and a template in a Next.js interface. Server actions validate ownership, effective access and capacity, then atomically create campaign snapshots and usage reservations in PostgreSQL. After commit, the dispatcher publishes individual send events to Inngest.",
+          "The worker prepares Gmail credentials and MIME outside database locks, then checks fresh controls and claims one delivery. Acceptance confirms usage. An ambiguous submission becomes UNCERTAIN, retains accounting and blocks automatic resend. Dodo webhooks and scheduled provider reconciliation maintain subscription observations; entitlements decide what the user can do now."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 30,
+            "end": 45,
+            "hash": "029a476ab30d49dec062b74e75a9340c7088875f5449837c90ae78fe1fd11337"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Contacts and template] --> B[Campaign plus reservations]\n B --> C[Inngest event]\n C --> D[Gmail send]\n D --> E[Confirmed or uncertain]",
+          "caption": "The two-minute pitch \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Read the current limits",
+        "paragraphs": [
+          "With paid gating enabled, Free allows 3 recipients per campaign, 3 emails per UTC day and 15 per month. Premium allows 10 recipients per campaign, 20 per UTC day and 300 per allowance period. PAID is the internal enum; Premium is the public label.",
+          "A 15-recipient request fails campaignSchema, whose array maximum is 10. A Free request containing 4 valid recipients passes that schema but fails the plan-specific campaign check. Do not describe a 15-message batch as current behavior."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/plans.ts",
+            "start": 4,
+            "end": 19,
+            "hash": "0de32a2a3431e665ac4198403edcd0306956f76e8a5bfb59b617910cc65fa092"
+          },
+          {
+            "path": "src/lib/validation.ts",
+            "start": 50,
+            "end": 71,
+            "hash": "e897efc83e93980e8566439786507bc6dcb5379243dbb05a608b87d2c63a1eb4"
+          }
+        ],
+        "table": [
+          [
+            "Limit",
+            "Free",
+            "Premium"
+          ],
+          [
+            "Recipients / campaign",
+            "3",
+            "10"
+          ],
+          [
+            "Emails / UTC day",
+            "3",
+            "20"
+          ],
+          [
+            "Emails / allowance",
+            "15",
+            "300"
+          ],
+          [
+            "Saved templates with gating",
+            "1",
+            "Unlimited"
+          ]
+        ]
+      },
+      {
+        "title": "A deliberate reading path",
+        "paragraphs": [
+          "Learn the nouns first: User, Campaign, Send and UsageReservation. Then trace one successful delivery, one uncertain delivery and one paid upgrade. Finish by explaining what evidence cannot tell you. The source browser preserves source line positions, including visible redactions. Every excerpt is checked against an expected hash."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/validation.ts",
+            "start": 50,
+            "end": 65,
+            "hash": "ba19f3df39cee737b022df0f4cbe60062350660755b1789f48114fee950270de"
+          }
+        ],
+        "items": [
+          "New to the code: Start Here \u2192 Architecture \u2192 Database \u2192 Authentication.",
+          "Working on sending: Sending \u2192 Inngest \u2192 Security/Reliability \u2192 Walkthroughs.",
+          "Interview revision: Tradeoffs \u2192 Interview Prep \u2192 Cheat Sheet.",
+          "Use the Function/API Reference and source browser to check details rather than memorizing file names."
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "architecture",
+    "title": "Architecture",
+    "description": "A modular Next.js application with durable database state and external providers.",
+    "interview": "Describe each boundary and identify which component owns durable truth. Avoid claiming a particular hosting topology is already deployed.",
+    "sections": [
+      {
+        "title": "Runtime boundaries",
+        "paragraphs": [
+          "The application uses the App Router, server components, interactive client components, server actions and route handlers. Browser state presents drafts and progress; server code authenticates, validates and owns mutations. PostgreSQL stores durable delivery, usage, billing and recovery state.",
+          "Inngest orchestrates work. Gmail accepts messages. Dodo provides hosted billing. Private Blob storage holds PDFs in production; development can use local storage. These services cannot participate in one shared transaction."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 218,
+            "end": 233,
+            "hash": "5e516e4d907861def29b34619cff1ae5302b5842f68d35dde487b18ce697c05a"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart TB\n UI[Browser UI] --> SA[Server actions and API routes]\n SA --> DB[(PostgreSQL via Prisma)]\n SA --> Q[Inngest]\n Q --> W[Delivery and maintenance workers]\n W --> DB\n W --> G[Gmail API]\n W --> S[Private PDF storage]\n D[Dodo signed webhook] --> SA",
+          "caption": "Runtime boundaries \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Stack and responsibility",
+        "paragraphs": [
+          "Version declarations describe this checkout, not an endorsement of the newest library version. See the dependency ledger for declared and locally installed versions. A package confirms implementation use; it does not prove why its author chose it."
+        ],
+        "refs": [
+          {
+            "path": "package.json",
+            "start": 35,
+            "end": 50,
+            "hash": "1f5f05394b5443f8dc227e22a8ba779407fe9ee65713c732f7de34089c7c09e7"
+          }
+        ],
+        "table": [
+          [
+            "Layer",
+            "Implementation",
+            "Role"
+          ],
+          [
+            "Framework",
+            "Next.js 16.4.3 / React 19.3.0 declared",
+            "Pages, actions, routes, UI"
+          ],
+          [
+            "Identity",
+            "next-auth 5 beta",
+            "Google OAuth and JWT sessions"
+          ],
+          [
+            "Data",
+            "PostgreSQL / Prisma 7.10.0",
+            "Relations, transactions, row locks"
+          ],
+          [
+            "Work",
+            "Inngest 4.22.0",
+            "Events, durable steps, schedules"
+          ],
+          [
+            "Delivery",
+            "googleapis / gmail-mime alias",
+            "Token preparation and MIME sending"
+          ],
+          [
+            "Billing",
+            "dodopayments 2.55.0 / standardwebhooks",
+            "Hosted checkout and signed ingress"
+          ],
+          [
+            "Validation",
+            "Zod 4.6.5",
+            "Runtime input validation"
+          ],
+          [
+            "UI",
+            "Tailwind / Radix / lucide-react",
+            "Styling and accessible primitives"
+          ]
+        ]
+      },
+      {
+        "title": "Module map",
+        "paragraphs": [
+          "src/app contains pages and provider endpoints. src/components holds page-level interactions and reusable UI. src/lib contains policy and business operations. prisma/schema.prisma expresses the current models; migrations record evolution. tests and scripts capture failure contracts, disposable database verification and operator tasks.",
+          "INFERRED tradeoff: keeping these concerns in one Next.js application reduces the number of deployable units to coordinate. Evidence is co-location and imports, not an architecture decision record promising lower cost."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/inngest/route.ts",
+            "start": 15,
+            "end": 26,
+            "hash": "28453ad5d2b7c756b79a0e16b7d2b6b43cb8f131c6a5996e04a9d5810de56274"
+          }
+        ]
+      },
+      {
+        "title": "Durability over publication",
+        "paragraphs": [
+          "submitCampaign commits campaign and reservation rows before dispatching events. Publication failure is caught; the rows remain discoverable. Reconciliation repairs publication using the same delivery identity with a new dispatch generation.",
+          "The durable outbox is a pattern: commit the intent locally, then recover publication to another system. It does not make publication and Gmail acceptance atomic."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 223,
+            "end": 238,
+            "hash": "c4283662b0398a4d1556dfb34ae9e62b7e15510f3b1b158e9ac1d2057b97d8f3"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "database",
+    "title": "Database",
+    "description": "Models, constraints, accounting identities and the migration history.",
+    "interview": "Explain why a Send and a UsageReservation are separate: message history can disappear while accounting identity must survive.",
+    "sections": [
+      {
+        "title": "The relational core",
+        "paragraphs": [
+          "A User owns contacts, templates, campaigns, attachments and usage records. A Campaign selects a template and optionally an attachment; each Send represents one recipient snapshot and its delivery state. The contact relation remains, but recipient and rendered-message fields are stored on Send so later edits do not rewrite the queued message.",
+          "Contact email uniqueness is per user. Campaign idempotency is scoped to userId. Send.mimeMessageId and UsageReservation.deliveryKey have uniqueness constraints. These constraints complement locking and policy checks."
+        ],
+        "refs": [
+          {
+            "path": "prisma/schema.prisma",
+            "start": 115,
+            "end": 130,
+            "hash": "79621a6b553db16d6166ba52b5f6e48c009b2ae40b2fa64d1d6178f149516304"
+          }
+        ],
+        "diagram": {
+          "code": "erDiagram\n User ||--o{ Contact : owns\n User ||--o{ Template : owns\n User ||--o{ Campaign : creates\n Template ||--o{ Campaign : selected\n Campaign ||--o{ Send : snapshots\n Contact ||--o{ Send : recipient\n Send ||--o| UsageReservation : accounts\n User ||--o{ UsagePeriod : owns\n UsagePeriod ||--o{ UsageReservation : buckets",
+          "caption": "The relational core \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Accounting that survives history deletion",
+        "paragraphs": [
+          "UsagePeriod holds daily/monthly counters and period boundaries. UsageReservation holds stable delivery identity, two period references, a status, claim token and lease. Deleting a Send sets its reservation link to null; it does not erase the charge. UsageImportEvidence retains content-free historical evidence.",
+          "DeliveryReceipt preserves minimal successful-delivery evidence after message-history removal. Its recipient address supports repeat-send checks. History deletion and account deletion are different retention operations."
+        ],
+        "refs": [
+          {
+            "path": "prisma/schema.prisma",
+            "start": 444,
+            "end": 459,
+            "hash": "9ecd92b34ab02e176954284d664d0115fa778a7f7ec7c9ec1446010409479fb1"
+          },
+          {
+            "path": "prisma/schema.prisma",
+            "start": 470,
+            "end": 491,
+            "hash": "3af9eeb8e4130d2da424061158bc295d19ecef77442ae730b8f64cd71644754b"
+          },
+          {
+            "path": "prisma/schema.prisma",
+            "start": 270,
+            "end": 291,
+            "hash": "f112b0fefe9c0ff75da5d6103c0bf82eca722e2ae0b50e2dc91a7ef347a36f4e"
+          }
+        ]
+      },
+      {
+        "title": "All models and all migrations",
+        "paragraphs": [
+          "The schema atlas below covers every model and migration in this snapshot. Read migration SQL before reasoning about old data: additive columns, data backfills and subsequent corrections matter beyond the final schema. Migrations that share a timestamp prefix are distinct directories and both belong to the history.",
+          "The initialization of SystemControl and later billing binding guards are operationally significant. Local reset scripts intentionally preserve SystemControl and migration metadata."
+        ],
+        "refs": [
+          {
+            "path": "prisma/migrations/20261111010000_dodo_binding_null_guard/migration.sql",
+            "start": 1,
+            "end": 12,
+            "hash": "919c5356bb14a9a8841fef5d5919b631639ab8f28333f012c2194dce19c6b480"
+          }
+        ]
+      },
+      {
+        "title": "Transactions and owner locks",
+        "paragraphs": [
+          "withUsageTransaction serializes an owner\u2019s usage changes with a PostgreSQL row lock. Reservation, claim, confirm and release operations run within that owner context. Period references include user identity to prevent linking a reservation to another tenant\u2019s period.",
+          "INFERRED tradeoff: per-owner serialization simplifies quota correctness under concurrent submissions but limits throughput for a single owner. The source supplies the locking design, not measured contention or capacity."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/usage-ledger.ts",
+            "start": 52,
+            "end": 67,
+            "hash": "409b6bbff8686d7bf80af2273e262521edd3cca9a85b1748d8b7453867e5ffc9"
+          }
+        ]
+      },
+      {
+        "title": "Billing, administration and deletion records",
+        "paragraphs": [
+          "BillingSubscription and CheckoutAttempt can outlive their User relation through SetNull and owner snapshots. BillingWebhookEvent is an inbox keyed by unique webhookId. AdminAuditLog records actor and target snapshots, reason, request identity, and before/after state.",
+          "AccountDeletionJob deliberately has no User foreign key: recovery must continue after User content is removed. Retained recovery and financial records need their own lifecycle; cascading everything would destroy recovery evidence."
+        ],
+        "refs": [
+          {
+            "path": "prisma/schema.prisma",
+            "start": 153,
+            "end": 168,
+            "hash": "120af9d70005b80ce82f796fe5ea189b87fc430ed8d3529a7ee68b7c1b59cd07"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "authentication",
+    "title": "Authentication",
+    "description": "Google consent, manual persistence, JWT sessions and encrypted server credentials.",
+    "interview": "Separate identity, Gmail authorization and entitlement. Being signed in does not imply permission to send.",
+    "sections": [
+      {
+        "title": "OAuth and session identity",
+        "paragraphs": [
+          "OAuth delegates authorization to Google. The normal Google provider requests openid, email, profile and gmail.send with offline access and consent. The signIn callback requires a verified email and Google subject, and checks deletion tombstones.",
+          "The app selects JWT sessions, meaning the session is backed by a signed/encrypted token managed by Auth.js rather than a session row in this schema. User persistence is manual inside the jwt callback. There is no Prisma adapter configuration in auth.ts. An unrelated existing email owner is never silently linked."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 11,
+            "end": 26,
+            "hash": "43fa1bc8cd240e3bbd4b00cc1991100f20126ca7b08cd0b799dcfa85b1d22c93"
+          }
+        ],
+        "diagram": {
+          "code": "sequenceDiagram\n participant U as User\n participant A as Auth.js\n participant G as Google\n participant DB as PostgreSQL\n U->>A: Sign in\n A->>G: Consent and offline scope request\n G-->>A: Verified profile and credentials\n A->>DB: Check tombstone and persist user\n A-->>U: JWT session with user ID",
+          "caption": "OAuth and session identity \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "What the callbacks persist",
+        "paragraphs": [
+          "The jwt callback finds users by googleId, locks an existing user, checks for deletion and rejects unrelated email collisions. It normalizes email, records granted scopes and send-only consent time, and computes gmailAuthorized from the scope plus refresh credential availability.",
+          "A new refresh token is encrypted with the owner UUID before persistence. If Google omits a refresh token, the existing encrypted value can remain usable. The session callback rechecks User existence and deletion state before exposing a usable session user ID."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 78,
+            "end": 93,
+            "hash": "9caf2333a19bb7a61723c3e07478fb135ba8194f62f961581d3a9932a869d259"
+          }
+        ]
+      },
+      {
+        "title": "Encryption and key rotation",
+        "paragraphs": [
+          "AES-256-GCM is authenticated encryption: ciphertext includes a tag that detects tampering. The v2 envelope contains version, key ID, random 12-byte IV, tag and ciphertext. Additional authenticated data binds the version, key ID, credential purpose and owner UUID. Copying v2 ciphertext to a different owner fails decryption.",
+          "Legacy v1 decryption uses TOKEN_ENCRYPTION_KEY; v2 resolves the identified key without falling back. rotateTokenPage scans User credentials and unexpired deletion credentials, defaults to read-only, and applies compare-and-swap updates so a concurrent reconnect wins. Retain old keys for backups until a restore exercise proves retirement safe."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/crypto.ts",
+            "start": 48,
+            "end": 63,
+            "hash": "adcb46ac87b33c3723b671b46ab07409e114c9f33f1c795ccb7cacaf4e71e18e"
+          },
+          {
+            "path": "src/lib/token-rotation.ts",
+            "start": 13,
+            "end": 34,
+            "hash": "1f226ee540e4a951ec17b8e8b321e720c514de05386ede1d71eb27bc3c77897b"
+          },
+          {
+            "path": "src/lib/crypto.ts",
+            "start": 70,
+            "end": 91,
+            "hash": "e10861b1b77b97e2ec56aa7be750343a94a19a6c352add39e29142b4b55b47ec"
+          }
+        ]
+      },
+      {
+        "title": "Authenticated mutations and fresh admin identity",
+        "paragraphs": [
+          "requireUser reads the current session and database owner; missing or deletion-pending users redirect home. Business operations still need entitlement and resource-ownership checks. A UUID alone is not authorization.",
+          "Admin access uses a distinct Google provider and checks fresh reauthentication for mutations. The restricted admin connection verifies database privileges before allowing operations. Do not equate an isAdmin UI check with this complete boundary."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/admin/auth.ts",
+            "start": 23,
+            "end": 38,
+            "hash": "0b6367fbb2ee852f635ba1a00746ce5980054edea2bd2a02e9a47c77fb7a4062"
+          }
+        ]
+      },
+      {
+        "title": "Preparing Gmail without implicit replay",
+        "paragraphs": [
+          "gmailForUser decrypts the refresh token on the server, explicitly obtains an access token, then replaces OAuth credentials with that access token only. The returned object exposes only messages.send. This prevents token refresh from silently replaying a rejected send request.",
+          "Send-only v1 cannot read a mailbox: canReadGmail returns false, and reply-check compatibility functions return disabled/no-op results. Repository files cannot establish Google verification status or provider approval for a production project."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/gmail.ts",
+            "start": 9,
+            "end": 24,
+            "hash": "a44b2c44bbdab6ceac0f70668da2a01e5d1c134ba902d4f0719ad26b7d907d9d"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "sending",
+    "title": "Sending",
+    "description": "From immutable campaign snapshots to a single Gmail submission.",
+    "interview": "Never promise exactly-once email. Explain local duplicate protection and what happens when Gmail acceptance cannot be observed.",
+    "sections": [
+      {
+        "title": "Campaign admission",
+        "paragraphs": [
+          "submitCampaign authenticates and consumes the campaign rate budget. createCampaign parses input, locks the owner through withUsageTransaction, checks an existing idempotency key, Gmail authorization, controls and plan limits.",
+          "The transaction checks template ownership and availability, contacts and repeat-send evidence. Already pending or uncertain recipients are skipped; previously successful recipients need explicit resend selection. A duplicate idempotency key returns the existing campaign instead of creating another one."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 30,
+            "end": 45,
+            "hash": "029a476ab30d49dec062b74e75a9340c7088875f5449837c90ae78fe1fd11337"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Validate and authenticate] --> B[Owner lock]\n B --> C[Check idempotency and policy]\n C --> D[Snapshot each recipient]\n D --> E[Reserve usage and commit]\n E --> F[Dispatch individual events]",
+          "caption": "Campaign admission \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Current-limit batch behavior",
+        "paragraphs": [
+          "The schema caps recipientIds at 10 and rejects duplicates. With paidGatingEnabled true, createCampaign additionally enforces 3 recipients for Free or 10 for Premium. Free daily/monthly allowances are 3/15; Premium 20/300. Available capacity can be lower because other reservations already occupy it.",
+          "With paid gating disabled, client entitlements expose 10 recipients, no monthly limit and the legacy rolling-24-hour cap of 200. The ledger still records state. Do not combine legacy rolling usage with UTC calendar counters as if they were equivalent."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/entitlements.ts",
+            "start": 278,
+            "end": 293,
+            "hash": "cad6c467ed177bed221b80b35ea06ab6a284bcd35377f83d9758662c1aba8db8"
+          },
+          {
+            "path": "src/lib/validation.ts",
+            "start": 50,
+            "end": 71,
+            "hash": "e897efc83e93980e8566439786507bc6dcb5379243dbb05a608b87d2c63a1eb4"
+          },
+          {
+            "path": "src/lib/email-limits.ts",
+            "start": 1,
+            "end": 9,
+            "hash": "7d2f817e38385eb3573a5281d7c844bfdcdb0d12291400b3977401d5aa754dc1"
+          }
+        ]
+      },
+      {
+        "title": "Personalization and MIME",
+        "paragraphs": [
+          "The allowed placeholders are {{name}}, {{company}} and {{role}}. The campaign stores rendered subject/body, recipient details, template name, message ID and attachment selection. A subject containing newlines after rendering is rejected.",
+          "MIME is the email wire format. buildMime uses the gmail-mime package alias for Nodemailer MailComposer. It creates text and HTML parts, an explicit Message-ID, and an optional PDF attachment, then base64url-encodes the result. Each message has one To recipient; the code adds no CC or BCC. File and URL fetching are disabled in the composer."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/gmail.ts",
+            "start": 49,
+            "end": 64,
+            "hash": "a71b10773bd8d861f90c76565447a5a8720250b38091e80384868c26923de58f"
+          },
+          {
+            "path": "src/lib/validation.ts",
+            "start": 64,
+            "end": 85,
+            "hash": "f25122ba9e16819d08f88785815b1437b52cd778320d7bf844a6367f5cde527e"
+          },
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 170,
+            "end": 191,
+            "hash": "5546a64ccb36b34b2ae1302090e09a455266dbc471d4ce44a2fe9d29c11d94f6"
+          }
+        ]
+      },
+      {
+        "title": "Prepare, claim, submit, settle",
+        "paragraphs": [
+          "deliverOne first reads current delivery state and performs preflight checks under a short owner lock. It prepares credentials, attachment bytes and MIME outside the lock. It then rechecks fresh controls and entitlement at the final claim; an intervening suspension or quota boundary can still stop delivery.",
+          "claimUsage moves the reservation into an attempting state and returns a claim token. Only after the final claim commits does messages.send run, with SDK retries disabled. Success records Gmail IDs and confirms accounting. A lease is a temporary exclusive claim, not permission to resend after it expires."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 315,
+            "end": 330,
+            "hash": "98f10faf38e7e9c234d09fba2d6d4026bb3bf31f742809546104f1d63c26e7b2"
+          }
+        ],
+        "diagram": {
+          "code": "sequenceDiagram\n participant W as Worker\n participant DB as Database\n participant G as Gmail\n W->>DB: Preflight under owner lock\n W->>G: Prepare access token\n W->>W: Read PDF and build MIME\n W->>DB: Recheck and claim\n W->>G: One send request\n G-->>W: Acceptance or failure\n W->>DB: Confirm, release, or retain uncertainty",
+          "caption": "Prepare, claim, submit, settle \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Definite failure versus uncertainty",
+        "paragraphs": [
+          "Preparation failures and definite provider rejections finish without an automatic sending retry and release appropriate reservations. Credential/domain failures pause the owner; rate limits pause owner or project work according to classification and provider deadlines. Other queued work can be deferred.",
+          "A timeout, network failure, unknown provider outcome, lost acceptance persistence, or an expired attempting lease may mean Gmail accepted the message. Such work becomes UNCERTAIN, retains accounting and never automatically re-enters READY. A stable MIME Message-ID aids identity; it is not a provider guarantee of deduplication."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 453,
+            "end": 468,
+            "hash": "a53ebdf5805e4358e394390af86a02dffc15661572ebb02af8f725598cfba09b"
+          },
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 382,
+            "end": 403,
+            "hash": "19746f70d089b24a94d23247f3f9de3f96797d240ebdc4bb57af309d99056c4f"
+          },
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 405,
+            "end": 426,
+            "hash": "809e73afe396352efcefd5471fa43c35ae23b05f4db10289766994841b14ee1b"
+          }
+        ]
+      },
+      {
+        "title": "Pacing and recovery",
+        "paragraphs": [
+          "Normal sends are spaced about five seconds apart, and the worker serializes per owner. Pacing waits happen before an attempt; they are not repeat submissions. Queues expire after 24 hours. Deferred publication and eligibility are revisited by hourly reconciliation.",
+          "Read queue copy carefully: \u201cretries\u201d can mean publishing durable queued work, while the email worker has retries: 0 and never repeats an ambiguous send. Manual reply marking is not delivery reconciliation and does not search Sent mail."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 518,
+            "end": 533,
+            "hash": "636ea8267ae4b1fa152a8171385a3b2dd122d9230cc815368997c4069d62f812"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "inngest",
+    "title": "Inngest",
+    "description": "Eight registered functions, durable steps, concurrency and recovery.",
+    "interview": "Distinguish orchestration retries, publication recovery, pacing waits and another Gmail sending attempt.",
+    "sections": [
+      {
+        "title": "Registration is the authoritative list",
+        "paragraphs": [
+          "/api/inngest exports GET, POST and PUT from serve with exactly eight registered functions. Imports elsewhere do not create a ninth registration. Provider callbacks use the service signature boundary, not a user session. Actual deployed registration and signing configuration require operational verification."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/inngest/route.ts",
+            "start": 15,
+            "end": 26,
+            "hash": "28453ad5d2b7c756b79a0e16b7d2b6b43cb8f131c6a5996e04a9d5810de56274"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart TB\n E[Queued email event] --> S[sendEmail]\n H[Hourly] --> Q[quotaReconciliation]\n D[Daily schedules] --> M[Maintenance and sweeps]\n F[Every four hours] --> B[billingMaintenance]\n Q --> E\n M --> A[Per-owner cleanup or deletion event]",
+          "caption": "Registration is the authoritative list \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "All eight functions",
+        "paragraphs": [
+          "Cron expressions below are the source schedules, described in UTC in the rollout documentation. Event-driven workers validate UUID data and serialize by user where configured."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/inngest/route.ts",
+            "start": 15,
+            "end": 26,
+            "hash": "28453ad5d2b7c756b79a0e16b7d2b6b43cb8f131c6a5996e04a9d5810de56274"
+          }
+        ],
+        "table": [
+          [
+            "Export / ID",
+            "Trigger",
+            "Purpose"
+          ],
+          [
+            "sendEmail / send-individual-email",
+            "mailloop/email.queued",
+            "One delivery; retries 0; concurrency 1 per owner"
+          ],
+          [
+            "quotaReconciliation / quota-reconciliation",
+            "0 * * * *",
+            "Settle evidence, expire leases, repair publication"
+          ],
+          [
+            "maintenance / maintenance",
+            "0 3 * * *",
+            "Discover owners with obsolete PDFs"
+          ],
+          [
+            "accountMaintenance / account-maintenance",
+            "mailloop/account.maintenance",
+            "Recheck and clean attachments per owner"
+          ],
+          [
+            "deletionJobSweep / account-deletion-jobs",
+            "0 2 * * *",
+            "Expire credentials; discover deletion jobs"
+          ],
+          [
+            "deletionJobWorker / account-deletion-worker",
+            "mailloop/account.deletion",
+            "Run durable account deletion"
+          ],
+          [
+            "rateLimitCleanup / rate-limit-cleanup",
+            "0 4 * * *",
+            "Bounded cleanup of old rate budgets"
+          ],
+          [
+            "billingMaintenance / billing-maintenance",
+            "0 */4 * * *",
+            "Lifecycle sweep, recovery; daily reconciliation"
+          ]
+        ]
+      },
+      {
+        "title": "Steps are durable work boundaries",
+        "paragraphs": [
+          "sendEmail uses step.run for each pacing round and step.sleepUntil when it must wait. The function has automatic retries disabled and ends on done, uncertain or deferred. Deferred work is discoverable for future publication.",
+          "Maintenance discovery pages users inside a step and emits batches of at most 100 owner events. Account maintenance rechecks deletion status, because events can arrive after account state changes."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 565,
+            "end": 580,
+            "hash": "542428189ab0055d1fbccd011cd4dc4b98550a9ebf7ca3cc6dbe699d486cca51"
+          }
+        ]
+      },
+      {
+        "title": "Reconciliation and maintenance",
+        "paragraphs": [
+          "Quota reconciliation pages owners, repairs accounting and publication, and turns abandoned claims into uncertainty. Attachment maintenance protects current PDFs and PDFs referenced by queued, attempting or uncertain sends. Physical deletion is marked separately so failure can be retried later.",
+          "Billing maintenance sweeps lifecycle state, recovers inbox/checkout work every four hours and reconciles at UTC midnight. It skips Vercel previews; it must not be assumed to run merely because the function exists."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/schedules.ts",
+            "start": 10,
+            "end": 25,
+            "hash": "97dfdba501467469cf3c584554bf1cb6ca12cd178ec3cbee1c5b8fed79688d49"
+          }
+        ]
+      },
+      {
+        "title": "Why background work exists",
+        "paragraphs": [
+          "CONFIRMED tradeoff: the billing schedule comment explicitly cites keeping baseline executions within Inngest Free\u2019s monthly allowance as the reason for a four-hour cadence. That cadence allows recovery delay. It is not an observed service-level guarantee.",
+          "INFERRED tradeoff: batching cleanup discovery reduces orchestration overhead relative to waking every account individually, while delays and backlog can increase. Measure step/run consumption and provider behavior before estimating capacity."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/schedules.ts",
+            "start": 8,
+            "end": 23,
+            "hash": "ffca050a511d128ef393383e246d56ff9ad4a16dd1c769b1a62a659067524ed4"
+          }
+        ]
+      },
+      {
+        "title": "Stale scheduling comments",
+        "paragraphs": [
+          "subscription-maintenance.ts still says scheduled maintenance runs each minute. The registered billingMaintenance caller actually invokes the sweep every four hours. Use the endpoint registration and the scheduler implementation for the current trigger; access is also checked at dispatch/final claim, so the periodic sweep is not the only enforcement point."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/subscription-maintenance.ts",
+            "start": 7,
+            "end": 28,
+            "hash": "51c5f56c0f747e8cff11dc8584385e463875351ad2439adf9797dcc4431e0aed"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "payments",
+    "title": "Payments",
+    "description": "Hosted checkout, signed events, durable receipts and verified entitlement.",
+    "interview": "A browser return means navigation succeeded. Explain how verified provider evidence becomes access.",
+    "sections": [
+      {
+        "title": "Explicit test and live environments",
+        "paragraphs": [
+          "billingConfig accepts only explicit test_mode or live_mode, requires server credentials/product/business configuration, rejects custom base URL/header overrides, and validates a canonical origin. Live mode requires HTTPS.",
+          "AGENTS.md and parts of older hardening/test guides describe test-only billing. Current config and docs/dodo-live-rollout.md support both environments. A database is bound to one environment and business; changing environment variables does not convert test objects into live ones."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/config.ts",
+            "start": 18,
+            "end": 33,
+            "hash": "3802a3c1d6e2b0249df6c804d417d7f34b5a59f12ec08d2411ad63aa246c018e"
+          }
+        ],
+        "diagram": {
+          "code": "sequenceDiagram\n participant U as Browser\n participant A as App\n participant D as Dodo\n participant DB as Database\n U->>A: Authenticated checkout request\n A->>DB: Bind mode and record attempt\n A->>D: Create hosted checkout\n A-->>U: Checkout URL\n D->>A: Signed webhook\n A->>DB: Commit receipt\n A->>D: Verify current provider state\n A->>DB: Update subscription observation\n U->>A: Poll access status",
+          "caption": "Explicit test and live environments \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Rollout guards and hosted prices",
+        "paragraphs": [
+          "ensureBillingBinding locks SystemControl and binds only a clean unbound database. Existing provider records in an unbound database require review; a mode or business mismatch fails closed. Checkout has a separate billingCheckoutEnabled switch. Turning off new checkout must not stop management and recovery of existing subscriptions.",
+          "verifyBillingProduct checks a monthly recurring catalog: USD 599 minor units, an India INR 29900 rule, tax inclusive, no trial/add-ons/discounts/PPP, and the expected long subscription term. Hosted quotes and final tax presentation remain provider-dependent and must be verified operationally."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/store.ts",
+            "start": 21,
+            "end": 36,
+            "hash": "d3a152c86832657ffea6cecb1aa57d42a76dd73e1c1979a5da75e066d2fb249d"
+          }
+        ]
+      },
+      {
+        "title": "Signature verification before storage",
+        "paragraphs": [
+          "The webhook route limits the body to 256 KiB and requires webhook-id, webhook-signature and webhook-timestamp. Standard Webhooks verifies the exact raw body with timestamp tolerance before any payload is trusted. Missing/invalid signature returns 401; unavailable configuration returns 503.",
+          "The route does not use a user session: a valid provider signature authenticates the callback. Never verify reserialized JSON or trust a client return URL as payment evidence."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/webhooks/dodo/route.ts",
+            "start": 53,
+            "end": 68,
+            "hash": "dea41b30201794ef6b72a8160eda8bd706dffa8df7577811128ec521edc16442"
+          }
+        ]
+      },
+      {
+        "title": "Durable inbox and reconciliation",
+        "paragraphs": [
+          "storeBillingEvent validates the business ID, normalizes supported data, hashes the raw payload and upserts by webhookId. Unsupported events can be IGNORED; recognized unusable data is QUARANTINED. Reusing a webhook ID with a different payload hash returns a conflict.",
+          "After the inbox commits, after() attempts processing. A lost processing opportunity is recoverable from committed state and nextAttemptAt. Lifecycle processing and scheduled reconciliation use server-side provider observations rather than redirect parameters. Financial state is not simply the last browser event."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/webhooks.ts",
+            "start": 10,
+            "end": 25,
+            "hash": "2e6565508923c6ee601f8af1b27cf8f148527ec577fb03e8a28a6c76e8ed122c"
+          },
+          {
+            "path": "src/app/api/webhooks/dodo/route.ts",
+            "start": 68,
+            "end": 88,
+            "hash": "953ed0ab028a1b75dfdb0a801f5d7be9c457ad6ace61499fdb35261842ca91b6"
+          }
+        ]
+      },
+      {
+        "title": "Effective plan is a decision, not a badge",
+        "paragraphs": [
+          "getEffectivePlan considers deletion/suspension, active overrides, grandfathering and resolveSubscriptionLifecycle. A valid paid observation requires meaningful provider period boundaries. PAST_DUE grace extends the operational end of the same allowance; it does not mint another allowance. An unresolved active boundary pauses sending.",
+          "Cancellation at period end can preserve access until the verified deadline. A later downgrade rechecks queued campaigns; whole eligible unsent remainders compete for Free capacity. Attempted and uncertain evidence is not refunded by downgrade."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/subscription-lifecycle.ts",
+            "start": 6,
+            "end": 21,
+            "hash": "7bac23bd1f7de8a21d7e7549549ff25d241514f1c2bbad7c0014c4ca80495a9d"
+          }
+        ]
+      },
+      {
+        "title": "Maintenance and account deletion",
+        "paragraphs": [
+          "Recovery scans checkout attempts and webhook receipts; reconciliation refreshes provider observations. Billing maintenance runs every four hours and performs daily reconciliation at midnight UTC. Cancellation, portal and status routes remain authenticated and rate limited.",
+          "Deletion recovery retains provider IDs and a deadline-limited revocation credential in an independent job so billing cancellation and credential cleanup can progress even after message content is gone. The handbook never performs real billing operations."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/jobs.ts",
+            "start": 46,
+            "end": 61,
+            "hash": "1ce19d9615d17cc3115915af318d2d9db04ba7b08c1b2c7e89c624786f5d4505"
+          }
+        ]
+      },
+      {
+        "title": "Portal-host caveat in the current implementation",
+        "paragraphs": [
+          "Confirmed code limitation: createBillingPortal validates the returned HTTPS URL against test.customer.dodopayments.com without branching on the configured environment. Checkout URL validation, by comparison, explicitly selects test and live hosts.",
+          "Externally dependent impact: if a live provider portal URL uses a different hostname, this implementation rejects it with INVALID_PORTAL_URL. The repository cannot prove which URL a live customer receives. Treat live portal verification as an unresolved rollout check; do not claim this snapshot has a verified working live portal."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/checkout.ts",
+            "start": 392,
+            "end": 420,
+            "hash": "8d5c190e2fc1a9ef804ba1fd5394033be3c2d99ebfeb737ff99dfcfa6121fa52"
+          },
+          {
+            "path": "src/lib/billing/dodo.ts",
+            "start": 19,
+            "end": 38,
+            "hash": "285e276e1d90101f5339232cfec0351a3f93123d1d2f93245d20f1bcfa4a3b8d"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "frontend",
+    "title": "Frontend",
+    "description": "Page responsibilities, server/client boundaries and honest delivery feedback.",
+    "interview": "Explain where UI convenience ends and the server\u2019s authority begins. Hiding a button is not enforcing a plan.",
+    "sections": [
+      {
+        "title": "Workspace page walkthrough",
+        "paragraphs": [
+          "The authenticated workspace layout obtains the owner and access/usage state, then wraps page navigation and interactive controls. Server pages prepare durable data; client components handle drafts, filtering, selection and feedback. Inspect page files alongside their components when tracing behavior."
+        ],
+        "refs": [
+          {
+            "path": "src/app/(app)/layout.tsx",
+            "start": 1,
+            "end": 16,
+            "hash": "379320661750fd8faf40e8bdaa34671b6a03da96020aba62a04cfac2e445c072"
+          }
+        ],
+        "table": [
+          [
+            "Page",
+            "Reader task",
+            "Implementation entry"
+          ],
+          [
+            "Compose",
+            "Choose contacts/template, inspect personalized previews, queue",
+            "src/app/(app)/compose/page.tsx"
+          ],
+          [
+            "Contacts",
+            "Create/edit/archive contacts and import CSV",
+            "src/app/(app)/contacts/page.tsx"
+          ],
+          [
+            "Templates",
+            "Edit and select plan-available templates",
+            "src/app/(app)/templates/page.tsx"
+          ],
+          [
+            "History",
+            "Review delivery states, shortlist, mark replied",
+            "src/app/(app)/history/page.tsx"
+          ],
+          [
+            "Usage",
+            "Understand allowances and current plan",
+            "src/app/(app)/usage/page.tsx"
+          ],
+          [
+            "Settings",
+            "Manage Gmail, PDF, preferences, data and billing",
+            "src/app/(app)/settings/page.tsx"
+          ],
+          [
+            "Admin",
+            "Restricted operator views and audited changes",
+            "src/app/(admin)/admin/page.tsx"
+          ]
+        ]
+      },
+      {
+        "title": "Public and return pages",
+        "paragraphs": [
+          "The landing and pricing pages explain the product and plans; help, contact, privacy and terms provide public support/policy surfaces. Loading and error files define route-level feedback. The checkout return and settings billing return routes coordinate a status view after hosted navigation.",
+          "Do not infer that a return page grants access. Read status polling and the server\u2019s entitlement state. The complete page and API route inventory below links the actual file paths."
+        ],
+        "refs": [
+          {
+            "path": "src/app/(app)/settings/billing/return/page.tsx",
+            "start": 1,
+            "end": 7,
+            "hash": "0f3499345d585afcac28a24acc8e56f93506a123c9b01f0abec0ff4a23df47f8"
+          }
+        ]
+      },
+      {
+        "title": "Compose and progress",
+        "paragraphs": [
+          "Compose coordinates contact selection, role values, template previews, resume attachment and submit state. The server validates those choices again. Campaign progress and sending-status components communicate queued and terminal outcomes. A client timer cannot prove provider delivery.",
+          "INFERRED tradeoff: server-rendered data plus focused client controls provides a useful initial view with local interactivity, but freshness must be handled explicitly after mutations and during long queues."
+        ],
+        "refs": [
+          {
+            "path": "src/components/compose.tsx",
+            "start": 61,
+            "end": 76,
+            "hash": "ba5ca12fe5f279fcbcda152585d8c34b0a6156dfafb62f620e82dc944e7a70c1"
+          }
+        ]
+      },
+      {
+        "title": "Themes, styles and reusable primitives",
+        "paragraphs": [
+          "The source uses semantic theme tokens, Tailwind utilities, retained scoped CSS and Radix-backed UI primitives. appearance-control, preferences and theme components preserve user preferences, while dedicated skeleton/loading components keep route transitions coherent.",
+          "Design documents record appearance constraints and browser screenshot expectations. They establish design intent and test coverage, not proof that every browser or assistive technology has been verified in production."
+        ],
+        "refs": [
+          {
+            "path": "docs/tailwind-styling.md",
+            "start": 1,
+            "end": 16,
+            "hash": "cf9d7ef565ad491e4386b51925de03307e4f9fc347f345afdd8f631911f3ff27"
+          }
+        ]
+      },
+      {
+        "title": "Feature feedback and source authority",
+        "paragraphs": [
+          "Plan controls explain limits in the UI through entitlement projections, feature locks, allowance cards and upgrade dialogs. Server actions and workers remain authoritative when a tab is stale. Suspended and deletion-pending users require fresh server decisions.",
+          "The source browser is a snapshot rather than a runnable copy of Mailloop. Redacted literals may no longer form executable code. This handbook\u2019s controls store only local learning progress and theme preference."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/entitlements.ts",
+            "start": 225,
+            "end": 240,
+            "hash": "45ac2cef69f0405190a48d2b5ef9e50d1b7274e66b3e3bd0b2f397d89631fd80"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "function-reference",
+    "title": "Function / API Reference",
+    "description": "Compiler-extracted declarations and call sites, with reviewed contracts for core operations.",
+    "interview": "Trace caller \u2192 contract \u2192 side effects \u2192 failure behavior. A function name alone is not an explanation.",
+    "sections": [
+      {
+        "title": "How to use the inventories",
+        "paragraphs": [
+          "The TypeScript compiler API visits every function body in the sanitized first-party TypeScript/JavaScript files: named declarations, methods, assigned arrow functions, inline callbacks, hooks, server actions and Inngest handlers. Each record carries file, inclusive lines, parameter text, returns, calls and structural caller candidates.",
+          "Call candidates are deliberately conservative: matching a callee name is not type-resolved reachability. Framework routing, JSX callbacks, higher-order registration, aliases and dynamic properties may supply callers that static analysis cannot resolve. Records explicitly flag this limitation. Source excerpts and reviewed core contracts below are the basis for behavioral explanation."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 218,
+            "end": 233,
+            "hash": "5e516e4d907861def29b34619cff1ae5302b5842f68d35dde487b18ce697c05a"
+          }
+        ]
+      },
+      {
+        "title": "Core contracts",
+        "paragraphs": [
+          "The reviewed contracts connect inputs, outputs, side effects and callers for the critical path. The full inventory includes implementation details and tests; use its filters to distinguish runtime functions from test callbacks. For unreviewed helpers, structural summaries are navigation aids, not invented behavioral guarantees."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/usage-ledger.ts",
+            "start": 456,
+            "end": 471,
+            "hash": "83b10d6615927a58ed4b365623ca728e8a81c0587a1459da4562f61bf9a75bda"
+          }
+        ]
+      },
+      {
+        "title": "Route contracts and authentication",
+        "paragraphs": [
+          "API inventory entries include declared HTTP methods and the exact route file. Normal user endpoints authenticate sessions; Auth.js, Inngest and Blob/Dodo provider callback branches have distinct verification boundaries. Review the full handler before applying the \u201call routes need a session\u201d shorthand.",
+          "Status codes, response shapes and ownership queries are in the linked snippets. There is no handbook backend. The source-browser query string selects an already bundled sanitized snapshot file."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/resume/blob/route.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "182a79795c2996c4667c4a9e6b52a28ccae126056c64e486397ad4587eeb60e7"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "walkthroughs",
+    "title": "Walkthroughs",
+    "description": "Six end-to-end traces with numbered source-linked steps and supported failures.",
+    "interview": "For each trace, name the durable commit and one failure before and after that commit.",
+    "sections": [
+      {
+        "title": "Six routes through the code",
+        "paragraphs": [
+          "Use the six child walkthroughs to rehearse real behavior: sign-in, a current-limit campaign, one delivery, resume attachment, Premium upgrade and account deletion. The original brief is represented only by the supplied plan; these six cover the important system boundaries without inventing unsupported features."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 218,
+            "end": 233,
+            "hash": "5e516e4d907861def29b34619cff1ae5302b5842f68d35dde487b18ce697c05a"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Identity] --> B[Prepare campaign]\n B --> C[Individual delivery]\n D[PDF lifecycle] --> B\n E[Verified billing] --> B\n F[Account deletion] --> G[Durable recovery]",
+          "caption": "Six routes through the code \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Choose a trace",
+        "paragraphs": [
+          "A three-recipient Free campaign replaces the outdated 15-recipient example. A Premium campaign can contain up to ten recipients if remaining capacity allows. Queuing does not promise immediate delivery, acceptance or an automatic retry after uncertainty."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/validation.ts",
+            "start": 50,
+            "end": 65,
+            "hash": "ba19f3df39cee737b022df0f4cbe60062350660755b1789f48114fee950270de"
+          }
+        ],
+        "items": [
+          "Sign in and reconnect Gmail \u2192 /handbook/walkthrough-sign-in/",
+          "Queue a current-limit campaign \u2192 /handbook/walkthrough-campaign/",
+          "Deliver one message \u2192 /handbook/walkthrough-delivery/",
+          "Upload and retain a PDF \u2192 /handbook/walkthrough-attachment/",
+          "Upgrade through hosted checkout \u2192 /handbook/walkthrough-upgrade/",
+          "Delete an account with recovery \u2192 /handbook/walkthrough-deletion/"
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "tradeoffs",
+    "title": "Tradeoffs",
+    "description": "Separate decision evidence from plausible implementation consequences.",
+    "interview": "Say \u201cthe implementation suggests\u201d when intent is unknown. Do not turn a dependency choice into a personal story.",
+    "sections": [
+      {
+        "title": "Confirmed: conservative sending",
+        "paragraphs": [
+          "CONFIRMED: code comments and usage-ledger rollout guidance explicitly state that an expired lease never authorizes a resend and Gmail/database cannot guarantee atomic exactly-once acceptance. The policy retains ambiguous charges and asks the user to check Sent.",
+          "Benefit: fewer duplicate submissions after unknown outcomes. Cost: a genuinely unsent message can remain unresolved and occupy allowance. Alternative: automatically retry uncertain sends, accepting duplicate risk. The source intentionally chooses the conservative policy."
+        ],
+        "refs": [
+          {
+            "path": "docs/usage-ledger-rollout.md",
+            "start": 105,
+            "end": 120,
+            "hash": "63194b55071d460418e1321c156e4a11896c40927f30195f7cc6ae7d4277dd98"
+          }
+        ]
+      },
+      {
+        "title": "Confirmed: send-only Gmail",
+        "paragraphs": [
+          "CONFIRMED: canReadGmail is hardcoded false and the source labels v1 send-only. Restricting the exposed Gmail client to messages.send is explicit. Reply checks return disabled results.",
+          "Benefit: runtime cannot inspect mailbox content through these paths. Cost: automatic reply/bounce detection and Sent reconciliation are unavailable. Manual reply status remains a user assertion, not observed mailbox evidence."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/capabilities.ts",
+            "start": 3,
+            "end": 18,
+            "hash": "ef53f25d5a7478c068756fcddf79e0cab231660b6b2db64a43cd146df02ff328"
+          }
+        ]
+      },
+      {
+        "title": "Confirmed: schedule cost versus recovery time",
+        "paragraphs": [
+          "CONFIRMED: the billing schedule comment names Inngest Free\u2019s execution allowance as a reason for the four-hour cadence. Daily provider reconciliation runs on the midnight invocation.",
+          "Benefit: fewer baseline executions. Cost: delayed recovery of missed processing. Do not quote a measured monthly bill or user capacity without running representative traffic and checking provider plans."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/schedules.ts",
+            "start": 8,
+            "end": 23,
+            "hash": "ffca050a511d128ef393383e246d56ff9ad4a16dd1c769b1a62a659067524ed4"
+          }
+        ]
+      },
+      {
+        "title": "Inferred: PostgreSQL locking and Prisma",
+        "paragraphs": [
+          "INFERRED: relational constraints plus explicit row locks support per-owner correctness while Prisma supplies typed queries. Benefit: campaign and reservation changes can commit together. Cost: contention and transaction complexity. An in-memory counter would be simpler but would not survive multiple processes or restarts.",
+          "The use of Prisma is confirmed by imports and configuration. The reason it was selected over another ORM is unknown; describe the demonstrated capabilities rather than claiming author motivation."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/usage-ledger.ts",
+            "start": 52,
+            "end": 67,
+            "hash": "409b6bbff8686d7bf80af2273e262521edd3cca9a85b1748d8b7453867e5ffc9"
+          }
+        ]
+      },
+      {
+        "title": "Inferred: one application and hosted services",
+        "paragraphs": [
+          "INFERRED: keeping pages, actions, webhook ingress and worker registrations in one codebase makes cross-layer tracing and changes easier. Cost: changes in shared code can affect several execution paths and require coordinated deployment.",
+          "INFERRED: hosted Dodo checkout avoids building payment collection UI, while adding provider availability, signed-event and reconciliation dependencies. Private Blob storage separates PDF bytes from database metadata, but cleanup becomes a distributed lifecycle."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/checkout.ts",
+            "start": 44,
+            "end": 59,
+            "hash": "62e039026b6505e39effdd359e6efde673493f553057a017b320160fed5040f6"
+          }
+        ]
+      },
+      {
+        "title": "Design comparisons to rehearse",
+        "paragraphs": [
+          "Compare JWT sessions with database sessions: current identity tokens carry IDs but callbacks still check database deletion state. Compare queued orchestration with synchronous request sending: background work survives UI navigation but needs publication recovery. Compare snapshots with live template reads: snapshots preserve approved content but retain message data that deletion must explicitly handle."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 157,
+            "end": 171,
+            "hash": "2698349d9ff82fe67188d3e7808a3c612de5a2821a02e06f53e62239d0c3a2f9"
+          }
+        ],
+        "table": [
+          [
+            "Choice",
+            "Shown implementation",
+            "Alternative and cost"
+          ],
+          [
+            "Message content",
+            "Per-send immutable snapshot",
+            "Live template read can change queued content"
+          ],
+          [
+            "Usage",
+            "Durable reservations with owner lock",
+            "Naive count-then-send races"
+          ],
+          [
+            "Unknown outcome",
+            "Retain charge and prevent resend",
+            "Retry risks duplicate acceptance"
+          ],
+          [
+            "Provider events",
+            "Durable inbox and reconciliation",
+            "Redirect-only access is untrusted"
+          ],
+          [
+            "Admin data",
+            "Restricted database role",
+            "Owner role exposes private message data"
+          ]
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "security-reliability",
+    "title": "Security / Reliability",
+    "description": "Existing controls, confirmed limitations and deployment-dependent risks.",
+    "interview": "Explain a concrete failure path and its control. Keep confirmed weaknesses separate from hypotheses.",
+    "sections": [
+      {
+        "title": "Authentication is only one boundary",
+        "paragraphs": [
+          "Normal mutations authenticate the owner, validate input and scope resource queries by userId. Rate budgets are admitted before business parsing for protected operations. Webhooks authenticate with provider signatures; Blob completion verifies its service callback. Admin mutations add fresh identity, restricted SQL privileges and an audit record.",
+          "These are implementation controls. They do not prove every deployment has correct secrets, least-privilege grants or provider settings. No penetration test or production audit is claimed here."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/admin/auth.ts",
+            "start": 23,
+            "end": 38,
+            "hash": "0b6367fbb2ee852f635ba1a00746ce5980054edea2bd2a02e9a47c77fb7a4062"
+          }
+        ]
+      },
+      {
+        "title": "Confirmed limitations",
+        "paragraphs": [
+          "Confirmed limitation: Gmail acceptance and database persistence are not atomic. Unknown outcomes cannot be resolved by mailbox reads because send-only v1 disables them. This can retain usage for a message that did not actually arrive.",
+          "Confirmed operational gap: automatic operator alert delivery and monitoring jobs were removed in the documented hardening evolution. Safe logs and persisted recovery state remain; operators must arrange observation externally. Do not infer that an alert integration exists."
+        ],
+        "refs": [
+          {
+            "path": "docs/minimum-hardening.md",
+            "start": 34,
+            "end": 49,
+            "hash": "7ec5c2a0440f9b7c94c0405d253090df52ba17e443447efb3da1b9d57b329b54"
+          }
+        ]
+      },
+      {
+        "title": "PDF and content safeguards",
+        "paragraphs": [
+          "PDF validation enforces a 5 MiB size bound, MIME type and %PDF- prefix. Storage paths are restricted to the owner\u2019s resume prefix, filenames strip control characters, and private Blob reads have timeouts. MailComposer cannot read arbitrary URLs or files.",
+          "Possible risk: size/type/magic checks do not establish that a PDF is harmless; the shown validation is not a malware scanner. This is a possible content risk, not evidence of an exploit. The actual provider storage configuration is externally dependent."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/validation.ts",
+            "start": 78,
+            "end": 93,
+            "hash": "ec0dfe077ac9f9ffbddb88cf32d351969797fc6bf4011a7b141aa9f3d4c7199b"
+          }
+        ]
+      },
+      {
+        "title": "Credentials, logs and key recovery",
+        "paragraphs": [
+          "Refresh tokens are encrypted server-side with owner-bound v2 authenticated encryption. Safe logging accepts bounded codes and identifiers instead of raw provider errors, email bodies, addresses or credentials. A key rotation command covers retained deletion credentials too.",
+          "Externally dependent: key provisioning, backup retention, restore exercises and secret access controls. Encryption does not protect against a fully compromised process that holds both database access and keys. The repository cannot establish actual backup readiness."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/observability.ts",
+            "start": 69,
+            "end": 84,
+            "hash": "6632dfc8c3ec552d31c61052a6e8a46e1c6a6f98eb2a51333cb6af88bfc76055"
+          }
+        ]
+      },
+      {
+        "title": "Rate limits and predictable degradation",
+        "paragraphs": [
+          "The database-backed limiter uses rolling windows, row locks, bounded timestamp arrays and database time. Limiter/database failures block protected operations rather than silently admitting them. HTTP routes return 429 with Retry-After or 503; actions return structured failure codes.",
+          "Provider throttling is separate from the app allowance. Reconnecting Gmail can clear a credential/policy pause but never restores cancelled sends, resets app usage or removes suspension."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/rate-limit.ts",
+            "start": 56,
+            "end": 71,
+            "hash": "32e6df9ac5ea67aaee39ec7ab2d824a4adc854123f92dffcb930546e3bab99f7"
+          }
+        ]
+      },
+      {
+        "title": "Test evidence has boundaries",
+        "paragraphs": [
+          "Tests cover token envelopes, MIME, usage claims, webhook signatures, deletion, privacy and database migrations. Browser suites exercise themes, plan gates, forms and status views. Test files are evidence of intended contracts; they are not proof those tests currently pass or that production behaves identically.",
+          "This handbook runs its own static and browser checks without starting Mailloop, touching its database or using any provider credentials."
+        ],
+        "refs": [
+          {
+            "path": "tests/gmail-boundary.test.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "d503ce8746083c976bed99f495980b671637bb51417820f2ffcef9ecefdf8534"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Known unsent] --> B[Release reservation]\n C[Provider accepted] --> D[Confirm usage]\n E[Unknown outcome] --> F[Retain charge and block resend]\n G[Deployment evidence absent] --> H[Mark externally dependent]",
+          "caption": "Test evidence has boundaries \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Admin controls and non-recallable work",
+        "paragraphs": [
+          "The operator can change a timed plan override, suspend an account and toggle global sending. An override changes app access without mutating provider billing or clearing usage. A Free override requires acknowledgement that billing continues; default overrides expire after 30 days.",
+          "Suspension cancels proven-unsubmitted READY work and preserves attempting/uncertain evidence. Unsuspension does not reconnect Gmail or restart cancelled sends. The global sending update takes an exclusive control lock that conflicts with final-claim shared locks: subsequent claims see the disable, but an earlier committed claim cannot be recalled.",
+          "Admin changes require fresh identity, predefined reasons and stable UUID request IDs; successful identical replays return an acknowledgement, conflicting reuse fails. Current admission uses the general limiter before business parsing. Older admin-panel guidance describes a superseded ten-successful-mutations limit and rollback behavior; current code uses 20 admissions/minute and admission survives business rollback."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/admin/mutations.ts",
+            "start": 37,
+            "end": 58,
+            "hash": "fccdef4fc1e50875ebaf6c023246b0a880fb1b71972062661f8fbc1e5ec1edb6"
+          },
+          {
+            "path": "src/lib/admin/mutations.ts",
+            "start": 118,
+            "end": 151,
+            "hash": "6a34c8b34d8c18270e9aa1c1213c0cb5444d3670ec122dc8765bcc27dff8d60b"
+          },
+          {
+            "path": "src/lib/admin/mutations.ts",
+            "start": 242,
+            "end": 276,
+            "hash": "6e9324008343c893757deb67297d9049ddea488ea3323faf2fc72d318e983695"
+          },
+          {
+            "path": "src/lib/admin/mutations.ts",
+            "start": 270,
+            "end": 298,
+            "hash": "966ee1ee256bbf3b83860690dad50a526b0cd734cf81ed2ce6aef1ba34010622"
+          }
+        ]
+      },
+      {
+        "title": "Current request budgets",
+        "paragraphs": [
+          "These rolling-window request budgets are distinct from campaign size, email allowance and Gmail provider throttling. Authentication precedes admission; accepted admissions consume capacity even if later parsing or business work fails. Multiple admin/system budgets are checked atomically in a stable lock order."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/rate-limit.ts",
+            "start": 8,
+            "end": 29,
+            "hash": "c1a7bca5d44f17077788d6e32aa952db516ba2f9467ffa1cc6e5c741502d7673"
+          }
+        ],
+        "table": [
+          [
+            "Operation",
+            "Budget"
+          ],
+          [
+            "Checkout",
+            "5 / 10 minutes / owner"
+          ],
+          [
+            "Portal and cancel combined",
+            "10 / minute / owner"
+          ],
+          [
+            "Billing status",
+            "30 / minute / owner"
+          ],
+          [
+            "Campaign submission",
+            "10 / minute / owner"
+          ],
+          [
+            "CSV import",
+            "5 / hour / owner"
+          ],
+          [
+            "Account and template exports combined",
+            "2 / hour / owner"
+          ],
+          [
+            "Admin mutations",
+            "20 / minute / actor"
+          ],
+          [
+            "System control additionally",
+            "5 / minute / actor; 10 / minute globally"
+          ]
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "scaling",
+    "title": "Scaling",
+    "description": "Bottlenecks, correctness constraints and measurement plans grounded in code.",
+    "interview": "Start with current constraints and proposed measurements. Do not invent requests per second, email volume or cost savings.",
+    "sections": [
+      {
+        "title": "Current concurrency and cost drivers",
+        "paragraphs": [
+          "The send function limits concurrency to one per user and normal pacing is about five seconds. Gmail/provider limits, preparation latency, database transactions and scheduled recovery all affect throughput. A five-second interval is a policy constant, not a measured end-to-end rate.",
+          "The platform may run many owners concurrently, but configured provider/account limits and Inngest capacity are external. Measure database lock waits, provider latency, event delays and uncertain-outcome rate before stating capacity."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 522,
+            "end": 537,
+            "hash": "91155be063035016c58a9baaa80e1919e9d657cf9de6f20b393f342418044296"
+          }
+        ]
+      },
+      {
+        "title": "Database pressure and indexing",
+        "paragraphs": [
+          "Owner locks deliberately serialize competing usage operations. Schema indexes support status/availability/lease discovery and tenant queries. Reconciliation and maintenance page by stable IDs; rate-limit cleanup uses SKIP LOCKED with bounded batches.",
+          "INFERRED tradeoff: more detailed accounting and indexes improve recoverability while increasing write work. Assess execution plans and realistic contention before changing indexes or widening parallelism. Removing owner serialization without a replacement can break quota invariants."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/rate-limit-jobs.ts",
+            "start": 5,
+            "end": 20,
+            "hash": "45a664b2d71d9b78ecd759632ec6e49ae15a3580ca78cba4ee48a8a65826cf67"
+          }
+        ]
+      },
+      {
+        "title": "Queue backlogs and lifecycle capacity",
+        "paragraphs": [
+          "Queues have original expiry deadlines; republishing must not extend them. Hourly recovery introduces visible delay after dispatch failure. Cleanup deletes at most ten obsolete PDFs per owner pass, so large backlogs take multiple passes. Billing recovery and account-deletion recovery have their own state and retry schedules.",
+          "A useful scaling dashboard would expose oldest READY age, publication delay, expired leases, unresolved UNCERTAIN age, counter drift, cleanup backlog and billing inbox age. This is a proposed measurement plan, not an existing dashboard claim."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/storage.ts",
+            "start": 216,
+            "end": 231,
+            "hash": "3c2ed1e063ea50b4c9e47e3a2001873314977606c9f4430961d9b4324143dba7"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Measure queue and lock waits] --> B[Identify limiting boundary]\n B --> C[Change one bounded stage]\n C --> D[Verify quota and duplicate invariants]\n D --> E[Measure with representative load]",
+          "caption": "Queue backlogs and lifecycle capacity \u2014 relationships shown are supported by the linked source; this is a conceptual view, not a deployment trace."
+        }
+      },
+      {
+        "title": "Safe next steps",
+        "paragraphs": [
+          "A proposed load exercise uses disposable PostgreSQL, fake provider responses and representative multi-owner campaigns. Include concurrent submit, lost event publication, a token-preparation delay crossing a quota boundary and a lost acceptance write. Record latency distributions and invariant violations.",
+          "Do not test production sending capacity by generating real cold email. Any architecture change must preserve stable delivery identity, tenant boundaries, accounting retention and uncertainty semantics. Sharding, partitioning or a dedicated queue are options to evaluate after measuring the actual constraint."
+        ],
+        "refs": [
+          {
+            "path": "scripts/test-usage-db.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "ce8406e3e4e4309e2055ecfadd4a79b2c181dad3fd3a7b58c43da772ebf48b7d"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "interview-prep",
+    "title": "Interview Prep",
+    "description": "Evidence-based answers, deeper follow-ups, flashcards and self-checks.",
+    "interview": "Use the short answer first; expand with a concrete code boundary and a failure case. Add personal experience only when it is your own.",
+    "sections": [
+      {
+        "title": "An honest answer framework",
+        "paragraphs": [
+          "Use four parts: what the feature does, the important implementation boundary, the tradeoff and how you would verify it. Say \u201cthe code implements\u201d for repository evidence. Say \u201cI would measure\u201d for an unrun experiment.",
+          "For personal questions such as \u201cWhat was your biggest challenge?\u201d, do not invent authorship or a production incident. A defensible framework is: \u201cA technically demanding area here is ambiguous Gmail acceptance. The implementation uses leases, durable accounting and no automatic resend. My own contribution was [your actual work], verified by [your actual evidence].\u201d"
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 72,
+            "end": 87,
+            "hash": "60c2753a91dfaee69ed7da4a7ace090dbfbbeb8a8aa7a2ade70124ab19e9dea0"
+          }
+        ]
+      },
+      {
+        "title": "Practice in three passes",
+        "paragraphs": [
+          "The question bank below contains short answers, deeper explanations and revision links. Reveal an answer before marking your confidence; use flashcards for recall and the quiz for discriminating between plausible choices. Progress stays in this browser only.",
+          "First explain the happy path. Next explain failed publication, definite rejection and uncertain acceptance. Finally compare designs without inventing why the original author made a choice."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 518,
+            "end": 533,
+            "hash": "636ea8267ae4b1fa152a8171385a3b2dd122d9230cc815368997c4069d62f812"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "glossary",
+    "title": "Glossary",
+    "description": "Plain-language definitions linked from the chapters.",
+    "interview": "Define a term by its role in this system, then point to the actual implementation.",
+    "sections": [
+      {
+        "title": "Read terms in context",
+        "paragraphs": [
+          "The glossary defines implementation vocabulary used throughout this guide. Terms are linked at first visible mention in chapter paragraphs. Some are general concepts, but each definition is tied to how this snapshot uses it. A lease is not a retry license; a session is not a Gmail credential; an entitlement is not a client badge."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/usage-ledger.ts",
+            "start": 456,
+            "end": 471,
+            "hash": "83b10d6615927a58ed4b365623ca728e8a81c0587a1459da4562f61bf9a75bda"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "cheat-sheet",
+    "title": "Cheat Sheet",
+    "description": "The ten concepts to retain and a compact map back to evidence.",
+    "interview": "If you can explain these ten concepts with a failure case each, you have a useful revision foundation. It is not a guarantee of interview readiness.",
+    "sections": [
+      {
+        "title": "Ten concepts before an interview",
+        "paragraphs": [
+          "Use this list to find gaps in understanding, then follow the revision links and source. The central invariant is that local state must not pretend to know an external outcome."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/plans.ts",
+            "start": 4,
+            "end": 19,
+            "hash": "0de32a2a3431e665ac4198403edcd0306956f76e8a5bfb59b617910cc65fa092"
+          }
+        ],
+        "items": [
+          "1. Product: personalized individual Gmail messages for job seekers; no batch CC/BCC.",
+          "2. Limits: Free 3/campaign, 3/day, 15/month; Premium 10/campaign, 20/day, 300/period.",
+          "3. Legacy flag: gating off uses rolling 200/day and still writes ledger evidence.",
+          "4. Identity: Google OAuth + JWT sessions; User persistence is manual.",
+          "5. Credentials: server-only encrypted refresh tokens; access tokens are prepared before final claim.",
+          "6. Admission: owner lock, idempotency, tenant checks, immutable send snapshots and reservations.",
+          "7. Delivery: prepare outside lock, recheck, claim, one Gmail request, then settle.",
+          "8. Uncertainty: retain accounting and block automatic resend; exactly-once acceptance is not guaranteed.",
+          "9. Billing: explicit mode/business binding, signed durable inbox, provider verification and entitlement decisions.",
+          "10. Recovery: eight Inngest registrations cover delivery, reconciliation, attachment cleanup, deletion, billing and rate budgets."
+        ]
+      },
+      {
+        "title": "Fast distinction table",
+        "paragraphs": [
+          "Keep these distinctions explicit. Most misleading explanations blur two states that the code deliberately separates."
+        ],
+        "refs": [
+          {
+            "path": "prisma/schema.prisma",
+            "start": 262,
+            "end": 277,
+            "hash": "2037eed932124a50d16ef45618a681c9559b72355842bb7b036f1b7159bd5b1d"
+          }
+        ],
+        "table": [
+          [
+            "Do not confuse",
+            "Why"
+          ],
+          [
+            "QUEUED and ATTEMPTING",
+            "A queued item has not necessarily crossed the send boundary"
+          ],
+          [
+            "FAILED and definitely unsent",
+            "UNCERTAIN may appear with a failed status but needs review"
+          ],
+          [
+            "History deletion and account deletion",
+            "Receipts/accounting can survive history removal"
+          ],
+          [
+            "Provider period and UTC month",
+            "Actual subscriptions use verified provider boundaries"
+          ],
+          [
+            "Reconciliation and resend",
+            "Repairing evidence/publication never licenses ambiguous resend"
+          ],
+          [
+            "Checkout return and payment proof",
+            "Only verified provider evidence can grant paid access"
+          ],
+          [
+            "Test coverage and production verification",
+            "Fixtures cannot establish deployed flags or Google status"
+          ]
+        ]
+      },
+      {
+        "title": "Commands belong to the right project",
+        "paragraphs": [
+          "Handbook commands run inside mailloop-handbook. npm run dev starts the local guide; npm run build validates content and exports out/. npm run source:verify checks that the source checkout still matches its baseline.",
+          "Mailloop operator scripts shown in the source are explanatory references. They can mutate application data when run with apply flags; this handbook does not run them or require its database, OAuth, Gmail or payment credentials."
+        ],
+        "refs": [
+          {
+            "path": "package.json",
+            "start": 5,
+            "end": 20,
+            "hash": "bb2ba86620d8acca8cca5f20b3f46b874e797dbadb9940ffd92b55818dce3ce2"
+          }
+        ]
+      }
+    ],
+    "kind": "chapter"
+  },
+  {
+    "slug": "walkthrough-sign-in",
+    "title": "Sign in and reconnect Gmail",
+    "description": "Trace Google identity through callbacks into a usable local owner.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Start Google consent",
+        "paragraphs": [
+          "The normal provider requests offline access and gmail.send. Identity scopes are separate from sending permission."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 14,
+            "end": 29,
+            "hash": "ddb47b9a1476354f2a041d5fef68d07d42a24ee1aa6d7fb6919eef9b41fb1d7d"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Consent] --> B[Validate identity]\n B --> C[Lock and persist owner]\n C --> D[JWT session]\n D --> E[Later prepare Gmail token]",
+          "caption": "Sign in and reconnect Gmail \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Validate the incoming profile",
+        "paragraphs": [
+          "Require verified email, subject and the expected provider; reject a deletion tombstone or pending deletion."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 52,
+            "end": 67,
+            "hash": "516a0792fadab481d78aa7751e026bc15aeb310afbc52ed4dc314dc2c3b910be"
+          }
+        ]
+      },
+      {
+        "title": "3. Persist the owner transactionally",
+        "paragraphs": [
+          "Resolve by googleId, lock an existing user and reject unrelated email collisions. Encrypt a new refresh token against the owner UUID."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 78,
+            "end": 93,
+            "hash": "9caf2333a19bb7a61723c3e07478fb135ba8194f62f961581d3a9932a869d259"
+          }
+        ]
+      },
+      {
+        "title": "4. Project a session",
+        "paragraphs": [
+          "Expose the owner ID only if User still exists and is not deletion-pending. Reauthentication evidence is distinct from normal Google sign-in."
+        ],
+        "refs": [
+          {
+            "path": "src/auth.ts",
+            "start": 157,
+            "end": 171,
+            "hash": "2698349d9ff82fe67188d3e7808a3c612de5a2821a02e06f53e62239d0c3a2f9"
+          }
+        ]
+      },
+      {
+        "title": "5. Prepare credentials when sending",
+        "paragraphs": [
+          "requireUser authenticates business entrypoints. gmailForUser later checks authorization and refresh availability and prepares an access token."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/gmail.ts",
+            "start": 9,
+            "end": 24,
+            "hash": "a44b2c44bbdab6ceac0f70668da2a01e5d1c134ba902d4f0719ad26b7d907d9d"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "Unverified email or wrong provider is denied; unrelated email collision requires review. Missing send scope or refresh credential means reconnect. A deletion tombstone prevents immediate recreation while cleanup is pending."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/gmail.ts",
+            "start": 9,
+            "end": 24,
+            "hash": "a44b2c44bbdab6ceac0f70668da2a01e5d1c134ba902d4f0719ad26b7d907d9d"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  },
+  {
+    "slug": "walkthrough-campaign",
+    "title": "Queue a current-limit campaign",
+    "description": "Replace a 15-recipient batch with an evidence-based three-recipient Free example.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Choose three eligible contacts",
+        "paragraphs": [
+          "Assume paid gating is on, three Free daily slots remain and at least three monthly slots remain. Choose a template and roles; attach only an available PDF."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/plans.ts",
+            "start": 4,
+            "end": 19,
+            "hash": "0de32a2a3431e665ac4198403edcd0306956f76e8a5bfb59b617910cc65fa092"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Three Free recipients] --> B[Auth and rate admission]\n B --> C[Policy and owner checks]\n C --> D[Snapshot plus reserve commit]\n D --> E[Publish]\n E --> F[Hourly repair if interrupted]",
+          "caption": "Queue a current-limit campaign \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Authenticate and admit the request",
+        "paragraphs": [
+          "submitCampaign obtains the owner and consumes the rate budget before calling createCampaign. A failed request may still consume request-rate capacity."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 218,
+            "end": 233,
+            "hash": "5e516e4d907861def29b34619cff1ae5302b5842f68d35dde487b18ce697c05a"
+          }
+        ]
+      },
+      {
+        "title": "3. Validate the maximum and idempotency",
+        "paragraphs": [
+          "campaignSchema rejects 15 recipients immediately. createCampaign checks an existing owner/key before creating rows; a new four-recipient Free request fails the plan-specific limit."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 37,
+            "end": 52,
+            "hash": "979aa0cade86f57a6d2f806942a325bc18447148739b15e526f93c59756df882"
+          }
+        ]
+      },
+      {
+        "title": "4. Check ownership and duplicate evidence",
+        "paragraphs": [
+          "Require an available owner template and contacts. Exclude pending or uncertain recipients; require explicit selection for successful-recipient resends."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 114,
+            "end": 129,
+            "hash": "72c97a7a04601bbbdba919bd6888f1dd11b8c3ba840b878229a1cd8ad4da8703"
+          }
+        ]
+      },
+      {
+        "title": "5. Commit snapshots and reservations",
+        "paragraphs": [
+          "Render each recipient\u2019s message and store a stable Send ID/Message-ID. Campaign creation and reserveUsage occur in one owner transaction."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 201,
+            "end": 216,
+            "hash": "bf5b4838690d897ba5ec3bfcbe326d22e2f5ad693d5407aa5731d63ce6081abb"
+          }
+        ]
+      },
+      {
+        "title": "6. Publish after commit",
+        "paragraphs": [
+          "Dispatch immediately. If publication fails, keep durable queue rows for hourly repair rather than creating another campaign."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 223,
+            "end": 238,
+            "hash": "c4283662b0398a4d1556dfb34ae9e62b7e15510f3b1b158e9ac1d2057b97d8f3"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "Fifteen recipients fail schema validation; four Free recipients fail plan enforcement. Missing contacts, unavailable templates, absent roles, unavailable PDF or exhausted capacity prevent a new campaign. Event publication can fail after a successful database commit without losing the durable intent."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/actions.ts",
+            "start": 223,
+            "end": 238,
+            "hash": "c4283662b0398a4d1556dfb34ae9e62b7e15510f3b1b158e9ac1d2057b97d8f3"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  },
+  {
+    "slug": "walkthrough-delivery",
+    "title": "Deliver one message",
+    "description": "Follow one queued Send across the non-atomic Gmail boundary.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Load state and refuse repeat submission",
+        "paragraphs": [
+          "Return immediately for terminal, DONE or UNCERTAIN states. An expired ATTEMPTING lease becomes uncertain rather than ready."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 74,
+            "end": 89,
+            "hash": "e0767142f4d91125727451d27088edf5da7b83ec43d3e20ffcd1c5ffc4653f1a"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart TB\n A[READY] --> B[Preflight and prepare]\n B --> C[Final claim]\n C --> D[ATTEMPTING]\n D --> E[Confirmed DONE]\n D --> F[Definite rejection and release]\n D --> G[UNCERTAIN and retain]",
+          "caption": "Deliver one message \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Perform preflight",
+        "paragraphs": [
+          "Under the owner lock read controls, pauses, expiry, access and accounting readiness. Pacing can wait and capacity can defer before an attempt."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 133,
+            "end": 148,
+            "hash": "3cd959115596d0bbb98f03614c8b8c2ea24da915cf45f15b94863e0571a67cf6"
+          }
+        ]
+      },
+      {
+        "title": "3. Prepare outside the lock",
+        "paragraphs": [
+          "Obtain an access token, read the campaign-selected PDF and build MIME. Slow network preparation does not hold the owner lock."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 315,
+            "end": 330,
+            "hash": "98f10faf38e7e9c234d09fba2d6d4026bb3bf31f742809546104f1d63c26e7b2"
+          }
+        ]
+      },
+      {
+        "title": "4. Recheck and claim",
+        "paragraphs": [
+          "Use a fresh authorization time and controls. claimUsage supplies the token and lease that identify this specific submission."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 333,
+            "end": 348,
+            "hash": "8bc1e81bd28624c5506765bcefa3a7beb5a177ff77c6eb1a21343c3d98573548"
+          }
+        ]
+      },
+      {
+        "title": "5. Send exactly one request",
+        "paragraphs": [
+          "Call Gmail messages.send with retry false. One To recipient is encoded in the MIME message. This is one submission policy, not a guarantee of exactly-once provider acceptance."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 339,
+            "end": 354,
+            "hash": "74df7b91431c197a6c7040a3634eb2c7dc360d657ed0af58de31af91ec4edf6f"
+          }
+        ]
+      },
+      {
+        "title": "6. Settle the evidence",
+        "paragraphs": [
+          "Persist success and confirmUsage; release definite rejection, or retain uncertain accounting. Failed settlement is warned and later reconciled."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 453,
+            "end": 468,
+            "hash": "a53ebdf5805e4358e394390af86a02dffc15661572ebb02af8f725598cfba09b"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "Missing credentials or PDF can fail before submission and release the reservation. A definite Gmail rejection finishes without retry. A timeout after submission or acceptance with failed persistence is uncertain, keeps capacity and never auto-resends."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/inngest.ts",
+            "start": 453,
+            "end": 468,
+            "hash": "a53ebdf5805e4358e394390af86a02dffc15661572ebb02af8f725598cfba09b"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  },
+  {
+    "slug": "walkthrough-attachment",
+    "title": "Upload and retain a PDF",
+    "description": "Separate uploaded bytes, activation, campaign references and physical deletion.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Choose the storage branch",
+        "paragraphs": [
+          "Production uses private Blob storage; non-production without Blob can store local files with restrictive filesystem modes. The upload entrypoint authenticates the user."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/resume/upload/route.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "137b90e1e0982cd32354cd1b66fe0db539c3c246f930dcbfc7ec38bd0ca3216f"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Private upload] --> B[Read and validate]\n B --> C[Activate under owner lock]\n C --> D[Campaign references PDF]\n D --> E[Protect while unresolved]\n E --> F[Retire and delete when eligible]",
+          "caption": "Upload and retain a PDF \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Verify Blob callback boundaries",
+        "paragraphs": [
+          "The client-upload route authenticates token generation and relies on verified Blob completion for the provider callback. Do not apply a user-session requirement to the service completion branch."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/resume/blob/route.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "182a79795c2996c4667c4a9e6b52a28ccae126056c64e486397ad4587eeb60e7"
+          }
+        ]
+      },
+      {
+        "title": "3. Validate and activate",
+        "paragraphs": [
+          "activateResume reads bytes, validates size/type/header, locks the owner, checks availability and stores/selects attachment metadata. Rejected activation tries to discard the unactivated path."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/storage.ts",
+            "start": 76,
+            "end": 91,
+            "hash": "c4e2857eaaaba26ae15066a42432868ccbf8d1cd01a12a4c540f2c23e1313c19"
+          }
+        ]
+      },
+      {
+        "title": "4. Snapshot the selection",
+        "paragraphs": [
+          "createCampaign records the selected attachment ID; the worker reads that selection rather than the owner\u2019s later replacement PDF."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/campaigns.ts",
+            "start": 146,
+            "end": 161,
+            "hash": "03d250c1ba6a63614da388780151c0cc7598808a49e58cb46f202af09bc22582"
+          }
+        ]
+      },
+      {
+        "title": "5. Retire only unneeded files",
+        "paragraphs": [
+          "cleanupAttachments excludes current PDFs and references from queued, attempting or uncertain work. deletedAt and storageDeletedAt separate logical retirement from completed physical deletion."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/storage.ts",
+            "start": 216,
+            "end": 231,
+            "hash": "3c2ed1e063ea50b4c9e47e3a2001873314977606c9f4430961d9b4324143dba7"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "An invalid owner path is rejected. Wrong MIME/prefix or oversized PDF fails validation. Suspension/deletion can race with completion and cause discard. Failed physical deletion remains pending; uncertain deliveries can intentionally retain their attachment."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/storage.ts",
+            "start": 216,
+            "end": 231,
+            "hash": "3c2ed1e063ea50b4c9e47e3a2001873314977606c9f4430961d9b4324143dba7"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  },
+  {
+    "slug": "walkthrough-upgrade",
+    "title": "Upgrade through hosted checkout",
+    "description": "Separate a hosted return, a durable webhook and a verified paid entitlement.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Authenticate the checkout route",
+        "paragraphs": [
+          "The user endpoint validates session/origin and consumes a checkout rate budget before creating a hosted session."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/billing/checkout/route.ts",
+            "start": 1,
+            "end": 16,
+            "hash": "86f37734c7486df9a8f4fe81a9f1787d0edf320c48a543a51a2eebc8c192d54e"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart LR\n A[Authenticated checkout] --> B[Hosted provider session]\n B --> C[Return status UI]\n B --> D[Signed webhook]\n D --> E[Receipt and provider verification]\n E --> F[Observed subscription]\n F --> G[Effective entitlement]",
+          "caption": "Upgrade through hosted checkout \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Bind mode and verify product",
+        "paragraphs": [
+          "Require explicit config, a matching SystemControl business/environment binding, a valid catalog and the checkout enable flag."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/store.ts",
+            "start": 21,
+            "end": 36,
+            "hash": "d3a152c86832657ffea6cecb1aa57d42a76dd73e1c1979a5da75e066d2fb249d"
+          }
+        ]
+      },
+      {
+        "title": "3. Record attempt and call provider",
+        "paragraphs": [
+          "Checkout uses durable attempts and idempotency. Uncertain provider creation is recoverable; retrying with an unrelated identity can create duplicate commercial work."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/checkout.ts",
+            "start": 44,
+            "end": 59,
+            "hash": "62e039026b6505e39effdd359e6efde673493f553057a017b320160fed5040f6"
+          }
+        ]
+      },
+      {
+        "title": "4. Verify and commit webhook receipt",
+        "paragraphs": [
+          "Verify exact raw bytes, validate business, normalize data and upsert the payload hash by webhookId. Commit before asynchronous processing."
+        ],
+        "refs": [
+          {
+            "path": "src/app/api/webhooks/dodo/route.ts",
+            "start": 53,
+            "end": 68,
+            "hash": "dea41b30201794ef6b72a8160eda8bd706dffa8df7577811128ec521edc16442"
+          }
+        ]
+      },
+      {
+        "title": "5. Process verified provider observations",
+        "paragraphs": [
+          "Lifecycle processing checks provider evidence and updates durable subscription state. Scheduled recovery and reconciliation cover missed processing."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/billing/lifecycle.ts",
+            "start": 435,
+            "end": 450,
+            "hash": "77b7680a20dc7b12925135533bd1eb1cad04a9cdc0f6b893654e74823801ea02"
+          }
+        ]
+      },
+      {
+        "title": "6. Resolve present access",
+        "paragraphs": [
+          "The return page displays status; entitlement resolution considers effective plan, valid period, override, suspension and deletion. A redirect alone never grants Premium."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/entitlements.ts",
+            "start": 102,
+            "end": 117,
+            "hash": "de7641398642a449600f8c046ea3d9e0418727a02dc8fcd852ef69ad2abe7f44"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "Config/mode binding or catalog mismatch blocks checkout. Invalid signature returns 401; oversized body returns 413. Duplicate identical receipts are idempotent; conflicting webhook ID/hash is 409. Processing outages leave durable recoverable receipts."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/entitlements.ts",
+            "start": 102,
+            "end": 117,
+            "hash": "de7641398642a449600f8c046ea3d9e0418727a02dc8fcd852ef69ad2abe7f44"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  },
+  {
+    "slug": "walkthrough-deletion",
+    "title": "Delete an account with recovery",
+    "description": "Understand why the cleanup job outlives User.",
+    "interview": "Explain each numbered step, then choose one supported failure and identify what durable evidence survives.",
+    "sections": [
+      {
+        "title": "1. Confirm owner intent",
+        "paragraphs": [
+          "requestAccountDeletion locks the owner and requires the exact account email. The user-facing action authenticates before invoking it."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/account.ts",
+            "start": 8,
+            "end": 23,
+            "hash": "1544c313bdd60fce4afa65a3e8e8a9bfa46c5c46db24e97e23c085966d5c8e50"
+          }
+        ],
+        "diagram": {
+          "code": "flowchart TB\n A[Confirm exact email] --> B[Disable account and persist job]\n B --> C[Immediate billing-only attempt]\n B --> D[After 15-minute drain]\n D --> E[Independent content and storage purge]\n E --> F[Revocation and billing recovery]\n C --> F\n F --> G[Retry unfinished stages]",
+          "caption": "Delete an account with recovery \u2014 conceptual order and durable boundaries; see each numbered source reference."
+        }
+      },
+      {
+        "title": "2. Commit unavailability and recovery state",
+        "paragraphs": [
+          "Mark deletionRequestedAt, disable Gmail authorization, increment billing version and create/update the deletion job in the same transaction."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/account.ts",
+            "start": 22,
+            "end": 37,
+            "hash": "75df561eebe94d3a81867e0c355bc52fc82878272bc95aab92771a3ab2ec7c9c"
+          }
+        ]
+      },
+      {
+        "title": "3. Remove the normal credential copy",
+        "paragraphs": [
+          "The job retains a deadline-limited encrypted revocation credential; the User credential is cleared. Cancel only eligible queued work; attempted evidence needs draining."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/account.ts",
+            "start": 23,
+            "end": 38,
+            "hash": "05e78d3530466cf3adb4d830db251dd2e299c53c0e7dd9c67d6962ae52537ff0"
+          }
+        ]
+      },
+      {
+        "title": "4. Continue external cleanup",
+        "paragraphs": [
+          "runDeletionJob coordinates billing cancellation, credential revocation, content and storage cleanup with durable markers/leases. Exact ordering and drain deadlines are in the job source."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/deletion-jobs.ts",
+            "start": 240,
+            "end": 255,
+            "hash": "f3f5779cd4b8a8276df53e0247a02deb6264ffec49b662fb6431068c97d4c785"
+          }
+        ]
+      },
+      {
+        "title": "5. Discover unfinished jobs",
+        "paragraphs": [
+          "The daily sweep expires retained credentials, prepares legacy requests, and emits per-owner deletion events for jobs that are due. The job has no User foreign key so recovery survives content deletion."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/lifecycle-jobs.ts",
+            "start": 10,
+            "end": 25,
+            "hash": "ba7a050e926ed350c26a2c0317143168ad2783827401943fa7a8312963e2fd5d"
+          }
+        ]
+      },
+      {
+        "title": "Supported failure cases",
+        "paragraphs": [
+          "Wrong confirmation email is rejected. External billing, storage or revocation failures leave recoverable state rather than pretending cleanup completed. Credential expiry can erase the credential before revocation succeeds; the job records incomplete revocation. Deletion tombstones block immediate Google identity recreation."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/lifecycle-jobs.ts",
+            "start": 10,
+            "end": 25,
+            "hash": "ba7a050e926ed350c26a2c0317143168ad2783827401943fa7a8312963e2fd5d"
+          }
+        ]
+      },
+      {
+        "title": "Drain and independent cleanup stages",
+        "paragraphs": [
+          "The drain constant is 15 minutes. A newly requested deletion can attempt billing-only recovery immediately. After the drain, the full worker attempts content purge, storage deletion and Google revocation independently before its billing stage, so a billing outage does not indefinitely block content erasure.",
+          "The credential retention deadline is 30 days from request, with the daily expiry sweep erasing one sweep interval early. Expired or missing revocation proof is recorded rather than fabricated. Completion requires content, storage, billing cancellation and Google revocation markers; unresolved revocation retains a visible tombstone."
+        ],
+        "refs": [
+          {
+            "path": "src/lib/deletion-jobs.ts",
+            "start": 279,
+            "end": 300,
+            "hash": "fe7c231299dc4abadd0360189d42e42310bb11640118d67bd2d639dc4d2cd9b8"
+          }
+        ]
+      }
+    ],
+    "kind": "walkthrough"
+  }
+]

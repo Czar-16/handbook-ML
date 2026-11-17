@@ -1,0 +1,11 @@
+import rawChapters from '@/content/chapters.json';
+import rawQuestions from '@/content/questions.json';
+import rawGlossary from '@/content/glossary.json';
+export type Ref = { path: string; start: number; end: number; hash: string };
+export type Section = { title: string; paragraphs: string[]; refs: Ref[]; items?: string[]; table?: string[][]; diagram?: { code: string; caption: string } };
+export type Chapter = {slug:string;title:string;description:string;interview:string;sections:Section[];kind:string};
+export type Question = {id:string;question:string;short:string;deep:string;chapter:string;ref:Ref};
+export const chapters: Chapter[] = rawChapters;
+export const questions: Question[] = rawQuestions;
+export const glossary: {id:string;term:string;definition:string;chapter:string}[] = rawGlossary;
+export const sourceHref=(path:string,line?:number)=>`/source/?file=${encodeURIComponent(path)}${line ? '#L'+line : ''}`;

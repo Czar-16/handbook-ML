@@ -1,0 +1,1 @@
+{"path":"src/app/(app)/templates/loading.tsx","text":"import { TemplatesLoading } from \"@/components/templates-loading\";\n\nexport default function Loading() {\n  return <TemplatesLoading />;\n}\n","hash":"a5aa5cf83e89913006491f19aedf40d959f1b1f30416a7fb2d6e734618d7572d","originalHash":"a5aa5cf83e89913006491f19aedf40d959f1b1f30416a7fb2d6e734618d7572d","lines":6}

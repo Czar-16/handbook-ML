@@ -1,0 +1,5114 @@
+{
+  "commit": "a4f1651b5293213f92211ddf8e6d37ef457e09f2",
+  "date": "2026-11-16T16:24:13+05:30",
+  "capturedAt": "2026-11-16T15:20:46.933778+00:00",
+  "status": "",
+  "files": [
+    {
+      "path": ".env.example",
+      "hash": "468ba8fca0943492b4b4dc9aa5ab4b323c8a118f8225b6c06601c183c07e68b6",
+      "bytes": 2314,
+      "lines": 51,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "hash": "97cab257b7991da153f09284c018d2c003d12a4b9997bdcc463013cbaa71e43e",
+      "bytes": 1453,
+      "lines": 50,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": ".gitignore",
+      "hash": "a1063fb014f705d6746bf49d1f2acab1e74ac13fed655f593aa6f5c8e5dd7972",
+      "bytes": 672,
+      "lines": 55,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "AGENTS.md",
+      "hash": "e337d62d6611e3bd9a11ba38d1cc884feaa9d2eaee8dc89b91b044348c249e81",
+      "bytes": 4280,
+      "lines": 100,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "DESIGN.md",
+      "hash": "45ebbd3b82af98e8d1128914e2d8cc1b8296517e16a8055f77511ddf915e3b6d",
+      "bytes": 11823,
+      "lines": 92,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "PLAN.md",
+      "hash": "f8ad7e6ffe484a2cf0e5bb1b94ff28f48f78e1c12d0af4eed7936bb93f28caae",
+      "bytes": 160203,
+      "lines": 1009,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "README.md",
+      "hash": "9938c2f55cc66cc329ee4cbd0dab4b0b0c44513a84010974de774360a8560ffa",
+      "bytes": 33553,
+      "lines": 235,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "components.json",
+      "hash": "b7303284fd581805a58defce3604a3445c6d886fae8e700ddf5133c5f837d573",
+      "bytes": 413,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/compose/README.md",
+      "hash": "41a13ed5346f815b86b76043cc56d0b7d9f75f448abb648eea8c53a4c52de47d",
+      "bytes": 2907,
+      "lines": 53,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/compose/prompts.md",
+      "hash": "a6ccf38061563e6745f938645e422c4deef29ffa230175c27c749eb28180ffe9",
+      "bytes": 2812,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "design/compose/reference-dark.png",
+      "hash": "4f96b3136e754b53af83b9709fc18b94c34b2bb6963deb8dae4dc56514a094ba",
+      "bytes": 1472618,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/reference-light.png",
+      "hash": "8cc3b25e8ffceec1222b2f12a42e57e61bd8f6faa2f8cb7af65008a8dad281ff",
+      "bytes": 1226427,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-dark-desktop.png",
+      "hash": "963aec64b8845c8063dab2c49ed71c463dff4015597a9807f92c43bf36c7d724",
+      "bytes": 216388,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-dark-laptop.png",
+      "hash": "a27ba9f169fa1d1ba34a934562905795a8b8210e08fe353024f761593a111e6c",
+      "bytes": 212714,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-dark-mobile.png",
+      "hash": "54d55c08720192cf687beca244a48a80a71ea9f125e03e4ee59aa3e122c0aea8",
+      "bytes": 206482,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-light-desktop.png",
+      "hash": "561314482394ac56f52ecf4f874b03c498cf50a7110761b048b5e902e5d1a410",
+      "bytes": 215686,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-light-laptop.png",
+      "hash": "da773a82e1cd8fc4880dd790bd3f170e3ced6bb9c6499164e09b1720181d16aa",
+      "bytes": 212012,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/compose-light-mobile.png",
+      "hash": "d34cd85d7cce57668ef7b26e00f520aa5496ed267cd94c619f59f4ac4cc13e8a",
+      "bytes": 204317,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/premium-dark.png",
+      "hash": "dd820459dfbd1562dd26d11032e52e44ae897d5ee7ea9be0123c9ec15716430d",
+      "bytes": 88708,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/compose/screenshots/premium-light.png",
+      "hash": "c77ad8ab781e574ae22ddba9eaacaf092f077bb3ad2da775b086cb4f6ec9e10a",
+      "bytes": 91785,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/README.md",
+      "hash": "8b37c8e7403e718f735892397253b2b1dac496504b9467d47bc376a3bff1a230",
+      "bytes": 2560,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-chalk-1440.png",
+      "hash": "0f09b7606a9eface7ae533d8d8d259c9b2c90c7321ef7b1a3f13b8d5644836b9",
+      "bytes": 368189,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-chalk-360.png",
+      "hash": "88f83961b310125e57e2798c517b71c975fe9debf01b1077443ebc19caa6463c",
+      "bytes": 268514,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-chalk-390.png",
+      "hash": "392d25af897108cf8afca58df26bd1350c7a7dd13d68c3be1e3a65a6a95a41c5",
+      "bytes": 270457,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-chalk-820.png",
+      "hash": "4706eda8b12ef0e2747a29b0bcf9975b8942c967506e18150186eee91f5ed704",
+      "bytes": 358965,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-lavender-1440.png",
+      "hash": "782da2535389730a0afe111abd48b2ef100c83eb88aff9b3617d5fce8832ce5c",
+      "bytes": 408414,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-lavender-360.png",
+      "hash": "6037046c84780b5a7a18a312d3fec2995a33f882d21f16dafcb45af8ce8b98c1",
+      "bytes": 323798,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-lavender-390.png",
+      "hash": "d046af8161a1c31500ff514a892cb6cc3f11c885203057ea29f6fe44f71a7d8b",
+      "bytes": 329111,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-lavender-820.png",
+      "hash": "381642b84c8e44cc72946e8ee75226499744b102d2995bf899883ef8e8220bdb",
+      "bytes": 393618,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-nightbloom-1440.png",
+      "hash": "782da2535389730a0afe111abd48b2ef100c83eb88aff9b3617d5fce8832ce5c",
+      "bytes": 408414,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-nightbloom-360.png",
+      "hash": "c4f30630b3932c96bf28020a98107393058d0db6f6e5688e7e06b5a52728b3af",
+      "bytes": 333054,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-nightbloom-390.png",
+      "hash": "94d3f2d987eface3104cd5a49da15c015b3ca917695b03ef54faee6a563016f9",
+      "bytes": 336981,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-nightbloom-820.png",
+      "hash": "bcfe260c3dfce9be3e30b5f3c986f39df6ac004646ff229563927279b888079c",
+      "bytes": 401123,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-obsidian-1440.png",
+      "hash": "b67d84d5a47ee482485b71dd284b0f1a97591b82a8785080fd123007f148f5b2",
+      "bytes": 373152,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-obsidian-360.png",
+      "hash": "4ef46ef6cb0f95fe666359bb1ad2630075a1fe693f2b0f996de5ab58615f04c2",
+      "bytes": 266623,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-obsidian-390.png",
+      "hash": "1ce163569444bdf105254e12ff29b541fb050c6b8f2950146dcb069366dc350d",
+      "bytes": 268357,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/pricing-refinement/screenshots/pricing-obsidian-820.png",
+      "hash": "8206c83b4f23169300f2207a0b6530b48366e33385afb38d21f2b7458c23f30a",
+      "bytes": 365196,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/README.md",
+      "hash": "6ef1f1245c08beeb0822906505e6b1d434001e71a17c3173766b807ff2ca0d26",
+      "bytes": 7966,
+      "lines": 124,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/usage/screenshots/purple-dark-desktop-menu.png",
+      "hash": "30569e8fd98f02e011f2d0cca2a93cea7a3d2185777cb170d1007c7d2cdba21b",
+      "bytes": 189466,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-dark-desktop.png",
+      "hash": "43f18a2e0ef731e5dd266132097d679c2bed180831e5b12abcce4a052f097ccf",
+      "bytes": 283544,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-dark-mobile-menu.png",
+      "hash": "6bf88bbf19aa9627e3623b2119504d296251f2908f88f62cee80726d81bd7a2b",
+      "bytes": 264412,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-dark-mobile.png",
+      "hash": "2f77f73a775b6db79b105c5668722cc54a374f4f9dfe43e1c0e30405fd58f06e",
+      "bytes": 1114845,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-light-desktop-menu.png",
+      "hash": "74a3c6900ff5b7cfa75e0db5171dd7b5a00ec5baf0fea8eef3e34a8969d74843",
+      "bytes": 179986,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-light-desktop.png",
+      "hash": "5188eb063eef88ea35a5ec7ba89a58814fbc5c6188e804145f2255fc09e97372",
+      "bytes": 273665,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-light-mobile-menu.png",
+      "hash": "f6816778b154df5a711cda83f6d5edc67def3cf10dd4e8c5599b1a9bab9ee096",
+      "bytes": 261392,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/purple-light-mobile.png",
+      "hash": "af984c3d8ee7ca115a0cac8b3e402121fb8dc1a35ace26da7c76177f89e56d62",
+      "bytes": 1066191,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-desktop-menu.png",
+      "hash": "7957ced2e1977bff3982c54473ebc1667bb7d8e3955495fc9f44c50ba478b0a3",
+      "bytes": 83558,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-desktop-premium.png",
+      "hash": "faf5370e9d05ed0aef1bb6fe0fefea6071b8adfbb75a9c83bdba1d280b54c26d",
+      "bytes": 219766,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-desktop.png",
+      "hash": "4513f286ce3c52b205cd46917cd3c751751548ed444bc0e4d975057b86e5999e",
+      "bytes": 174360,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-mobile-menu.png",
+      "hash": "acc9ec69dd374d154017254d1b3281c83030aeab1b7c4bd9a7691b368903554d",
+      "bytes": 152050,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-mobile-premium.png",
+      "hash": "d387e14132eea9774065fd21d1df906cc104ad1b3c4a3a15bcc685da0b62fb84",
+      "bytes": 844467,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-dark-mobile.png",
+      "hash": "6dc11506740cf476cfd6d342a0c89ff881baf1ece0fbe66ee27142ad1f070b59",
+      "bytes": 643471,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-desktop-menu.png",
+      "hash": "05193c9e6cb53b7d5ff89783f4b2f0c2795408e1d87909a4544f0db85de93909",
+      "bytes": 83899,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-desktop-premium.png",
+      "hash": "c21b18bb4bf824dffb262d1c416810bb5c76c7bd46acdac22c412b2297a21cfe",
+      "bytes": 218450,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-desktop.png",
+      "hash": "15e76b51647dd734a85cca9590c0cc16b6642831580f452d3744d68c1d840b79",
+      "bytes": 173731,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-mobile-menu.png",
+      "hash": "a50f7b31a75fde236c0aafd0d1bb5a134126917e7d31f8061ac5623b58596f44",
+      "bytes": 152757,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-mobile-premium.png",
+      "hash": "069e950805a1c20fde8f49e6ffdf84e255d3299b7e0bf0df7ee15991cc73f494",
+      "bytes": 842947,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/usage/screenshots/vercel-light-mobile.png",
+      "hash": "ed7931510eed07d19cd04e84b3568526688dffb7e791821d50fff27408a14b7b",
+      "bytes": 642628,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/README.md",
+      "hash": "a94b5f422c48c17f795a479c93ebd8d34ff913169fab9c7d5cd45a435e60e9f2",
+      "bytes": 8873,
+      "lines": 155,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/help-vercel-dark-desktop.png",
+      "hash": "cf2e7492b422eeed14ffa9a5e08a1d6c17af3f4bd14e51fc423fb769a4dcb6b5",
+      "bytes": 107174,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/help-vercel-dark-mobile.png",
+      "hash": "abec3789d4bb6b8d66122dfe4c8c320bcace08c27f7f98f8e366e1e1472d5fff",
+      "bytes": 147731,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/help-vercel-light-desktop.png",
+      "hash": "22ab8e18a2ba808406b14e5f5b5ce01547c53e1666600ee194cd740da9c59ec5",
+      "bytes": 113765,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/help-vercel-light-mobile.png",
+      "hash": "c9a5d9c3c16b8bf2a1b419285be5aacc7db7dba5a95527cd5956c629e385490b",
+      "bytes": 152753,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/history-vercel-dark-desktop.png",
+      "hash": "9834a34efb8d0140539d691d8857fa8ce23123b35843c285611ebb846f21c447",
+      "bytes": 337618,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/history-vercel-dark-mobile.png",
+      "hash": "1c43fd8e642cada982939481837629c420a9220825aaa68d5d0149cb9e1d9461",
+      "bytes": 1276790,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/history-vercel-light-desktop.png",
+      "hash": "cccb56f82331d032a2183710e809d0bf5c78c646b453eed6a97f6d0c39afd1ec",
+      "bytes": 340720,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/history-vercel-light-mobile.png",
+      "hash": "deb1128c5f50713234ddb660e1bc3569b0555f5552bdf739b654a1182f72ce69",
+      "bytes": 1285976,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/pricing-vercel-dark-desktop.png",
+      "hash": "580d626626d4c12167ec570ba8c07a7037bdcda05234c7d57dc8c261a46af641",
+      "bytes": 299576,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/pricing-vercel-dark-mobile.png",
+      "hash": "e9bf6cd61d021ae38399fae6a3c61c1abb1c534ff5fc19abda4ec2c581c7d03f",
+      "bytes": 1063902,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/pricing-vercel-light-desktop.png",
+      "hash": "acc20df689db915ceeb1bb126e570ee2de26e260420a5e38ceb86db2c2bfd304",
+      "bytes": 296891,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/vercel-refinement/screenshots/pricing-vercel-light-mobile.png",
+      "hash": "853d56b89202917735b474e72f6d41216599c63db23ed970e21fa5828599aa5a",
+      "bytes": 1060362,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/README.md",
+      "hash": "dfa5d0efc7792c545a728feed4d2af723a8d727b6a352423a7926275c5335c41",
+      "bytes": 3772,
+      "lines": 66,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "design/workspace-themes/screenshots/appearance-chooser-mobile.png",
+      "hash": "bb42da0c0fa08a69aa8aaf73f6ec395934b4e217fa1af9960a4e9c52242773cf",
+      "bytes": 283479,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/appearance-chooser.png",
+      "hash": "aaaefb8356882163c2ddbead42e5b1076f419d9a3d6ec6bedfa028a1e2863418",
+      "bytes": 158700,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/compose-purple-dark.png",
+      "hash": "7bfc0f707ff1ff43e3cc4750b73181097851cfcf54f68a751ee9a0021dc9467f",
+      "bytes": 324703,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/compose-purple-light.png",
+      "hash": "15d9d0f6ce744c3ee227b1344c207e28711128cef10cbefccdfaff7e5c58d4e7",
+      "bytes": 312818,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/contacts-vercel-dark-mobile.png",
+      "hash": "283d4d2cf4b4b79a7da6f5219be4fac795341f82e3e87a4bc90a094eb5b02590",
+      "bytes": 533180,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/contacts-vercel-dark.png",
+      "hash": "5dbe1923243fbb158e261dc89475cd2e5f3888cd42ae2bd2c3a520a5afb034af",
+      "bytes": 159582,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/history-vercel-dark.png",
+      "hash": "5151cae736c8e68c5f638e0c0c104f22806939523fa5141b85c7a941f988c78b",
+      "bytes": 218685,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/settings-vercel-dark.png",
+      "hash": "2a3475a260d9f9d38a1f8b838a9614e8f1ceaadd1fe400380d54996e5bca7d53",
+      "bytes": 251004,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/templates-vercel-dark.png",
+      "hash": "f47ef989743c049d5a5b4b6adfb6a97b426b0c5fd480806353bd8c9702f76d7c",
+      "bytes": 57475,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/usage-vercel-light-mobile.png",
+      "hash": "6b9176578a9e150ea40c9d23bc33c77349ac1eef067727a67744a4d3f4651507",
+      "bytes": 642771,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "design/workspace-themes/screenshots/usage-vercel-light.png",
+      "hash": "e0515905c11f66169bd960ba23e3434217f0fae30e3780a2349edb008d23d12c",
+      "bytes": 171067,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docker-compose.test.yml",
+      "hash": "332046bbfbb9cb61dbc608ccecb6a0fef194caad7238c0407c8fce3297ac67a9",
+      "bytes": 528,
+      "lines": 18,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docker-compose.yml",
+      "hash": "ce052df66bec53f2147ba50309eb7d5d5619c3297ab2998a95b11ce8fa62b05b",
+      "bytes": 651,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/admin-panel.md",
+      "hash": "0573b323d449f4efbc957dc24d5a4bb4c2b98c6e0f6328cf62a31906b8b053a7",
+      "bytes": 6689,
+      "lines": 100,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/custom-role-change-review.md",
+      "hash": "cfa540dda580b1a3694cb74cbc8943304f5bff33f7a994e566347f476b631874",
+      "bytes": 16485,
+      "lines": 192,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "docs/design/free-templates/README.md",
+      "hash": "fb3160fd91d63972fdb001e60284b1b1e7f06d32786d01ede47474a61b4a7453",
+      "bytes": 4696,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/design/free-templates/active-desktop-dark.png",
+      "hash": "f65268999c2750d380e5c45902e17e7b7ce7550bb0947c31b98d5681f960b2da",
+      "bytes": 1448893,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/free-templates/retained-mobile-light.png",
+      "hash": "352aa6dfe43430ef77adb20681bf1400e86e3af5a9f3bf753172bd63d85cbdb7",
+      "bytes": 1184477,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/landing-footer-reference.md",
+      "hash": "c30edd485b53fb1260862374ef2a1e1975b5137e7b761e51d0444942cdedf526",
+      "bytes": 2978,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/design/landing-footer-reference.png",
+      "hash": "88142e7a6dd3e0873824828b6c0ddfd03ec07d9fd97139cc5c03b47e2842061a",
+      "bytes": 1080784,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/paid-templates/README.md",
+      "hash": "15cc9fa0d8108ffa32386a4c9769943ffd3ee750fe5c98a7201af8921fa53a53",
+      "bytes": 4873,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/design/paid-templates/library-desktop-dark.png",
+      "hash": "74952e5edd56566003ec090bfda50eedcbc9240197b31bec27e709a184316d0b",
+      "bytes": 1358083,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/paid-templates/library-mobile-light.png",
+      "hash": "a9a8915733888e399a659f63f8e9f080b97a3b3f20c8dddd0318c418b44323ba",
+      "bytes": 1173893,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/usage/README.md",
+      "hash": "0c46de4631c3ec89d835f4a8170e552f2719032eb6ab5099c0ed13008adf4b9f",
+      "bytes": 2975,
+      "lines": 19,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/design/usage/allowances-desktop.png",
+      "hash": "6e29aa85972695ba52cf3f15fbffa74497c1ad782627dfee6eb15bdc9582bf62",
+      "bytes": 1209510,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/design/usage/sending-mobile-dark.png",
+      "hash": "f2e87de7af436c350ec9236e1d0345055edf9ffb8f2aee9ab04f0b4b561ad5ab",
+      "bytes": 1429712,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "docs/dodo-live-rollout.md",
+      "hash": "271f6d468e4f18c0c8cebec3428db63d6ab0e49cc73aa31d407985600a1978d0",
+      "bytes": 3548,
+      "lines": 67,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "docs/dodo-test-billing.md",
+      "hash": "9c5caaafa52a8cbc3fc34793d78f42054405bec83166a2426b19da336f297d3a",
+      "bytes": 23492,
+      "lines": 387,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/entitlement-foundation.md",
+      "hash": "5619de3a3bee769fff7f60dea8df565fdb4d4c2d6830cbb6a865719028f0716b",
+      "bytes": 14699,
+      "lines": 148,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/minimum-hardening.md",
+      "hash": "caca778b0d6cb22659f192cf264f48009089165ba645832951706fea44717048",
+      "bytes": 8758,
+      "lines": 142,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/oauth-verification-v1.md",
+      "hash": "784344c69de6d0f801a040f10e7ca775140ab54e4d5f6e810e4ce5117e8fa669",
+      "bytes": 10543,
+      "lines": 191,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/storage-monitoring.md",
+      "hash": "5fbe71d2771d6c1afe3e2a5d5de9c5ca1a19931b2613fe06d90b3dc33bd7ac7e",
+      "bytes": 5387,
+      "lines": 51,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/tailwind-migration-handoff.md",
+      "hash": "1145bf369b5cfe5e489eb6cf2b053dc4883db8f96f7577f7aecd892a6a71d294",
+      "bytes": 32243,
+      "lines": 480,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/tailwind-styling.md",
+      "hash": "b4c7b51a276348a5672086a881ec0d38f904da736ded87d371a51284d90ae9e4",
+      "bytes": 68250,
+      "lines": 945,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/README.md",
+      "hash": "068ab55c0da03996b645ab62f319a863beee1da9a0e72f59914dc5bba5681a53",
+      "bytes": 3626,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/indicator-contrast.json",
+      "hash": "06f34efcb0d64e106f4b171498fd8a8ad83437989adfa407107ba3429c47d3ab",
+      "bytes": 3998,
+      "lines": 122,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/manual-findings.json",
+      "hash": "a10cc4cf796899b9e91b920705e76d469e7ecc2ef61242c247f0f2d4e2355389",
+      "bytes": 1401,
+      "lines": 33,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/results.md",
+      "hash": "127cf6b0c644d872f665fb64ce30d0261f432a1e984d35270953f7b9baa46be8",
+      "bytes": 1198,
+      "lines": 16,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/style-changes.json",
+      "hash": "592073e847c7b8eb82eca959068fe2919aa5fd8e38753aace0eba44fb3546621",
+      "bytes": 1140,
+      "lines": 31,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/summary.json",
+      "hash": "b15025b34ebc010a4834e6f2bfbd4e71d33159685f22a8408b106e5414c7b0d5",
+      "bytes": 890,
+      "lines": 43,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/theme-audit/token-changes.json",
+      "hash": "628be56e32bdf51b4d1797715cbacd7348fa5ad9e354e9b1f3db197f6598a626",
+      "bytes": 14331,
+      "lines": 446,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/upgrade-modal.md",
+      "hash": "5ac20f6fe6ed8a5828b3f9e7a9fc0a71a9814f1fdc9bed2537ac2524811107f1",
+      "bytes": 6848,
+      "lines": 118,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "docs/usage-ledger-rollout.md",
+      "hash": "cca86df8397b8241dfac9e240a59760f3f4ba5001f1a10f31346f02c71b0a0c6",
+      "bytes": 8454,
+      "lines": 151,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "eslint.config.mjs",
+      "hash": "0fd8d141c85a318f31e6afa3d4a11821d3594afd796efe064a4f56c4f39911e7",
+      "bytes": 578,
+      "lines": 24,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "next.config.ts",
+      "hash": "f21b9a5098fcd196da97ade7011829e696910ed90c873e9e5fd03331a5d3d2e0",
+      "bytes": 401,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "ops/storage-report.sql",
+      "hash": "a64867dca672fd2f19100fd568f2a8ee57e4a224ce4bf8d3534e5e1782fa2761",
+      "bytes": 495,
+      "lines": 16,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "package-lock.json",
+      "hash": "e6a51ac55ec82a5503f30ed1d56744768307f5ba22b3e2bcb324eb194c9a392a",
+      "bytes": 508075,
+      "excluded": "dependency resolution metadata (parsed separately)"
+    },
+    {
+      "path": "package.json",
+      "hash": "f5d4a0f3142a8da23541bc519ceb4781026491e668b21a1d15f2a2c21a80ca7f",
+      "bytes": 3144,
+      "lines": 84,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "playwright.config.ts",
+      "hash": "69740302408da3420a5c422e89c2825667dae60b9ff17dd6ecf24496b972042c",
+      "bytes": 2182,
+      "lines": 64,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "postcss.config.mjs",
+      "hash": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+      "bytes": 94,
+      "lines": 8,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma.config.ts",
+      "hash": "c1bcbd0ff267c8b6885cd467ed8122cf6508bdac6c929d69f9b512ccde65a033",
+      "bytes": 374,
+      "lines": 15,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261007145521_init/migration.sql",
+      "hash": "2db11bb9bb9b424828cf6152896faa7a4628dc7bb6dee45e526785bdcd9a4fd0",
+      "bytes": 3555,
+      "lines": 120,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261007194758_mailloop_mvp/migration.sql",
+      "hash": "78556ef259f815e741a2103acd37a4cceec602d064335178e6027e4093f526f8",
+      "bytes": 2469,
+      "lines": 60,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261007202355_protect_resume_cleanup/migration.sql",
+      "hash": "a885393e0216c1bf6eab9f5b914b9a55668dac01137d79b859a6dc3721a09dc8",
+      "bytes": 80,
+      "lines": 3,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261008000000_roles_and_resume/migration.sql",
+      "hash": "b3dddad458a5f3ab4dbd79e4ac19295ad451294e4caf5deb62b91cc1447c7faf",
+      "bytes": 593,
+      "lines": 10,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261008010000_generic_link/migration.sql",
+      "hash": "f70f054d0be94646f69ddfcac1e4989b72344d52dce1c2eea4b40283c436c590",
+      "bytes": 344,
+      "lines": 11,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261008020000_inline_template_links/migration.sql",
+      "hash": "73de12e8a72c6423779b3cf63b84e32a75f1b9d94b4acd3031b1709b6bea5ac4",
+      "bytes": 657,
+      "lines": 22,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261010000000_contact_follow_up/migration.sql",
+      "hash": "bc304dff4972fdd72daf01185f813db710ad4600ac1553b933063a6f5ce2e4ad",
+      "bytes": 69,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261010010000_launch_controls/migration.sql",
+      "hash": "f8d9fac368b21ad0ba8772b5a7fc5e0dc4ba0044ccea7fa79722095e7232dafb",
+      "bytes": 326,
+      "lines": 5,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261010020000_shortlist_removal/migration.sql",
+      "hash": "8b33ee8def9552147691a0d599230c4a62ecb69b9403796569ee60ac25c552a9",
+      "bytes": 68,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261011000000_delete_history/migration.sql",
+      "hash": "c0bbde291a3ce265244dd1013b4d9854a7a7e7084c30f613c77cc3e514e8bab1",
+      "bytes": 63,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261012000000_permanent_history/migration.sql",
+      "hash": "99778580c4ee3e232b81b6487a53c21dba7b7d753a6c51a80b4f0e84f34f16ca",
+      "bytes": 1407,
+      "lines": 27,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261013000000_attachment_storage_cleanup/migration.sql",
+      "hash": "14759eb9988e2eb0c87ea3815b4aacf146404d614da7decf2e4a8fba07994618",
+      "bytes": 368,
+      "lines": 7,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261016000000_send_only_v1/migration.sql",
+      "hash": "b1377b31b246f1f7e81cccf90d2015b8f537840b614ea9b756dfce408d3d9d82",
+      "bytes": 755,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261016010000_subscription_foundation/migration.sql",
+      "hash": "4688b31709eca771bfd08a11755595a9cf297a9841252191f15ec6c982a4bc3a",
+      "bytes": 11575,
+      "lines": 251,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261016020000_remove_recipient_suppression/migration.sql",
+      "hash": "54fdadb062b39f35606a81577a259a7a8d566132e445e9ccbe7e5e82786bcf43",
+      "bytes": 151,
+      "lines": 8,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261016020000_usage_ledger/migration.sql",
+      "hash": "0ddc667d3778091ed6680ffa316535a06f74bdcc2601e4077e769c488127fbce",
+      "bytes": 7119,
+      "lines": 163,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261016030000_usage_runtime/migration.sql",
+      "hash": "82f06aa42589e900ebc3a81fa12b39d99f026e5e9767d44f39fb023d673a5f1c",
+      "bytes": 257,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020000000_dodo_test_billing/migration.sql",
+      "hash": "8d5a2d437d6eb743f4f1282dd2b0764f9d98cf126e429eebf5e0abab52fa8417",
+      "bytes": 2262,
+      "lines": 45,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020010000_hosted_checkout_country/migration.sql",
+      "hash": "7921f9fee594c0a0c189d92ed2c74234964357049ce2eea86e38a4b54979bb04",
+      "bytes": 229,
+      "lines": 4,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020020000_dodo_billing_completion/migration.sql",
+      "hash": "a94c31401366323d32d5142de509fd468d059cc3e1e3603cb85f48079e9e38f4",
+      "bytes": 1073,
+      "lines": 17,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020030000_subscription_lifecycle/migration.sql",
+      "hash": "77de5307f3300058553e4086419c7652a0c5cf627ef966cd12c1c511ee87da18",
+      "bytes": 3422,
+      "lines": 81,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020040000_admin_panel/migration.sql",
+      "hash": "04f4c9e526e48c17406781b753b507e359191d5dc6dc198d6a5981819f286801",
+      "bytes": 6366,
+      "lines": 79,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261020050000_minimum_hardening/migration.sql",
+      "hash": "c6eb753cac66bb1445e314ed5a754f0b1832625ea7c2e4fd8d53dbbdc30ed42d",
+      "bytes": 2900,
+      "lines": 77,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261021000000_remove_operator_alerts/migration.sql",
+      "hash": "1d0dd2cb592c8da2a37cba917dd8126f8e213272532baaedf5c796fb91793163",
+      "bytes": 332,
+      "lines": 10,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261102000000_testing_usage_reset/migration.sql",
+      "hash": "a182af4e625acb8523b8324ba3459d5a78a8508504532b8d175d35ccc81dd70d",
+      "bytes": 66,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261111000000_dodo_live_billing/migration.sql",
+      "hash": "c5bf2b45086cb276bd44290ddee3ec091fdddba3f98802ef410f15ac46ed3e6c",
+      "bytes": 524,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/20261111010000_dodo_binding_null_guard/migration.sql",
+      "hash": "919c5356bb14a9a8841fef5d5919b631639ab8f28333f012c2194dce19c6b480",
+      "bytes": 490,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/migrations/migration_lock.toml",
+      "hash": "99836963713b4f5b269ad49af0ed3d7b0b2e336115c2f92dc9ac683d139d0900",
+      "bytes": 128,
+      "lines": 4,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "prisma/schema.prisma",
+      "hash": "706065192123a60b4d972d0ff06cff7df20fa04b74f276f847c5a5f7827b9f80",
+      "bytes": 17171,
+      "lines": 513,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "public/fonts/inter/InterVariable.woff2",
+      "hash": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "bytes": 352240,
+      "excluded": "binary asset: .woff2",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "public/fonts/inter/OFL.txt",
+      "hash": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+      "bytes": 4380,
+      "lines": 93,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "public/google.svg",
+      "hash": "cbe9772630b9b72daf7c14eab28c6c86f88e07da9cb08487544e022e385ede1f",
+      "bytes": 2326,
+      "lines": 22,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "public/sample-contacts.csv",
+      "hash": "79e7664fd482ec3205e98a5f589f894fd5d0b71ae42196c79624c53d7cbc0bb4",
+      "bytes": 95,
+      "lines": 4,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "public/social-logo.png",
+      "hash": "0d4c851c0c1fa507e92cabf1fa0f306b926e239f6750de5c3e79c6c574a54330",
+      "bytes": 62493,
+      "excluded": "binary asset: .png",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "scripts/backfill-subscription-usage.ts",
+      "hash": "cf0090ed55bf97e7e9ce68e2c4f7bf796c794b5c698c8b40c769962223450204",
+      "bytes": 3899,
+      "lines": 116,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/bootstrap-admin.ts",
+      "hash": "ea88c87e6ccf0f2747322bbcff1812fe5791796b7232af4b7e0908e045ca6b89",
+      "bytes": 2720,
+      "lines": 90,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/check-colors.ts",
+      "hash": "42df9d6bf546e5af7a74cb2cdbf321f531c22ccba9a565a5ec8353b06899e93b",
+      "bytes": 4302,
+      "lines": 59,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/color-exceptions.json",
+      "hash": "9dda639733d0b641a11bf84690b0c166d2936925502f0b3fe17429487350f3a4",
+      "bytes": 936,
+      "lines": 31,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/lib/reset-local-data.ts",
+      "hash": "09a2e0aeec7059ec6529f45a79dd964227795fbf9e56c2460a6ecd1bcaefe8c1",
+      "bytes": 3208,
+      "lines": 82,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/provision-admin-db.ts",
+      "hash": "1f3db1ded6f3b5a577353f57c088cee413ee8a2fed5b49c353275edcf6b1f907",
+      "bytes": 5948,
+      "lines": 154,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/report-theme-audit.ts",
+      "hash": "5c3a4b27abfc596876666b40f8f63f7e406f03996281353b1639c4defb491590",
+      "bytes": 6376,
+      "lines": 217,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/reset-local-data.ts",
+      "hash": "3dc16b82f4d0349d0bbe7be06d713f2f3246acba1dda1f6d52ef079f268bdac4",
+      "bytes": 1137,
+      "lines": 38,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/rotate-token-encryption.ts",
+      "hash": "516c47593be5c4facc40b78bc210308b4dfe9613bc44a86851d1a7f5526ec02c",
+      "bytes": 897,
+      "lines": 34,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/subscription-maintenance.ts",
+      "hash": "48c7bcc29ef0474c3c90c3056611d5507794d9bdbea7c1abec76617b452e2d36",
+      "bytes": 1490,
+      "lines": 42,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "scripts/test-usage-db.ts",
+      "hash": "c1a4d8563e6ecf875906550b66a59c549365bdcba320deedec00161668f7ce56",
+      "bytes": 6770,
+      "lines": 221,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/app/(admin)/admin/audit/page.tsx",
+      "hash": "af6092836daf7bfbf1df31c3169340b6d26d1631d431a301da3fcccbc9966e0f",
+      "bytes": 2011,
+      "lines": 69,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(admin)/admin/controls/page.tsx",
+      "hash": "0594bf1811f98eaeb26463e378380ef8c3234b7be63465c47a9d284799de3195",
+      "bytes": 844,
+      "lines": 28,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(admin)/admin/layout.tsx",
+      "hash": "cac483f89fe0800207977553058954528bd0512e93d5391b0af7a3b134275bba",
+      "bytes": 1677,
+      "lines": 48,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(admin)/admin/page.tsx",
+      "hash": "af2b5d1ff898db4dfd642beec001ffde0836c2bbf81520b9c41563015b59603d",
+      "bytes": 821,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(admin)/admin/users/[userId]/page.tsx",
+      "hash": "691bced8b5a98fc74616bac49035fabaff48ab6627fade4eee48e23a6629047d",
+      "bytes": 3217,
+      "lines": 106,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(admin)/admin/users/page.tsx",
+      "hash": "303e981af33e65f0e9fbb1b711352ba54510464380aa229ee8594ca1edd1fffb",
+      "bytes": 2785,
+      "lines": 95,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/billing/page.tsx",
+      "hash": "ab53c830dee024546c805f5dd65a22cfaed95492cfafc8dcd49a78b8d340246d",
+      "bytes": 197,
+      "lines": 8,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/billing/return/page.tsx",
+      "hash": "68e8f8a07fd61e5f6817a9353e828416464d36373a4d5f1c6edb536185f7a833",
+      "bytes": 196,
+      "lines": 8,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/compose/loading.tsx",
+      "hash": "4787a3092b69fe834b000f6ef18e4727eb1145bf56fcd49d4aa7e5a378f35ea7",
+      "bytes": 155,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/compose/page.tsx",
+      "hash": "b722d22b56e98351b550f3c5538d1bb062604e26d9dc4555a501d314b54fe0d6",
+      "bytes": 4234,
+      "lines": 125,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/contacts/loading.tsx",
+      "hash": "3ec9f77a2695a579285be3734040e01a2e7819f7b60602a64833034297c0d30b",
+      "bytes": 156,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/contacts/page.tsx",
+      "hash": "c5d2c32e52e0cbb6d94ff659e0d313c108e0bf3b3f9d817ffd234c4d0368e038",
+      "bytes": 3987,
+      "lines": 98,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/error.tsx",
+      "hash": "7ae639e404287e56d2a52f1b1376e0bc95225c38f7100f755fdf674d7fb190a8",
+      "bytes": 449,
+      "lines": 14,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/history/history-sent-time.tsx",
+      "hash": "c1c7b522161b0fad9fcc07d3687cf41adb57877a3c4f0dc50f7e925c7a4a94c3",
+      "bytes": 904,
+      "lines": 39,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/history/loading.tsx",
+      "hash": "1569cb7e772b738584b6c3756653a62d63d7b3c3935fb07adb618e12e51e7c21",
+      "bytes": 307,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/history/page.tsx",
+      "hash": "eef1240af99d4027dd25e87ef9a58fcd86b3cab757f9a7a178c63ed2cda682f2",
+      "bytes": 9859,
+      "lines": 277,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/layout.tsx",
+      "hash": "17bb457390543553700a6fcf991bc1eafa15e2c060b0e8b27f064b2a46d1acd6",
+      "bytes": 4213,
+      "lines": 102,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/loading.tsx",
+      "hash": "73532820f38d027d367dffb482f586ae26a22808aa09d6572ed89c88923068a9",
+      "bytes": 137,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/settings/billing/return/page.tsx",
+      "hash": "0f3499345d585afcac28a24acc8e56f93506a123c9b01f0abec0ff4a23df47f8",
+      "bytes": 197,
+      "lines": 7,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/settings/loading.tsx",
+      "hash": "9661c1076652ae2fcccf879093d3e26e2e5d699a81fb05ac55dff775cef933cb",
+      "bytes": 156,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/settings/page.tsx",
+      "hash": "7afa113b2449263fc3cb106d62d429e2a7fedd7002dd87f1a201f7df7b2f8d10",
+      "bytes": 4253,
+      "lines": 108,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/templates/loading.tsx",
+      "hash": "a5aa5cf83e89913006491f19aedf40d959f1b1f30416a7fb2d6e734618d7572d",
+      "bytes": 137,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/templates/page.tsx",
+      "hash": "0705d6d3fe30272db751b990cc268e3221c62691887276144672cd29cc7bef26",
+      "bytes": 9053,
+      "lines": 244,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/templates/template-editor.css",
+      "hash": "3c7f6d250b3691e9f13fc291d66eefc7656690c00fdfa3c2d830899502587c34",
+      "bytes": 2882,
+      "lines": 94,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/usage/loading.tsx",
+      "hash": "615cf51a6f0619c1db5db56d4090c4ca733301ce6eabea916bdf64644ffff123",
+      "bytes": 587,
+      "lines": 19,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(app)/usage/page.tsx",
+      "hash": "c54567a6c4234cde4183060efd2fef1f83beb608b4eb384c9e8787717cc33090",
+      "bytes": 627,
+      "lines": 18,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/(checkout)/usage/return/page.tsx",
+      "hash": "0889536855f2de6da0bec8c1eae0d50a4589dfe9b56e4dd58938dbe57814fb53",
+      "bytes": 1257,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/account/activity/route.ts",
+      "hash": "6df73cb0812264b100517b7a6f96af8bd54a1cbb1ec3f3932caaca238a1193aa",
+      "bytes": 591,
+      "lines": 16,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/account/export/route.ts",
+      "hash": "7cf93bb6d102b14c484c4ae6b1fb915dc87281aeaef6c140e978004ad2fe227d",
+      "bytes": 894,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/account/notices/route.ts",
+      "hash": "e034628f4476dc166849ecda27d4817303fa6cb0e7b73e2b7daefead707df663",
+      "bytes": 744,
+      "lines": 22,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/auth/[...nextauth]/route.ts",
+      "hash": "91e865e1ac44658a8eccaf2c3778c5013d2dd6fb126c92f44a6249559ad18924",
+      "bytes": 74,
+      "lines": 3,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/billing/cancel/route.ts",
+      "hash": "4cfb62cbd6240bf690de11b12442c1eeed1c1627698736ad499b48755812b542",
+      "bytes": 1025,
+      "lines": 38,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/billing/checkout/route.ts",
+      "hash": "e75501e74ada3c4882401d8ce6d699c7898d165dcdaa091c327db59fda969415",
+      "bytes": 1017,
+      "lines": 38,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/billing/portal/route.ts",
+      "hash": "46269625808f0503dc269211c8d8f3186e3fe96e248182561f6ea11748c13cbf",
+      "bytes": 604,
+      "lines": 23,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/billing/status/route.ts",
+      "hash": "57193eb415505b7289a0fcf61fc6d86c26030bfbb4268812bb966d2a1d3e50e4",
+      "bytes": 522,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/inngest/route.ts",
+      "hash": "a0e3da2d0f1249257e42a4c92022a6c91402626c6026f6ed3c54fa6e03e01448",
+      "bytes": 640,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/quota/route.ts",
+      "hash": "0457dff6f31cbb8f100537f5032176aea89a829221473187626943ed5608948d",
+      "bytes": 837,
+      "lines": 31,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/resume/blob/route.ts",
+      "hash": "d66a5577546d3210e53f8173818f552893b9c3685dd3e4d44660b84bf90a7b77",
+      "bytes": 3949,
+      "lines": 116,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/resume/download/route.ts",
+      "hash": "e6a6b8fca3a2d8e6a1c54722c76cc60e6bdd36cb770f6152f703cb62bdb34d28",
+      "bytes": 1267,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/resume/upload/route.ts",
+      "hash": "d17a6fb4890cc18f93b7aa1c4b91733aa23470d12e28156e7862383a7cec0ba2",
+      "bytes": 2172,
+      "lines": 66,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/templates/[id]/export/route.ts",
+      "hash": "de36d87e00b2bb25709aa3f55a622b11a8fd8c1430ba30d60b4fef991ed38e4b",
+      "bytes": 1407,
+      "lines": 42,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/api/webhooks/dodo/route.ts",
+      "hash": "22e9454b8bc7a655be47c7756c799e7946ca09faf4a869eb861eb8c8839da038",
+      "bytes": 2734,
+      "lines": 88,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/appearance-control.css",
+      "hash": "be54ec0782c249c2ad52a36a8eaa291d1c00ccdb6240a5364a0f6022c82c5ecb",
+      "bytes": 2630,
+      "lines": 91,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/compose-theme.css",
+      "hash": "45402b121d05d20acbaae41abbc874456ff6d381f6d1f353dade9f3ce9cd185d",
+      "bytes": 2207,
+      "lines": 92,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/contact/page.tsx",
+      "hash": "8183e6a94008f664f2d9d3f4ee3fcd37df8a21b7e5abf8469c0287519576f44b",
+      "bytes": 1867,
+      "lines": 53,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/favicon.ico",
+      "hash": "78e070c3dde0f4865b690522f1c48bb74a96a5c4491ed7dcffa0a000c9321c3c",
+      "bytes": 1937,
+      "excluded": "binary asset: .ico",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/fonts/InstrumentSerif-Italic.ttf",
+      "hash": "08939b8bdf534afec24ae0ef5e03f948940cd9a8fe08e7fecbad040e62327385",
+      "bytes": 71592,
+      "excluded": "binary asset: .ttf",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/fonts/InstrumentSerif-OFL.txt",
+      "hash": "129ed7618959716959f2941fdd5b49e0ad6e6c1d78726761786a00253d865521",
+      "bytes": 4405,
+      "lines": 94,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/fonts/InstrumentSerif-Regular.ttf",
+      "hash": "498efd461f6ddfcb7a111bf9a565709d2085d48201d501ead960d93e84ffbb88",
+      "bytes": 70012,
+      "excluded": "binary asset: .ttf",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/fonts/JetBrainsMono-OFL.txt",
+      "hash": "b2fe5e8987594e9ffd1d2ca52a2f5d73eb8335243893c5d6254b5ad69269591d",
+      "bytes": 4399,
+      "lines": 94,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/fonts/JetBrainsMono-Variable.ttf",
+      "hash": "48715a42ec242c21e9f02692891e147d022299a52e48d5e413e1a942193ffeda",
+      "bytes": 187208,
+      "excluded": "binary asset: .ttf",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/fonts/PlusJakartaSans-OFL.txt",
+      "hash": "995c7199cab65954f545996326755daee7b63cc6b42b06c13da1f9502ab08a99",
+      "bytes": 4402,
+      "lines": 94,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/fonts/PlusJakartaSans-Variable.ttf",
+      "hash": "89b3fb38aa0d275d7a731d0d817a4f1622b316b4d7fbdedcf02ee9099ff68bc8",
+      "bytes": 176288,
+      "excluded": "binary asset: .ttf",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/fonts/README.md",
+      "hash": "6e2165d7e2063c1d424018a789f0b3a5db0c808de938e7a84a8b614163521653",
+      "bytes": 913,
+      "lines": 18,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/fonts/SpaceGrotesk-OFL.txt",
+      "hash": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+      "bytes": 4495,
+      "lines": 94,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/fonts/SpaceGrotesk-Variable.ttf",
+      "hash": "acad6de1fc93436f5c0f1f4137751ef04f1aea3063e7036535970ffcfbd79f72",
+      "bytes": 136676,
+      "excluded": "binary asset: .ttf",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/globals.css",
+      "hash": "af9e8e93255812052247a24c7ca5c20f1d745a5ae997bec0d07ad5fd7dc350fb",
+      "bytes": 54117,
+      "lines": 2198,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/help/page.tsx",
+      "hash": "9bf917e0dc9111c6661c0d1d3487d80b41cdbc251452709a78dfa021f5e92b15",
+      "bytes": 4351,
+      "lines": 113,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/icon.svg",
+      "hash": "917b016bc1389c68a84e4c129f312a941ba724ece9ad66d767c2efe548a3b4ca",
+      "bytes": 652,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "hash": "b5df1e066f92b09a2c56fe823822ff5079570a845f73f681c58eee7bddb80e39",
+      "bytes": 3690,
+      "lines": 121,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/logo.png",
+      "hash": "0d4c851c0c1fa507e92cabf1fa0f306b926e239f6750de5c3e79c6c574a54330",
+      "bytes": 62493,
+      "excluded": "binary asset: .png",
+      "purpose": "font / app icon / public asset"
+    },
+    {
+      "path": "src/app/page.tsx",
+      "hash": "cf6eff259086f544c7e681afb05a8347ec57aa61e06784ddc115216fa74a3c32",
+      "bytes": 9310,
+      "lines": 239,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/preview-highlight.css",
+      "hash": "7047242bfe2ce3fc1faea4251742b41543d05fdc2277d4d0cd9573d060dbf181",
+      "bytes": 5484,
+      "lines": 126,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/pricing/page.tsx",
+      "hash": "cea2f7ca96694512417971b818a822544ecc723e38121e6147614c1ff203f6bd",
+      "bytes": 4230,
+      "lines": 92,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/privacy/page.tsx",
+      "hash": "d063fc6ec81ac5c26d3d9bcff3fe181525779d9733908a5d8aa7ef0933543027",
+      "bytes": 17501,
+      "lines": 331,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/app/robots.ts",
+      "hash": "0cb13aee4831b7c62e4b0a4a1b40dfe066c39c65124d267f94703baedd00b5fe",
+      "bytes": 435,
+      "lines": 23,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/sitemap.ts",
+      "hash": "9751aa5e3df4867889d3274bbe5630704235df24418bf044e75f0cc0b300933c",
+      "bytes": 268,
+      "lines": 10,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/terms/page.tsx",
+      "hash": "464d42bff815f80462666acaa5bee13147bca4a410f3e6380cc92d49475b1a6d",
+      "bytes": 9101,
+      "lines": 172,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/app/theme-tokens.css",
+      "hash": "8c17e252ec049d948e4c0020253170abab936ce05bb66231fe4b76a1b1d8e843",
+      "bytes": 54880,
+      "lines": 1436,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/app/workspace-theme.css",
+      "hash": "224f5457815a7149a838cc21da2c394bb6042019ff077b8e868786601a870e48",
+      "bytes": 32539,
+      "lines": 929,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/auth.ts",
+      "hash": "14f1b06030aaace17bd5127f5a47a2ca1416509d2901ac5812a6dfd550411fcf",
+      "bytes": 5877,
+      "lines": 171,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/PricingPage.module.css",
+      "hash": "e00d2a3ec7efb9c062fbe4f1e35e35e48acf12a9597a2afbe4aca16a89e54204",
+      "bytes": 1478,
+      "lines": 60,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/PricingPage.tsx",
+      "hash": "fece0f213928c81cc1d716c3a5011d18d5001c78c28344af2ced189a5d8f5bea",
+      "bytes": 12462,
+      "lines": 337,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/account-menu.tsx",
+      "hash": "d666a5b763482a6e71327fb66fe4b11f6baaab8b1410f2b0fcead83ba7a5c2e2",
+      "bytes": 6453,
+      "lines": 179,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/activity-marker.tsx",
+      "hash": "dd248fad663b21d95dcbc272d3e76ea35ab52d26f7cd9c1862a011ba722c5751",
+      "bytes": 609,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/audit-table.tsx",
+      "hash": "ec4e0ce71dc7a47b3222a024ae5dfc412db5a7e4e35a4dab1644448c8eca2513",
+      "bytes": 1886,
+      "lines": 61,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/common.tsx",
+      "hash": "1b939cc37d15af02aaa344cce4ddd8998c73c402ed38f98ff44da85df597096e",
+      "bytes": 892,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/mutation-form.tsx",
+      "hash": "8852c52b6787555c54c651cf0f6cdcfce59aea28451137d684e577c04914e29f",
+      "bytes": 2454,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/sending-controls.tsx",
+      "hash": "bf124d5a123251dda8a0ce58984ac6bfe7bccfbfaf8b50b79d98eb6313b796cb",
+      "bytes": 1190,
+      "lines": 37,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/user-controls.tsx",
+      "hash": "3f221786525939a1948ba6c62b79083d338653395c0dbf6864ce9a075eb287a1",
+      "bytes": 3718,
+      "lines": 106,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/admin/users-table.tsx",
+      "hash": "ff6200fe7f88c4443d0d6fcf1f23ff7e85f240567e63c33d51cc4ba35792b226",
+      "bytes": 2547,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/appearance-control.tsx",
+      "hash": "6b19c5f41e28b85eb88a3850519b889e457c4e93e4578fc28dec3344d3be32f2",
+      "bytes": 13101,
+      "lines": 311,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/billing-controls.tsx",
+      "hash": "225bac93b76ed8f5a37d3738f47da0831c5d7f742ab7cdf8e479bf48552910ca",
+      "bytes": 29548,
+      "lines": 750,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/campaign-progress.tsx",
+      "hash": "2c79a24bf746f3220d26822045b00c3e65dcdc36f2cd5fb2cc497c2097b15bf0",
+      "bytes": 21640,
+      "lines": 628,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/common.tsx",
+      "hash": "8e61c0751516542eb929977f33dcee45f944df036d595c12864adacff0026ffd",
+      "bytes": 3684,
+      "lines": 116,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/compose.module.css",
+      "hash": "81a5fce2a73c19c3fe49afe04019a77af27462e81d831757b832258f0a3ccd7a",
+      "bytes": 652,
+      "lines": 31,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/compose.tsx",
+      "hash": "48ef1e733e148f41d80f91fc5affaee79fa1f7faca1e8c7eaf5a4f26dbff8c68",
+      "bytes": 42305,
+      "lines": 1050,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/ContactList.tsx",
+      "hash": "905b7fde007deae0c1ae98b19b0e15529709c99feba098011f71b6e95e88eee5",
+      "bytes": 2345,
+      "lines": 70,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/ContactRow.tsx",
+      "hash": "eba8d598f6d5d56d800dca01423a8b21ce147c2799bbdccdbb82aea3caf59f1f",
+      "bytes": 4335,
+      "lines": 89,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/ContactShortlistAction.tsx",
+      "hash": "004940350a4dcb73fce06f700f4ad337ab61e8539f67ed20ff645e4564a417c4",
+      "bytes": 6148,
+      "lines": 182,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/contacts/ContactsEmptyState.tsx",
+      "hash": "869b40395dfefb378e6a4d1d010d19475c4930cce5f45064c5545b133b737f8c",
+      "bytes": 1215,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/ContactsSearch.tsx",
+      "hash": "76d0de6b4a555e44eed6ea210a86d0e03d7843ec516fbbb652efd8f7a6262ff2",
+      "bytes": 2657,
+      "lines": 82,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/ImportContacts.tsx",
+      "hash": "fb1cad8449dc1d319295774bccd2e7fcce4123777abbd3a361e06c9a1fe1e0ea",
+      "bytes": 21100,
+      "lines": 551,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/contacts/NewContactForm.tsx",
+      "hash": "310984b1e4c09f7038f00a0f4c4fef5016463b27b4cc0c05e56eed5b474123fa",
+      "bytes": 12308,
+      "lines": 326,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/contacts/RoleChips.tsx",
+      "hash": "d8415319c458af6cffe8c1bac20b5dcb4842847acdc4af7cb864101c1259d614",
+      "bytes": 1785,
+      "lines": 59,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/contacts/contacts.module.css",
+      "hash": "723dabbf15f7805882559071b8e2ddf21034923a41c0bfbb222236c0601e8c58",
+      "bytes": 5449,
+      "lines": 183,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/date-time.tsx",
+      "hash": "f0539294eec6def138d32ff826b33214b2496bbeb6f227e91e6d269c2b0f8bbd",
+      "bytes": 727,
+      "lines": 28,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/expandable-contacts-table.tsx",
+      "hash": "f530f3aa089495f96ff71f26333e38c768702d8db445a7e10680d9c89df58324",
+      "bytes": 5851,
+      "lines": 183,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/feature-lock.tsx",
+      "hash": "16dbc9b88db3072de611bbe147214231d3a3dc892fe491af83ec2a24fb42b02f",
+      "bytes": 1270,
+      "lines": 48,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/footer-wordmark.tsx",
+      "hash": "9eaa1335c1dfe6b480ed713cc9fadb529517f285e23d220f0ca54216d3d4153f",
+      "bytes": 15988,
+      "lines": 474,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/forms.tsx",
+      "hash": "540f3aa4c9d3d233fb0ee16ad2686a609a80b80d4eb1d78ac0daa1bd92af19a6",
+      "bytes": 35250,
+      "lines": 935,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/gmail-status.tsx",
+      "hash": "42981d5095cf0f56efe196228b220eaa690cd162a52cbfc34a3ea4929168daf3",
+      "bytes": 1534,
+      "lines": 41,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/help-tutorial.tsx",
+      "hash": "d629a2d0b7eedeceeda8f87c90b8ea003c478aef772dd29a454a7d3af4f9f10c",
+      "bytes": 12719,
+      "lines": 349,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/history-controls.tsx",
+      "hash": "b0c8c771022e64287ad6ff058df62183b413dfd8cd265244c3820921fb5f877c",
+      "bytes": 565,
+      "lines": 24,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/AllowancePill.tsx",
+      "hash": "936de4e29b77e109c0ea168419b9ab94697d3cebe56927d33f0e3d3f8ea3d192",
+      "bytes": 258,
+      "lines": 10,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/AllowancePillView.tsx",
+      "hash": "6e1f1dcaa512feb7df72af1345be6f0bec72d772a9f78291445eb91bbb2ef493",
+      "bytes": 7847,
+      "lines": 175,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/HistoryInfoRow.tsx",
+      "hash": "15261fa15a2381d00b46826a86fe3588a01f7a4d52c400c6c4b9ee59d32c7979",
+      "bytes": 2699,
+      "lines": 83,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/HistoryRow.tsx",
+      "hash": "3f7aad4c0c8882d5942474a09d83b04381b98263e8103fabb16963cc55c54445",
+      "bytes": 3099,
+      "lines": 85,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/HistoryStats.tsx",
+      "hash": "fc8f45195a37549c733a5911062e390b4c8e1f081c3e78c27d5f6d0d34a30df8",
+      "bytes": 3738,
+      "lines": 114,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/HistoryTable.tsx",
+      "hash": "aff8481ae6310f071049728b72060240389f44b16368873d7705f46960d124ef",
+      "bytes": 2851,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/HistoryToolbar.tsx",
+      "hash": "da585fa9943ecf3033949aceeee65c1e50ac7064d3bcef30431f3446a7f94012",
+      "bytes": 3697,
+      "lines": 110,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/RowActions.tsx",
+      "hash": "f252a85b8fba680c1c4cf7c1b7d87f223bddbb051848ca2f90b0fb2db1954d2a",
+      "bytes": 9146,
+      "lines": 275,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/StatCard.tsx",
+      "hash": "5269a15016eefb98edddd2d190e5d8640fb480a58bcdd0aaba739ef614f80361",
+      "bytes": 1381,
+      "lines": 49,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/StatusBadge.tsx",
+      "hash": "b7ea077063cc771a4372dab9d560e7411ffae565568e3c8ee7aa7d55023bb87e",
+      "bytes": 2109,
+      "lines": 71,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/StatusLegend.tsx",
+      "hash": "179531ec1e970ab9c12c8a8c2f86f8b16684b15ae7fb8251f5855e6196580892",
+      "bytes": 755,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/history/history.module.css",
+      "hash": "7df7f80da524ff43cbc27cfd2ac17997d928647798c8a296bafdfab8bd3548f8",
+      "bytes": 4448,
+      "lines": 156,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/PricingSection.tsx",
+      "hash": "f1f8691fb40c60158bc5b712138afb4874cdb72c09615f2c2a0c951044888772",
+      "bytes": 3528,
+      "lines": 82,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/batch-progress-card.tsx",
+      "hash": "4f3d8cbea71e453c6c0c64d35f34ff46da5b224f17cf2c2d05e449aab1358b13",
+      "bytes": 13720,
+      "lines": 352,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/features.tsx",
+      "hash": "f6dbcf1e3317f1f34c9bf4801cc1eec8ca53c01459a1719cfb761dee855397e4",
+      "bytes": 9242,
+      "lines": 161,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/landing/footer.css",
+      "hash": "36339c506cb964492a0f0870206b6a22eb70268b4f85109cc63a01778d7a68f9",
+      "bytes": 1177,
+      "lines": 39,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/footer.tsx",
+      "hash": "6540089c11b30869797109f785a59be186f7699a72317a220e820d5ec0241075",
+      "bytes": 8573,
+      "lines": 229,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/how-it-works.tsx",
+      "hash": "b2b86d4e0c58fb56be9e2200bd62f758825bd043d2c91d3c1e1506ad48014b91",
+      "bytes": 7506,
+      "lines": 125,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/landing.css",
+      "hash": "5f2aec5a74beb2f680e786d86173af41de01d7ba866517580a9c66e0d61c9f91",
+      "bytes": 32953,
+      "lines": 1354,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/lower-sections.css",
+      "hash": "77d6f7d95b29b700eed668c408eb0e3623fff2d895748a311c5b4956b134fb26",
+      "bytes": 3418,
+      "lines": 143,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/navbar.tsx",
+      "hash": "f112be12b03d00c2a8b6a6912dd99ae8b3e8e1d05173e3f448ca68ce10dcf071",
+      "bytes": 7346,
+      "lines": 178,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/landing/pricing-section.css",
+      "hash": "09757d538a88437df7d27c500c7306db493a7d7d27f85bd40c30681998750d77",
+      "bytes": 952,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/limit-banner.module.css",
+      "hash": "e823f185d7a09c4f22caf70a2a5e41fb854e8d2dd1e2f5758fe27b9e0e7210ba",
+      "bytes": 777,
+      "lines": 47,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/limit-banner.tsx",
+      "hash": "31341262730f1792c8ecc40772a7dd75f273bf01de8ad4bca621fcccb9512ad9",
+      "bytes": 8290,
+      "lines": 219,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/navigation.tsx",
+      "hash": "3e40cc5cb626bb7a96aae64ab77af1bae0a7856a91831cda4e6117ae99c8cec6",
+      "bytes": 4642,
+      "lines": 120,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/notifications.tsx",
+      "hash": "bbce5ee245ad1c96b9d17592ed0021a600658736a5b05f5c2920d03fb4dcfebb",
+      "bytes": 4076,
+      "lines": 143,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/page-transition.tsx",
+      "hash": "4cf02340a12b16e1adeff886da79c5cec29f8e91d499110d093e7c58044e3476",
+      "bytes": 283,
+      "lines": 14,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pagination.tsx",
+      "hash": "649aa100e8a95132b23619f35d9ea8b9d3d4979198d65e0da1d8b93995b2b8dc",
+      "bytes": 1141,
+      "lines": 48,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/policy-page.tsx",
+      "hash": "e6cb04965f5671cbb9e188aeca8098b3d57ed9e2512df2b689cadf276d940fac",
+      "bytes": 1550,
+      "lines": 54,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/preferences.tsx",
+      "hash": "36c2a32fedae94161916ddf29a36309598a96a006a550917b0c431138c1ee0b4",
+      "bytes": 5667,
+      "lines": 169,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/premium-lock.tsx",
+      "hash": "b48900a0a3f47e4facc3ec7d69b92db997c52824fa2e72942101746d0adc918c",
+      "bytes": 7687,
+      "lines": 220,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/premium-upgrade-dialog.tsx",
+      "hash": "8eea2661a68c31bcc94e5e5bdadd08c151514a8fec56e0581dac5bfcd2867352",
+      "bytes": 8581,
+      "lines": 231,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/premium-upgrade-provider.tsx",
+      "hash": "6dab562cf07c12a908b66721120e17f7fb84bb6d8f25d3f611aa20a4ad49c414",
+      "bytes": 2082,
+      "lines": 77,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/preview-highlight.tsx",
+      "hash": "aec4d062c6904571113f9cf06fb3f539c4d2539d213a5d71f4914b1ee40ea14f",
+      "bytes": 8839,
+      "lines": 291,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/pricing-table.tsx",
+      "hash": "46e0bf9c605218043fdc33a9c38b25aadea01ec4b3061d13f1984c1326f1ae3b",
+      "bytes": 1206,
+      "lines": 41,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pricing/card-spotlight.tsx",
+      "hash": "253f1bba98c461244d80523c8dafc587d3e7b270790f4142ad9239914583d9a2",
+      "bytes": 742,
+      "lines": 24,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pricing/checkout-button.tsx",
+      "hash": "12c55f6f94a827d5bc495b18be6d10989dbe9fab390ce6acfb3bd9e2e8a0e5ad",
+      "bytes": 1942,
+      "lines": 66,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pricing/plan-card.tsx",
+      "hash": "d64ec042e1be71ee03a8df691b946a636e9cfbd2b54d622510315180678da38b",
+      "bytes": 7451,
+      "lines": 194,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pricing/pricing-cards.tsx",
+      "hash": "96fe312dd17d6cf46a8812e78d8d2a71dd48430738a7acea857171654b0c5585",
+      "bytes": 2954,
+      "lines": 77,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/pricing/pricing.css",
+      "hash": "29b47a9332ccda78a897b2cd3549c99d3b95b303f68edf2f8d50be9aeb52942e",
+      "bytes": 2016,
+      "lines": 73,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/progress-ring.tsx",
+      "hash": "19f74821042ae0ded3e55c90e3c519d809de6171f1c965584c535f091b12fe68",
+      "bytes": 8386,
+      "lines": 260,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ring-completion.tsx",
+      "hash": "6c224bb4a5bbf2a2d61b3300190f9b1b34281b2cc1935352f66677d0d7e9d44a",
+      "bytes": 3741,
+      "lines": 121,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/role-allowance.tsx",
+      "hash": "d7192e27a46ba419c784c0702ac9f6e4b6725a2e8350e1dac987f61ec8c01147",
+      "bytes": 775,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/search-button.tsx",
+      "hash": "68eda044e25510f3732fb4935b9eabf7d04d7ee7b5816ef0f39f714e12f27a52",
+      "bytes": 573,
+      "lines": 24,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/send-checklist.tsx",
+      "hash": "b0f49d093f893ae809eca93b9c5e3f0b71c80a176e34946c19ae69368ffdd565",
+      "bytes": 6115,
+      "lines": 183,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/sending-status.tsx",
+      "hash": "e04f034068109ea43c7338f54cb2974bb30e8f4dd6be814d52c7a1ce27ae03ee",
+      "bytes": 2062,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/DangerZone.tsx",
+      "hash": "bf62c2120471396dd5838c5911ed9f7dd374eac4c3495b59b65ad6efe4dcf706",
+      "bytes": 16810,
+      "lines": 370,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/FollowUpReminders.tsx",
+      "hash": "5ee82a6306b247678e50fa3d32abac502a800c9e278141e7d39dc687d34d9c42",
+      "bytes": 4750,
+      "lines": 109,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/GmailConnection.tsx",
+      "hash": "998780710aa20ed95df4e042009183ba9e3ae1a3721ee37151cfe858d5088fdf",
+      "bytes": 3301,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/OutreachPreferences.tsx",
+      "hash": "3c71f09b253842c882ae0a56914242e17957edaf5d4512996e5f11037ce979dd",
+      "bytes": 7808,
+      "lines": 188,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/settings/PlanSummary.tsx",
+      "hash": "e175b9d5d51857d5993963707d47e38f49327420dc8de1ff5f308bf97de42ce2",
+      "bytes": 6712,
+      "lines": 162,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/PremiumNotice.tsx",
+      "hash": "c700ba134b022f0fe3b2b0e1ea0621ba90ba92912ddef5a8f0842c82073999af",
+      "bytes": 948,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/ResumeUpload.tsx",
+      "hash": "ce121fe5b832ac196dc8ce034d34d7ae262ca0aeef8a5f00a9fcfe1f480c6cae",
+      "bytes": 10398,
+      "lines": 225,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/RoleChip.tsx",
+      "hash": "40e5b8e5b23b4cfa318d7499f73c5c46a332b07b57d147b169f8927d30a86b58",
+      "bytes": 975,
+      "lines": 30,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/SavedStatus.tsx",
+      "hash": "bf8d3b8e5df678d3cee55bdd0278b3f9d39248c176e69d376dea9fe8c88c7a08",
+      "bytes": 690,
+      "lines": 24,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/SettingsNav.tsx",
+      "hash": "03caa3a225ce0f417f153a434b5d96529b429699115110de1a481e67a053b533",
+      "bytes": 10708,
+      "lines": 313,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/SettingsPanel.tsx",
+      "hash": "06aa3b5ef2b5c8b480a01509b2618799d2c6200d4ddc423edd1a3b7c3be4bf3a",
+      "bytes": 2043,
+      "lines": 69,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/SubscriptionMenu.tsx",
+      "hash": "06cd52db29e81a2dc231e70755834d4c52fdbfebb032a704dfd0d663fc787171",
+      "bytes": 7361,
+      "lines": 213,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/settings/YourData.tsx",
+      "hash": "b7f366f9d86e4043de6078cd32aaa9c18608c83f3fb4e30f45aebd1bfe7fa380",
+      "bytes": 1592,
+      "lines": 38,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/settings/settings.module.css",
+      "hash": "e119354dfc18b7660946ccd80b523e94ce0e8bd0fbd94232f9a02fe772ebf1a1",
+      "bytes": 3968,
+      "lines": 113,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/template-controls.tsx",
+      "hash": "b01eb7b4b676052e2ccbd707eb49eef34c2fb47a7032e65f4cd696cccde613db",
+      "bytes": 2045,
+      "lines": 67,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/template-preview.tsx",
+      "hash": "e7e8c0083e31e1dda3b001e383f4610232caf9cd4cd2222db1d76d05cf863385",
+      "bytes": 8369,
+      "lines": 239,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates-loading.tsx",
+      "hash": "7a25b26f1d4fbe8c180fcdb4c54bdb0f8812742acc1f6a6656a71e112a6c4ade",
+      "bytes": 1919,
+      "lines": 54,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates/FreePlanSidebar.tsx",
+      "hash": "3ee12008e487cc4293eeb8497fba58114e5db61435a35d817f54e776c822afee",
+      "bytes": 2673,
+      "lines": 58,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates/HighlightedText.tsx",
+      "hash": "58a552635dfcf129f3752309338df7500e69da63de9a8d1dfc486c75bef721bb",
+      "bytes": 540,
+      "lines": 17,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates/TemplateListItem.tsx",
+      "hash": "b274dcccba792d05d3be0b967bb0b3db06f717092fa076854824d1ca49f8a67d",
+      "bytes": 3887,
+      "lines": 106,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates/TemplatesFreeView.tsx",
+      "hash": "8cb631b677a6c32ab2a207a99f92d44aea2350742967267e64422e678c91314d",
+      "bytes": 6762,
+      "lines": 141,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/templates/TemplatesPremiumView.tsx",
+      "hash": "0a306f36a84fa3c127e7b63a5be987ef297cfb9fb60af3518adc77975e35f596",
+      "bytes": 7026,
+      "lines": 203,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/templates/templates.module.css",
+      "hash": "0f975f2e9972e460d6ac70376143b8ad907cbff61203ffe1688ef780807bb7f3",
+      "bytes": 3574,
+      "lines": 112,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/theme-access.tsx",
+      "hash": "026f23b74c7ea7fa23587b4972d8290ba308478884df32390b40ce88f16faaed",
+      "bytes": 809,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/theme.tsx",
+      "hash": "d5ef9de22d8eb5ae7282ea74d6b7bb56e8fc3ef32e683c1d2d064f8f52ac88c6",
+      "bytes": 12234,
+      "lines": 378,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/tutorial-content.ts",
+      "hash": "c8dd02388e19cfddf51f1e0a562f7bbabb971d265d1470a4accdfc1c62c2cd63",
+      "bytes": 16139,
+      "lines": 290,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/tutorial-hint.tsx",
+      "hash": "d5230b8907393a51dbe1d27d1c9000324fa681dfc3378e6af4f30cf049298bf3",
+      "bytes": 19036,
+      "lines": 542,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/ui/InfoTooltip.tsx",
+      "hash": "95ca8f062de484b16ccea2f6c706051ee742a6f375683b1a47e15a02ff8040fd",
+      "bytes": 851,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ui/Tooltip.module.css",
+      "hash": "1671749d301a99ea52acc7961bb7464140076897c4ac9199c722dc570b9e3c3d",
+      "bytes": 2121,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ui/Tooltip.tsx",
+      "hash": "192d9359b49d7e58d76f9cc215849c1ec389e10ffc6822ae2562700ca11eb1cd",
+      "bytes": 8371,
+      "lines": 249,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "hash": "494ad95ad900471cabe8eb6cae2163bd8f58acf293fafed8fd2cdea8175b5a0b",
+      "bytes": 1453,
+      "lines": 40,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "hash": "62c98c1db3c2fdc49bf8f2eeab64eb913235ad6044dbf6adfad18fc2692a97d7",
+      "bytes": 1004,
+      "lines": 36,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ui/input.tsx",
+      "hash": "a756b6c40736ef42f109591d9cfafec97a2b8a0bd744fa6eac9074ba2a29a98c",
+      "bytes": 501,
+      "lines": 20,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "hash": "36fb45ba55e4d766d6bf1f1fdecd1706eebdf85eb8018c1349b44758a5990465",
+      "bytes": 419,
+      "lines": 18,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/upgrade-prompt.tsx",
+      "hash": "ab96cb089a852190ffa12668f3bffc364ed0b4872e6e0ba1c7535b983c8ff815",
+      "bytes": 925,
+      "lines": 35,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/AllowanceCard.tsx",
+      "hash": "440ed0b7f2627f7d78d6fd1972f2137ff0083e92e3d05a3b7a5ad7dcf4df604d",
+      "bytes": 8487,
+      "lines": 230,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/AllowanceGauge.tsx",
+      "hash": "622dbff13eceb48a77fadb3ecf211cfdd793f623c0bfd8822cc2bf4e0cf9cc72",
+      "bytes": 2194,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/HowSendingWorks.tsx",
+      "hash": "7db6a743efe6a2c33be85bf2de31ec6cfd9fb133d710403b6661fef09661e257",
+      "bytes": 3808,
+      "lines": 100,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/PlanCard.tsx",
+      "hash": "7804b7587da6e8caee29318916fa3cc902ca538f5960b62f4cff5d4bc602e118",
+      "bytes": 22846,
+      "lines": 510,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/UsageContent.tsx",
+      "hash": "41669e63747a111ddd3c3787777a3584df9b01dd41e34c03e5dd293efa2d37e4",
+      "bytes": 6150,
+      "lines": 151,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/usage/usage.module.css",
+      "hash": "83d8d7f57d09b36833872e338ac8b0ade9b6c8ba246b0eee950ec4318eeb0e86",
+      "bytes": 10317,
+      "lines": 275,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/use-role-preferences.ts",
+      "hash": "a1b72b7e197bd8529f20ac7c168ec27344abb9dff8134315b513213bdd045c21",
+      "bytes": 4260,
+      "lines": 151,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/workspace-banners.tsx",
+      "hash": "77484364126c2d547734ad1f14a25c7b798c736259227b8d242e0ed0416516e4",
+      "bytes": 8650,
+      "lines": 252,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/workspace-footer.tsx",
+      "hash": "287801f9b77aa1cae111378cb150dc88408659e00b1b9cfe658353374f06a177",
+      "bytes": 310,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/workspace-loading.tsx",
+      "hash": "821045a17e2da429007e0a222aa3b54c9ffaa699306c6dbd8bdf7f424bebd902",
+      "bytes": 1823,
+      "lines": 53,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/workspace-quota.tsx",
+      "hash": "bbf50b12602cbeb3b8a310153e365d6b791120f0de49cfabdf0f4ebb17d381d4",
+      "bytes": 6725,
+      "lines": 213,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/components/workspace-skeleton.tsx",
+      "hash": "8d9277d765c7c31705ea4fea87030c106b76a05017b2e17e13cf202cf513e4f9",
+      "bytes": 11340,
+      "lines": 361,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/account-notices.ts",
+      "hash": "96dca47a989ea7c69218fe6615ac62ba98bb75e69c88d8f2c466bb19974e4ae8",
+      "bytes": 853,
+      "lines": 32,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/account.ts",
+      "hash": "c4f94dabcde35172646df9dac0e7e73a8329570cf442c58040eda473a4fd0366",
+      "bytes": 4938,
+      "lines": 175,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/actions.ts",
+      "hash": "4023dc264fdfa7182eea9f3a348bf96991c8838f90457bc83fbdb7977d47b696",
+      "bytes": 12496,
+      "lines": 379,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/activity.ts",
+      "hash": "201e7ea8e7c0f9a3db6cb4ca342cdc66f48c7add20dd3811c7dda15c7e557070",
+      "bytes": 401,
+      "lines": 19,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/actions.ts",
+      "hash": "0a6a1bf819f89ff3d8e2c68f64ecf5f186d5940dcd846895fae418eaffe3e835",
+      "bytes": 927,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/audit.ts",
+      "hash": "7b44acb36fff8d4774da778623a1ba5059ff2733cf71e9c11bb7bbc60b213bc4",
+      "bytes": 840,
+      "lines": 19,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/auth-freshness.ts",
+      "hash": "b7c7029cbc15a796b0b955bd64e1738d050a9fdb60eb286332bbd46c0243d0a4",
+      "bytes": 206,
+      "lines": 9,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/auth.ts",
+      "hash": "5e66e53574aa46a15409a6a1e0ffbb73e87d9381f4f7d8dfda80fde466cdd2a6",
+      "bytes": 2621,
+      "lines": 57,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/contracts.ts",
+      "hash": "3ab4ba6d78492d4ce6963f0b48f6f2cf6d4b3418d6922789f220fd89bb1b9639",
+      "bytes": 2528,
+      "lines": 98,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/db.ts",
+      "hash": "6696438bc14fd00f13ae3c293d9b4f2c995b0bd73cbd95b07a7df07d3e421b31",
+      "bytes": 797,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/mutations.ts",
+      "hash": "207af8ec61f2f10fe3bc8bf7c22314afc437af81807c769fa59197f1c5fedbf5",
+      "bytes": 10623,
+      "lines": 298,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/page-auth.ts",
+      "hash": "62add25a155ddbbacb287b05f8f148fafe03a4b69c369a167d73c34bcf782044",
+      "bytes": 226,
+      "lines": 11,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/projections.ts",
+      "hash": "15d7ec43974d8b4957ef83086303847a7306ab2e599c378956db46653fc9001e",
+      "bytes": 1070,
+      "lines": 43,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/queries.ts",
+      "hash": "44c231ba643994715d6cd032266bcaa08e308053b4dfb226a044f4c9f4df3662",
+      "bytes": 6700,
+      "lines": 173,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/reauth.ts",
+      "hash": "dc4c94d6b3710f48991101b5d3e5de5a96414bac22881530aa7d96a970fcf647",
+      "bytes": 2572,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/admin/usage.ts",
+      "hash": "1f257b41739cd8617d16120c5f6ef0abd19af5914f088dd2dd925b0a13d5a012",
+      "bytes": 5791,
+      "lines": 164,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/appearance.ts",
+      "hash": "10a33b8a240d091cc7f5f49dbb71ef1a12c5567189dfac7849033951402b96a8",
+      "bytes": 424,
+      "lines": 14,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/cancel.ts",
+      "hash": "7590e6d686537a0ad931e15d605ff86b55122f031fb63dcefa80fa5c1b1f4ee7",
+      "bytes": 3681,
+      "lines": 111,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/checkout.ts",
+      "hash": "4afa19cd9bbee90dda160458992ae38da167edb54d11a3e487d824868e48904e",
+      "bytes": 14348,
+      "lines": 420,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/config.ts",
+      "hash": "35ccb2a33aef0107e2492413e5cc17adce941a9faf9f55d9adcc6b466a965b5e",
+      "bytes": 2025,
+      "lines": 71,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/deletion.ts",
+      "hash": "abe5a9af4012deff3b29047cdae390dea22cd84a074f025777f91bd51d1c73c9",
+      "bytes": 5805,
+      "lines": 171,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/dodo.ts",
+      "hash": "8bc20be71b1690071c7cd528ef76fe81553cb68f00a5a96ed35c7f19d228390c",
+      "bytes": 869,
+      "lines": 38,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/events.ts",
+      "hash": "04ec6559d03eb850153407fb6e153555d2957760f4d972283b1612bfba4b9745",
+      "bytes": 5074,
+      "lines": 164,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/http.ts",
+      "hash": "6d544d198cf313615b46617d84c1006c59122ee5e6760fe7fafe79717072f2c7",
+      "bytes": 2196,
+      "lines": 69,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/jobs.ts",
+      "hash": "72e742ff700c4f2114b60116ca15a3d9b860de70087076832a177ad35266e7eb",
+      "bytes": 7979,
+      "lines": 268,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/lifecycle.ts",
+      "hash": "361d8f61bf558fbb0a8e531234ea976053adee952fbf9d1bc3ce702d30e6a8f2",
+      "bytes": 22284,
+      "lines": 585,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/schedules.ts",
+      "hash": "fdd5fe9b35069b46abb3a3e553305cb19f63861dcc726900b2d2a09d32373221",
+      "bytes": 1531,
+      "lines": 46,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/status.ts",
+      "hash": "e7cdf6818ce5c0f1a96dca4eed7494374e3a7eccd1360557c7a0df72ef3f2aff",
+      "bytes": 3452,
+      "lines": 103,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/store.ts",
+      "hash": "48fa8a4adec7695640f70686bf66f5f41a021c108e2aef5035efb62bc4e0d9e2",
+      "bytes": 3097,
+      "lines": 87,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/billing/webhooks.ts",
+      "hash": "1cd895adf82c5a056d1626fb8ff11d5b3a7e34d1d64cf25cdc7a05be234a15b1",
+      "bytes": 2842,
+      "lines": 89,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/campaign-policy.ts",
+      "hash": "36760ba1c9cb80809942265382faea3ee15aee7f2f56848ecabdc6a9908432d8",
+      "bytes": 6477,
+      "lines": 223,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/campaign-progress-actions.ts",
+      "hash": "b4579412b38db30d67f5d5d2304878d439720d6ccd5aff95b411970a425b67ca",
+      "bytes": 358,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/campaign-progress.ts",
+      "hash": "de1d15fc42cc64af9733bd5dbac05be8fb696af20c36bb0c3951b564015165bb",
+      "bytes": 5345,
+      "lines": 175,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/campaigns.ts",
+      "hash": "15667c5e5c70c68f05c4d1bd026bc7c3e27b408663b0c616166258f66460c534",
+      "bytes": 7988,
+      "lines": 232,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/cancellation.ts",
+      "hash": "420650714ccfb20ec8e8572ddb349ec667a25d40b60c299a1bdb25c1d0b2816b",
+      "bytes": 3613,
+      "lines": 134,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/capabilities.ts",
+      "hash": "cea1922625a276c0cc9bea148e5551e44ed6c68dc33340e177e1887fd602c75f",
+      "bytes": 847,
+      "lines": 32,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/contacts/suggestNameFromEmail.ts",
+      "hash": "8750024a4fd411c80c3adf1d8e7055285d158fd986e6a9a06f6db3e1cd760a84",
+      "bytes": 362,
+      "lines": 13,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/crypto.ts",
+      "hash": "66066735c5f2e4e3dfd6f82679a0bbf9abc1cbed08c8e41e1ad5f6d72e016aa3",
+      "bytes": 3543,
+      "lines": 100,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/db.ts",
+      "hash": "9f43d240add758fc3229a5f598340df234511659f81d9056a343abfc34b673c7",
+      "bytes": 934,
+      "lines": 30,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/deletion-identity.ts",
+      "hash": "1bc3827b60c80d8795c892f0d0cab5d672a42cca689fdfe9f205beaae4451dd8",
+      "bytes": 834,
+      "lines": 26,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/deletion-jobs.ts",
+      "hash": "4500f200fa4a596b993260d72c9bd67af353e121ec797321b72d57d3f29f0a67",
+      "bytes": 15105,
+      "lines": 434,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/delivery-usage.ts",
+      "hash": "6d7ec7a6673e990a80559b5ff81f4a8527b2830d7e152a7561e61b8e03c9ff15",
+      "bytes": 2261,
+      "lines": 49,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/email-html.ts",
+      "hash": "320c5dcd7d5549c6f169c96bc26bcce25e141921db2eb509db9afb88b72b80fd",
+      "bytes": 2131,
+      "lines": 66,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/email-limits.ts",
+      "hash": "7d2f817e38385eb3573a5281d7c844bfdcdb0d12291400b3977401d5aa754dc1",
+      "bytes": 634,
+      "lines": 9,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/entitlements.ts",
+      "hash": "c4678928f808e769608b5f70a6469447112e956cf6ece9b21768b7a18b4b59d6",
+      "bytes": 11551,
+      "lines": 350,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/errors.ts",
+      "hash": "e6db9baa0268835e5cab38f6ca316d22c2d3a2b063e6a893adf6e636d34f4b07",
+      "bytes": 935,
+      "lines": 41,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/follow-ups.ts",
+      "hash": "fa9d016e6ee60ec8d9d74beba7791b062ee2b85c78c29f3c0d5050b9d805e9dc",
+      "bytes": 2317,
+      "lines": 48,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/gmail-errors.ts",
+      "hash": "4b19b2620f2aaae96823f5a29ad50e583ff29dbfa30af8ba6a51150fbe9b8d64",
+      "bytes": 5430,
+      "lines": 160,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/gmail-pause.ts",
+      "hash": "24d72e8ddefe25468cd2471944347b9b476a65e04a487306638229a0027193f1",
+      "bytes": 1788,
+      "lines": 50,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/gmail.ts",
+      "hash": "4b5f6207a682d08f3bc8b1aa2a951f554ba00f8de9ad903527cb252dec0d59ed",
+      "bytes": 2647,
+      "lines": 86,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/history-actions.ts",
+      "hash": "9296f2d9dd841a3dea8eccdddb2bf0a854fe90ac4fe08d11c8f18ae2649026b8",
+      "bytes": 869,
+      "lines": 33,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/history.ts",
+      "hash": "34af58fa4f0e93dd9f1f6e329a7cb6f07ceda990fb76224c2fe70dca694531d2",
+      "bytes": 3832,
+      "lines": 107,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/imports.ts",
+      "hash": "ff8b70e8c12b04b69627afc68e1b175fa57a3a86a39d4d670e7dcad72cd6097e",
+      "bytes": 3446,
+      "lines": 105,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/inngest-client.ts",
+      "hash": "0129201c6376ef3ed0c7b5fbd193aaa06dedd60bb5d4ee49607cac6fda0bed01",
+      "bytes": 933,
+      "lines": 31,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/inngest.ts",
+      "hash": "e96f1fc3570c3d3be8ab0928cd704d5c11c05a5a0711069e06bd5e9fd0e1e83b",
+      "bytes": 23448,
+      "lines": 689,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/lib/launch-actions.ts",
+      "hash": "663ce63aa76e6396e3d1dd7899cbc389a5db866182c259b4b2045f077db33bf8",
+      "bytes": 2688,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/lifecycle-jobs.ts",
+      "hash": "a44c7a9263f7b5bf2d72c2a485420c3b88af165626cf9a3aa74b0a8ef2144574",
+      "bytes": 2299,
+      "lines": 77,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/localized-price.ts",
+      "hash": "5a4a2ce21cae137828a196365544268040e7e1d3be22c1f6afcb3d78049a47cb",
+      "bytes": 752,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/message-format.ts",
+      "hash": "992a69085e4fde90a5a5b2952f6a55e1bd6a725b10379c64a7aac5135f924a1e",
+      "bytes": 1872,
+      "lines": 56,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/observability.ts",
+      "hash": "c65aab3c752a7bd8cd307e10796fbfaba22239b6a5bb5ae3f6f4c83d057f838e",
+      "bytes": 2773,
+      "lines": 93,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/params.ts",
+      "hash": "d7a4cb34bb9a651b681f0c17757a84e3efe7841ec65bb353bf2d382b9585739f",
+      "bytes": 139,
+      "lines": 5,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/plan-features.ts",
+      "hash": "301c139ccb19c3783b1e5be29e96835462e9dc04a055a2acda4dda1b34cb6b5c",
+      "bytes": 2402,
+      "lines": 78,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/plans.ts",
+      "hash": "e216323a7776011713e4dbe9640ac2011db0b2543877091b382edfe1e2c400c2",
+      "bytes": 1762,
+      "lines": 64,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/pricing.ts",
+      "hash": "1f5c41dec36c85e97804c56a301ecc69b10544bab5c4e3abfaa1e3a270ea8fd0",
+      "bytes": 1018,
+      "lines": 18,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "src/lib/progress.ts",
+      "hash": "82871d0c322f4c21889a0a6f8baaf7228691b13dcee3382535eb583e8b716dbf",
+      "bytes": 1157,
+      "lines": 43,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/public-plan-copy.ts",
+      "hash": "8748554a9ce95c88bae12c0c679f4b49ada20848bb3846cf76ae806d4b7d922b",
+      "bytes": 939,
+      "lines": 21,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/quota-snapshot.ts",
+      "hash": "1627ce4784bd3e8b407f475dd8f3d90d602c294fc1ef541cdd4ebc68e8d8e40c",
+      "bytes": 947,
+      "lines": 37,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/quota-usage.ts",
+      "hash": "f357aafa698ec505b571408d76f124450601af975cfd5c3351a6cdc5f5e8a873",
+      "bytes": 6408,
+      "lines": 175,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/rate-limit-jobs.ts",
+      "hash": "d40bcb2dbab221c6e9a523cf8b9c003fad94f0faa9649f5c49ceddc93c46b7e8",
+      "bytes": 837,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/rate-limit.ts",
+      "hash": "b474144ff55c4d5eb9ca1cb28dccf9c6ee8ffbb98e73b34acf2abf9e461f6b64",
+      "bytes": 4704,
+      "lines": 133,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/recipient-actions.ts",
+      "hash": "0690543876acc142d7992ff91275dd43e70a6318d426efa58bf301cb2a17336a",
+      "bytes": 3043,
+      "lines": 95,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/resume-actions.ts",
+      "hash": "a74710e1dc7762e2f55abbe733a35f58792d1385a85aa4e81604510d6560bacb",
+      "bytes": 1425,
+      "lines": 47,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/role-store.ts",
+      "hash": "c0483187e7968e1ac0c4917bbb419f15ac80abacfd5c729490ed3508166ba452",
+      "bytes": 1607,
+      "lines": 56,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/roles.ts",
+      "hash": "3cdc3c340cd780b3ac1ab2a1a77354636a56671e1e5372e4bd5d82b6142cfb9f",
+      "bytes": 2414,
+      "lines": 88,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/sending-pause.ts",
+      "hash": "6d394024835da366846790d05227714f2d65a6a377ff65b2e226230b01fa020b",
+      "bytes": 2298,
+      "lines": 69,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/sending-status-actions.ts",
+      "hash": "d55da7cc6194d277fb52f9620099f0140175f6203e10db332a5f103ff648b3ee",
+      "bytes": 438,
+      "lines": 13,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/sending-status.ts",
+      "hash": "aa0e66d1c0bf63807776e43af948b31a952c459cf91d04387978209c9cfbade1",
+      "bytes": 344,
+      "lines": 15,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/session.ts",
+      "hash": "236e790025b9a9daba368e20756297dad4ac686cd88bc0acdc1d6714d3a55a7a",
+      "bytes": 798,
+      "lines": 30,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/shortlist.ts",
+      "hash": "29f18201a87fe467f5ee4bcb36bacded5f0ba7f2496adf42bdbb348088ffb346",
+      "bytes": 4178,
+      "lines": 75,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/storage.ts",
+      "hash": "144880a968629428adaed7ee082171c6ea31ca1e1cd7d6a2b557f786e8ae54f7",
+      "bytes": 9738,
+      "lines": 300,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/subscription-lifecycle.ts",
+      "hash": "edc63b13c2151b0e23ae193361674237af61f8e0a4a87052f068750e73cf2c25",
+      "bytes": 1443,
+      "lines": 42,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/subscription-maintenance.ts",
+      "hash": "e3492e0e0053a13e848962820bac740452a4aaa85069285033683bac3bb49ec3",
+      "bytes": 1516,
+      "lines": 56,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/template-policy.ts",
+      "hash": "97aabb5a0ee894ba69cad412f59c09a8d047e338647b3866255812d633e7c600",
+      "bytes": 2033,
+      "lines": 67,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/theme.ts",
+      "hash": "41dd5640728f2836dd92513ff1cc65c0bd0a7a75371275b387f65261f03c4188",
+      "bytes": 1212,
+      "lines": 13,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/token-rotation.ts",
+      "hash": "a5634b938453d12169f1dbe698fa24a13502a27f818f48311676f1f5bf67708e",
+      "bytes": 3127,
+      "lines": 93,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/usage-backfill.ts",
+      "hash": "89186fe8ec3dba70f3c59193305889d62adf02aa0fa3bf422e2f250a7dee4b95",
+      "bytes": 10252,
+      "lines": 269,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/usage-ledger.ts",
+      "hash": "5099141d0db811a08500404a07d0cfd4f8c74d79158ba3f1a60a5f53ac1da176",
+      "bytes": 28776,
+      "lines": 874,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/usage-periods.ts",
+      "hash": "ec083d5677d6e7070baddd6feba2fbffd4af18b59174624b6732100313026e74",
+      "bytes": 3808,
+      "lines": 130,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/usage-reconciliation.ts",
+      "hash": "16132889eb9c7b92982f3d7758e00756390e8e4ceb1f794222302c245be31c2a",
+      "bytes": 9176,
+      "lines": 301,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/usage/getAllowanceState.ts",
+      "hash": "771ea7f0e2526eb31fe4b5ec234e0dd2c14dcdaabc350afac5ced864181566d3",
+      "bytes": 454,
+      "lines": 17,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "hash": "c4afe23db29651dec75ca5a3098a8bafe35f78cd45d4773d1db1c8001e640623",
+      "bytes": 168,
+      "lines": 6,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/lib/validation.ts",
+      "hash": "5424f6edfbf0a7fa1ea45e87718af28eeca3aa73e62f523abeee7584fd3b3cd0",
+      "bytes": 2883,
+      "lines": 98,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/types/gmail-mime.d.ts",
+      "hash": "c39d67ea234509bcd8bec824d1d22ea59af6ebc0fa18713756aec5da82df744f",
+      "bytes": 140,
+      "lines": 5,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "src/types/next-auth.d.ts",
+      "hash": "de49860b89d4559c34babba77e8708444668b393c923cd5658b7c6526dcecaa9",
+      "bytes": 414,
+      "lines": 22,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/account-auth.test.ts",
+      "hash": "14133388491025812e7b94a2651d988b581025dca903b96e501ec1c1d567d1db",
+      "bytes": 9597,
+      "lines": 312,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/account-cleanup.test.ts",
+      "hash": "1ceb84051aad8e1738b5357d55c84b6eb472f586fae36b34063c6f527374d985",
+      "bytes": 2908,
+      "lines": 79,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/account-deletion.db.test.ts",
+      "hash": "4a32ec5d72f9f1c8a1f9dc682f0a499d3d70e433f87c38c8c60c5b0761b2266a",
+      "bytes": 9488,
+      "lines": 248,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/account-export.test.ts",
+      "hash": "7fadaab267234fbd1b5b3ff0cc0b7e29626d3a33bef224b2822623c6fc887ab3",
+      "bytes": 1266,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/account-notices.test.ts",
+      "hash": "f60187a7a9e4ca026c6b235b414eb708681fec86574c0cf83d71af1d84431d4e",
+      "bytes": 1491,
+      "lines": 34,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/actions.db.test.ts",
+      "hash": "0d1064bf0fdfdced5b86160a0c24a49690fcd4b596bc183cc7c8a4a76d6973f9",
+      "bytes": 33487,
+      "lines": 952,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/activity.test.ts",
+      "hash": "317963c989338b640921cf5ebbefbf2297c89c1849b8358a5c415422460c08f8",
+      "bytes": 1886,
+      "lines": 60,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/admin-auth.test.ts",
+      "hash": "391e5eb3501098f41ebdee8a3011f3ebf1a96851259dd9a8fb91d698f5e14f6d",
+      "bytes": 3423,
+      "lines": 106,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/admin-migration.db.test.ts",
+      "hash": "e15bb8d5a66ce56fc936f7e333f7238e84b0c45f5501c07c7fc5a42dc4dfab43",
+      "bytes": 4749,
+      "lines": 132,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/admin-privacy.db.test.ts",
+      "hash": "4a64d98cce2dc07aafa0a74a981e5d527b5f4adcaa8e687468f029575dcc472a",
+      "bytes": 6262,
+      "lines": 166,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/admin-queries.test.ts",
+      "hash": "ebe4b07f2e4251f15159e0b8db79e333ab661f289ea97fc4a05898bd86fb348c",
+      "bytes": 2740,
+      "lines": 92,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/admin-reauth.test.ts",
+      "hash": "ae15b53adcdfd91ae028774e75ef8ee639aa0fbe7eb8497cb177382189fbb98a",
+      "bytes": 3732,
+      "lines": 118,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/admin-upload.db.test.ts",
+      "hash": "ac88e6d15672ca5602bee1b9ebc577851b05f04fae3ed0b558ae685d1ae1479c",
+      "bytes": 4707,
+      "lines": 141,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/admin.db.test.ts",
+      "hash": "b0f2639c9bba459c83e3a109381a881447cae5f65abad5d5d6e3c5fc9b60b7df",
+      "bytes": 19851,
+      "lines": 600,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/appearance.test.ts",
+      "hash": "72a98ec2eef0506c075c19d2816e56807ae9f57d3bf3b6c4f7c0ff35c45a4666",
+      "bytes": 3856,
+      "lines": 137,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/attachment-cleanup.test.ts",
+      "hash": "39fd5417507c4917d59e9d023302b59b744348e4e49d7aac0a39d4af657ef969",
+      "bytes": 4524,
+      "lines": 136,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/billing-status.test.ts",
+      "hash": "a1fb8c8211bee4ff08e5e189c0d3dbc318355b2f008dd004b440db6c37d11fbf",
+      "bytes": 4742,
+      "lines": 146,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/blob-account.test.ts",
+      "hash": "a6767f73c163e8827c146fedcb937227b3d561baefa591879f430e59ff7cab3f",
+      "bytes": 9411,
+      "lines": 273,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/admin.spec.ts",
+      "hash": "d6a773d82ed2119efec973fb2dd2d1b49c97631ba4096ad3e0a6f5cee29a31fe",
+      "bytes": 10714,
+      "lines": 313,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/app.spec.ts",
+      "hash": "dfbd797ccbf5794f52e62c71fd8f9783cca0fc8ba552b9b6ae1a9c096a8b316c",
+      "bytes": 265997,
+      "lines": 7243,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/appearance.spec.ts",
+      "hash": "46a266eb70c0d1570f40b124f38e94f719cca8bf185d9be52a4c470fb622e3de",
+      "bytes": 21399,
+      "lines": 563,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/button-hover.spec.ts",
+      "hash": "df9c376117f5225d8c6fde1ec71a1f3e11c61d12a1a0d938b6405d11a698bb8e",
+      "bytes": 17537,
+      "lines": 434,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/compact-previews.spec.ts",
+      "hash": "8f8490323329606034508b798b968ab8fc6673e43253fc2ecafd304bef61db6a",
+      "bytes": 5320,
+      "lines": 134,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/dodo-billing.spec.ts",
+      "hash": "63f2b3b5e2bda568e71c31ed7b98a96c26c0ceeeaa3f748340c1ceea6938be79",
+      "bytes": 38819,
+      "lines": 1171,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/feature-gates.spec.ts",
+      "hash": "40a4ecbb639ff8a9ba74fe4664948f1e089331b67a595f8e08af985672cddf84",
+      "bytes": 103524,
+      "lines": 2842,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/footer.spec.ts",
+      "hash": "881ad0a2b57ee169fbfc8a15da6fea3c5ce8467c6073594533946721095d2730",
+      "bytes": 34513,
+      "lines": 876,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/gmail-pause.spec.ts",
+      "hash": "932a51042333a69920dd3f84f46cb2cb35481fd035b529b5bd2619c56bb4f900",
+      "bytes": 3195,
+      "lines": 105,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/history-allowance.spec.ts",
+      "hash": "aa59872bde6b19366bebcbe376285021eafaab7a19846ad72ea6cdd15c4d4177",
+      "bytes": 6481,
+      "lines": 166,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/history.spec.ts",
+      "hash": "993fbeee071c4f6982f82cc406f1ec66bb55c1957afe0b7f100d124637884030",
+      "bytes": 14115,
+      "lines": 347,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/interaction-polish.spec.ts",
+      "hash": "8f0b775e5ee549806db81437a4d218437529992f2acddecc49d40b9cfac8a23b",
+      "bytes": 3511,
+      "lines": 99,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/landing-ring.spec.ts",
+      "hash": "d8f38a89a85ce057d38f795843679326a328778eb342d599094f3bac36b84589",
+      "bytes": 6599,
+      "lines": 184,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/landing.spec.ts",
+      "hash": "1050f6f7c671cf0cfb1f0850ca2bb8b3aa9885561ba981fa874e2af1c0dc1ebd",
+      "bytes": 25815,
+      "lines": 708,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/limit-banner.spec.ts",
+      "hash": "b683a2f71c69c228e8fa43581c3512e94410524e0e0444608e3f092b9685941c",
+      "bytes": 7157,
+      "lines": 221,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/mobile-landing.spec.ts",
+      "hash": "8a74545e8ecb60becadb9384d0bde370116c5aefa572dde37fe92a8379c82ce5",
+      "bytes": 2698,
+      "lines": 70,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/navigation-motion.spec.ts",
+      "hash": "0dc6a5b6598bc1140cda4086ec290f64a331159552d52b2f183caa53cf596593",
+      "bytes": 2437,
+      "lines": 68,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/policies.spec.ts",
+      "hash": "1377e8285c665a33339ba01930344c9301b95345a002a95490eb2580fc350e8c",
+      "bytes": 2924,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/premium-upgrade.spec.ts",
+      "hash": "331a4125cdfd1d050d7e2000f9207c1a11a9c45ff2001d4d9dbd1ff371272c45",
+      "bytes": 15368,
+      "lines": 415,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/preview-highlight.spec.ts",
+      "hash": "b1aa0c0ab3ad8bcaf9dc8a0d8c9cf6a0e8e357a62549f56e581b3dd59b83e797",
+      "bytes": 16862,
+      "lines": 456,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/pricing-account.spec.ts",
+      "hash": "d13bdf9a92ea93aef9a13a27788260e04bce9acc51cd9efaa7e4557b03d62fa6",
+      "bytes": 3448,
+      "lines": 90,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/pricing-ribbon.spec.ts",
+      "hash": "c018d93fc04fbebace7c4da328c6e61e669d925dc13bc88847e00c93cd951fbd",
+      "bytes": 8489,
+      "lines": 226,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/pricing.spec.ts",
+      "hash": "16b9e187dc6c94e99e9250b18856966539b018a9cf5084344204efd05e65c7ac",
+      "bytes": 14162,
+      "lines": 382,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/primary-actions.spec.ts",
+      "hash": "9baad14c24bb4be31b62ada65dc7226711899da66f931eefa9bd3bdd1c8a306d",
+      "bytes": 6732,
+      "lines": 184,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/progress-card-hover.spec.ts",
+      "hash": "05469eda5a3cbfff678bd1d031cfddd146339959ebad3a8b0cb2c974be96f06f",
+      "bytes": 5638,
+      "lines": 147,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts",
+      "hash": "7e0158f524513d096cc6555dca7c57c243cb698c3146eddfa6c9dd979340666b",
+      "bytes": 2249,
+      "lines": 77,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/landing-purple-dark-desktop-linux.png",
+      "hash": "0ca6fb9edb669e40b422e6bb953b657748b71db12251c3d5291ad3a51d45086d",
+      "bytes": 1156735,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/landing-purple-dark-mobile-linux.png",
+      "hash": "b41542ad13c094050b7b5e6c5def6f572258fee4a1e461c9f9d433bd56cee1dc",
+      "bytes": 592655,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/landing-purple-light-desktop-linux.png",
+      "hash": "6db5cc021baa7d00c15629594287f7a7e3306dbff95e3495b1df0aee181c7e77",
+      "bytes": 830353,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/landing-purple-light-mobile-linux.png",
+      "hash": "6a2ee660743c0cb5cce296437e64158a8975c5e73eff7882ab525a722198596c",
+      "bytes": 542176,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-purple-dark-desktop-linux.png",
+      "hash": "5dba82721c5b133b14350ec6d6b3cd4c8041fb8d81d9db2ea4be0ec1a87d9695",
+      "bytes": 458712,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-purple-dark-mobile-linux.png",
+      "hash": "7ed900da2affda3881afebf970c184c6da070a4b12d90efd79eff3568568ff1f",
+      "bytes": 338180,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-purple-light-desktop-linux.png",
+      "hash": "3221f77254f1a7e47e74fffe21015a81aa8508dfe671fd1f9410b1b9f54edf36",
+      "bytes": 450144,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-purple-light-mobile-linux.png",
+      "hash": "225a48f17001a98038d309ced143200a5bfbd698e581d1b22a613b820e114fa0",
+      "bytes": 332228,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-vercel-dark-desktop-linux.png",
+      "hash": "79098f679593df1c9ca0a61e543cc3004c46771106cb5512dcd2eb21e54df361",
+      "bytes": 420653,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-vercel-dark-mobile-linux.png",
+      "hash": "deb730d3f19ec33e54beb974d6b5ea58cc75dddd299bac01bcc0cf6d64374dc1",
+      "bytes": 290534,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-vercel-light-desktop-linux.png",
+      "hash": "17b19c6e9450f7a8670c361fea71ff69a80a104baa88c0a9262e3160d17b3884",
+      "bytes": 414331,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/pricing-vercel-light-mobile-linux.png",
+      "hash": "ba4a9e71716dbfd2c7e0ce6540f37c6cecca1ca7c5585d257fe9d92ccfe627a8",
+      "bytes": 291821,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-purple-dark-desktop-linux.png",
+      "hash": "4fa205579f5155d04e87254916732d220377c46e09cd6d9fa41f6266a95ceb86",
+      "bytes": 928814,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-purple-dark-mobile-linux.png",
+      "hash": "bbfea692424f538896cb4f6182360ff44833fa4f0d71fc7e14e9ee8e3d39275a",
+      "bytes": 892508,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-purple-light-desktop-linux.png",
+      "hash": "6dff476254cc9fb25eec68fa6d0024081b9eddba7e468c45dcbe0463de05633a",
+      "bytes": 916286,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-purple-light-mobile-linux.png",
+      "hash": "04589ef5540bb54adb8249a61f829caaf491ddd46eda7898ef3620d20fa86f9d",
+      "bytes": 882555,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-vercel-dark-desktop-linux.png",
+      "hash": "b1ca81dde39c75e3e08c14733c0ecdc47ca4e67ab7075b746b5eaab0f28c30c7",
+      "bytes": 851178,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-vercel-dark-mobile-linux.png",
+      "hash": "c478faab92fc0e08981fc80f5defb19199cd60e7791069bf0c1f50f1bcaf2d0c",
+      "bytes": 936176,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-vercel-light-desktop-linux.png",
+      "hash": "ba695a0db069b62a8a1183e6ae3bb4e2a695bc5aacef82cccd3ee04e075c7b84",
+      "bytes": 824251,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/privacy-vercel-light-mobile-linux.png",
+      "hash": "94647ba9bd41fbecd69bee45d7950712210a9b497f5b3fb0b4d39dcdfb99363e",
+      "bytes": 904011,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-purple-dark-desktop-linux.png",
+      "hash": "bb8d85b29a6e2b08c9ef0708d0257fa6dccdf80bb4cc8741213001f0423b8cf2",
+      "bytes": 604069,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-purple-dark-mobile-linux.png",
+      "hash": "9bb4b3ee77d8cc80a1f3a804c9743b91fd018adee9a96a55d27d86bd8ada4297",
+      "bytes": 537196,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-purple-light-desktop-linux.png",
+      "hash": "2b34ea0177e2a05f23d7a33d983e4f0fabf9f62711710db2091b38e6554670e3",
+      "bytes": 596684,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-purple-light-mobile-linux.png",
+      "hash": "e69e2e0e69b093f489bef190b34be4384969e90631888720f4039758b6e28f69",
+      "bytes": 544689,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-vercel-dark-desktop-linux.png",
+      "hash": "de3aa97c1736b2429514a32d58d4ce535c217a3e2875587bc72d7d9eef4b8cea",
+      "bytes": 564254,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-vercel-dark-mobile-linux.png",
+      "hash": "d57e13c2d65fbdff9698d3bcb48060078e9b12bc527cafe9391d60ceccac5271",
+      "bytes": 493090,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-vercel-light-desktop-linux.png",
+      "hash": "0a652e0e19871461e9324320e415c0e7dea6626a12b282c541b3585cbfb93c7e",
+      "bytes": 548215,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/public-visual.spec.ts-snapshots/terms-vercel-light-mobile-linux.png",
+      "hash": "1c91413f6cd055660121fc0d8e4599796283a270cee9cd0860b7daa40ccb0c2c",
+      "bytes": 486052,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/ring-completion.spec.ts",
+      "hash": "2c04fe5062d65b601f1130d3ed98e2d1a32ba2ca12692b29f27eafe07425dd3a",
+      "bytes": 2469,
+      "lines": 74,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/separators.spec.ts",
+      "hash": "6236e344b8be501c3e1e218d5702dff21c5966b5f9ef9991d9b15db1bd321f5f",
+      "bytes": 4544,
+      "lines": 134,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/settings-nav.spec.ts",
+      "hash": "5d3f017680392074460bbefefab8f115c63fd91b010b41f1674fbe19474fdba0",
+      "bytes": 12391,
+      "lines": 340,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/support-pages.spec.ts",
+      "hash": "dae211161e7649902aaca889718fa58e8394047ef57f71d87c014b54661d1556",
+      "bytes": 3230,
+      "lines": 90,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/template-editor.spec.ts",
+      "hash": "f5e19769ab44ff78340df3b8ca4b280ea3d817c6935c6234740b286012615e16",
+      "bytes": 13382,
+      "lines": 354,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts",
+      "hash": "9ca62ebf83ca58a38e000810f10c2414daeacf211788361b1196be3a55fe2bf2",
+      "bytes": 46847,
+      "lines": 1284,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-compose-desktop-linux.png",
+      "hash": "73ea6362aab97f2d3eac3ec9202537cb92749d27d18b9e9dd0bb811de8a7ac1b",
+      "bytes": 271232,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-contacts-desktop-linux.png",
+      "hash": "e3d72bafe8416b666a672ef149aadd00ff9dffc5edebb9db4727cd590045e79c",
+      "bytes": 273744,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-history-desktop-linux.png",
+      "hash": "743984fb60ce6abfdd20e6569c4a106302162b6e1d5f4f2c6bddf75f2207602b",
+      "bytes": 186854,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-settings-desktop-linux.png",
+      "hash": "6eaf5ff8e37a91a14f0682c811043664a7a75c412ce37881c074770d883e8a4e",
+      "bytes": 362810,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-templates-desktop-linux.png",
+      "hash": "ea27139a6cfdc62a0e5eea0cbccda173bbd523c9b7aec2fab1716cc54b7abdd7",
+      "bytes": 252652,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-dark-usage-desktop-linux.png",
+      "hash": "e801f6577ec0e07347ed56df0a3bac83d19c107a3c7a236029002d47fc657923",
+      "bytes": 463880,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-compose-desktop-linux.png",
+      "hash": "af0194c6bb16c3007608c7082f1ff1c4c0a894a15141438e28220053324d221d",
+      "bytes": 258156,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-contacts-desktop-linux.png",
+      "hash": "7c5eb235668c4b4803d5ab40b549be9f7ad2d9f18ad3b0158ed7465adcd0e9b2",
+      "bytes": 264383,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-history-desktop-linux.png",
+      "hash": "acc1c8849cea5ffcfac4fdb1bdfd8cdd9f94bab5612989531633b4f31ca99184",
+      "bytes": 167919,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-settings-desktop-linux.png",
+      "hash": "2a744f568ba36e88df6e24392d11f4631e14c39d42f7cf706ee398cea90bd09a",
+      "bytes": 350648,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-templates-desktop-linux.png",
+      "hash": "0f4869a73d310e620f98db9e97afc7fe052712f99663e691afc59187489b537e",
+      "bytes": 215165,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/empty-free-purple-light-usage-desktop-linux.png",
+      "hash": "c237d500dcd9e12e56f542729ba20acc2872a216c3c71f007c89a2ec7705c88f",
+      "bytes": 407296,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-compose-desktop-linux.png",
+      "hash": "dc34f8d351e39ac97165e3842245e0c0e3e8b9efd56d56c44a5c542cd6fefd68",
+      "bytes": 287659,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-contacts-desktop-linux.png",
+      "hash": "5c434bbb311406471db2b48cd6a9628b10798bee17ec314e7b73002dfc317dd1",
+      "bytes": 210601,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-history-desktop-linux.png",
+      "hash": "3ee767b6122832e1761e41b12b83fca468194e09a084d568c8cc4151e88e37a2",
+      "bytes": 270320,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-settings-desktop-linux.png",
+      "hash": "db1bc18227631dff8ed55a3ab8afda180878ecc0d88cbe6ad9c37f397ad3fee0",
+      "bytes": 355512,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-templates-desktop-linux.png",
+      "hash": "032347391fc19acd4736f1e79da08e297f8c2afa209e15dded7a76fa56e559e3",
+      "bytes": 148880,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-dark-usage-desktop-linux.png",
+      "hash": "e0fa402b7c9b92f7aeaca282fa878d7d5f5e705f99e8fb970293a44ed201d931",
+      "bytes": 287979,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-compose-desktop-linux.png",
+      "hash": "e181211fa7fe1641247090a74b6ae502203ce3598c4213894a757f6654f68c99",
+      "bytes": 274711,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-contacts-desktop-linux.png",
+      "hash": "ce4d47f7a6a2d91306bed3e8fc56a09118fee9ad25037846c1eb41de09af3b44",
+      "bytes": 192725,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-history-desktop-linux.png",
+      "hash": "bc3b8c8f0bb33ce4d883f087e9df4ea5d58804e18dc273137dcadd3a4b577d92",
+      "bytes": 253405,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-settings-desktop-linux.png",
+      "hash": "cd5fb804ad591254000cd54647d64ce2de7f4b7f70e165843a99f6cfe88df6f8",
+      "bytes": 343015,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-templates-desktop-linux.png",
+      "hash": "fd26751de048678df4e2db8ab7de743eab0918c19fd5092c286e177dc071fd4f",
+      "bytes": 130722,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-purple-light-usage-desktop-linux.png",
+      "hash": "854f20547eea977dcf73a4f4f2831666f6c30fd9ed162e5cb73d7de21b5a8bed",
+      "bytes": 277980,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-compose-desktop-linux.png",
+      "hash": "6dd11e38b9d3b3a760b06ad1b6bd629e318cf0b294120525fda1e23d4e553749",
+      "bytes": 179579,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-contacts-desktop-linux.png",
+      "hash": "12da5c2fc06731be5b2ee664b680afc77e41e4f115ed0ada90bff1d880e76012",
+      "bytes": 105727,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-history-desktop-linux.png",
+      "hash": "796a7b6c455512f7774eb562db226d8c0169610e1427b56a48f2e575eb303ce9",
+      "bytes": 176563,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-settings-desktop-linux.png",
+      "hash": "a2ed3711fb17d2c8b0b5a0daa7412fffd564f3689e391a8efdc6e59076c2c128",
+      "bytes": 278092,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-templates-desktop-linux.png",
+      "hash": "a3f0468f60f0bf21fd77cd9ea2177542416d1671e99cb7ddc34644c08316ab9f",
+      "bytes": 59956,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-dark-usage-desktop-linux.png",
+      "hash": "98062d54c4732eb8e0702be1b269cbd193ff51ea72a4b02a0355891020441447",
+      "bytes": 225008,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-compose-desktop-linux.png",
+      "hash": "e15bda166cb80b3edbb3b96e0393e36a4e3e3015afd8661854a4aa14300735db",
+      "bytes": 178899,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-contacts-desktop-linux.png",
+      "hash": "5e5814ec591dc812d186e6381cfed997b4df01127a765d015e285e9e70e90a76",
+      "bytes": 105468,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-history-desktop-linux.png",
+      "hash": "d1ed94072f372038c156dcc80545ed7645822f9a4f7e83b97c665202e12a1550",
+      "bytes": 177245,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-settings-desktop-linux.png",
+      "hash": "2cb00dc88be3f3401cb6bf818077841ad6bc1f6826206d39910e688e5edde670",
+      "bytes": 275331,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-templates-desktop-linux.png",
+      "hash": "06b5743e227ab757e82569232c17ac490c522a0d9d98948ce3fb99a9e0583471",
+      "bytes": 59722,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/theme-audit.spec.ts-snapshots/populated-premium-vercel-light-usage-desktop-linux.png",
+      "hash": "4a8b1d3f18a54426b56c29244a5718e159a02c22b0b072f6a56d7a03aeca706a",
+      "bytes": 223345,
+      "excluded": "binary asset: .png",
+      "purpose": "visual reference / screenshot"
+    },
+    {
+      "path": "tests/browser/tutorial-plan-updates.spec.ts",
+      "hash": "b22db5f8363fbaa5ecf70a957535d4fb31b22b5de8fb41865d0d4a7c2c6582f5",
+      "bytes": 4530,
+      "lines": 126,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/browser/usage-plan-card.spec.ts",
+      "hash": "99846b3b15d7dd869d8c9a920483195ed6c4a43b356aa0e66492711019c3907c",
+      "bytes": 20374,
+      "lines": 584,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/campaign-progress.test.ts",
+      "hash": "ab8d4d1d58a1322d16982653a59342fc20c6549d83774f612ec878c61b3281f5",
+      "bytes": 15299,
+      "lines": 507,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/core.test.ts",
+      "hash": "9d02a544faa1ad254ab93cc0c8b7f83f4a3f8cdac832fabea00ae4c20520dda5",
+      "bytes": 8947,
+      "lines": 253,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/db-client.test.ts",
+      "hash": "288f610ef0f49d4aa1c38e04de965260863ff029825617246e4d77aded9efecc",
+      "bytes": 1680,
+      "lines": 46,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/deletion-schedule.test.ts",
+      "hash": "b950208388e3d83623d19ea386f9b51ffd80a9dfaa8ebc906c41ebcd3ec54bd6",
+      "bytes": 2303,
+      "lines": 74,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/deletion-storage.test.ts",
+      "hash": "1657f4635112412c687b1f0defb8271c932a683666bb2a57a2f25f5d3e8b2a2b",
+      "bytes": 2363,
+      "lines": 65,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/dodo-billing.db.test.ts",
+      "hash": "1469d5102ecfee8217b0ebc68f348e0d36c1a9a923990aac2fdd95a4fe9df741",
+      "bytes": 57240,
+      "lines": 1517,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/dodo-config.test.ts",
+      "hash": "abbe90c70c8c3dcb3a89f72d657ea8d30e5c0966b1809192f46b3301ab42f4c5",
+      "bytes": 6712,
+      "lines": 195,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/dodo-jobs.test.ts",
+      "hash": "44bf5f250393df0b5055b19186102870fac28e2209f7c96c565361f4f22dc2fb",
+      "bytes": 5014,
+      "lines": 149,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/dodo-migration.db.test.ts",
+      "hash": "258cec9b1a256f16d5cc97fb82db2aa830be0bc89545d3c0759c6dbc4c6af16d",
+      "bytes": 7712,
+      "lines": 181,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/dodo-routes.test.ts",
+      "hash": "f98f6de0d063506fab0b9f7fe4edd5876c044f55ea97ce0dc7b39c89aa47b1e2",
+      "bytes": 7939,
+      "lines": 224,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/dodo-webhook.test.ts",
+      "hash": "a402e6924c88535d2017058bfa5ad8b77fc6193b60aeb2aa615b27707bdeabc3",
+      "bytes": 8150,
+      "lines": 241,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/email-mime.test.ts",
+      "hash": "cb32dffff6f280b4fd66c51d24390dab1b7fa902be28ad3e470b31cb2d2636ed",
+      "bytes": 4599,
+      "lines": 116,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/entitlement-foundation.db.test.ts",
+      "hash": "f498a9c0ed281a2bba363842ef047e61b67f19e0d4082325f754d950e280ae95",
+      "bytes": 10512,
+      "lines": 295,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/entitlements.test.ts",
+      "hash": "1803df54867236909b019b6f3124ed8cf2b2cf8c2e96379b6c18e350eaa2e300",
+      "bytes": 15649,
+      "lines": 468,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/feature-gates.db.test.ts",
+      "hash": "fde938ea758be14252f0880eb309fb9da251e9a79ef4060c1349f8fe716dd0ad",
+      "bytes": 28229,
+      "lines": 794,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/feature-gates.test.ts",
+      "hash": "fe6231427ac46f1e0fbd0e1b7adff89ec6c9eb54310f33cd02c8cb1c7db35900",
+      "bytes": 4235,
+      "lines": 143,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/fixtures/render-ring.ts",
+      "hash": "ce522856e22b4cb839e9479b32f741150b7a717812eea8756718727ef68ad781",
+      "bytes": 881,
+      "lines": 29,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/fixtures/usage-worker.ts",
+      "hash": "ff98f349fbd21455a17f7695e5de6d5a5ec078972706cbb68905c59fce03fb7c",
+      "bytes": 3363,
+      "lines": 122,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/gmail-boundary.test.ts",
+      "hash": "8118fd7eba166d4f4dc67616480dc60e6027d0e6647b6fe7be9ea79c45c340ca",
+      "bytes": 2124,
+      "lines": 66,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/gmail-errors.test.ts",
+      "hash": "0cea896b0a716506af372e9ffb9c6bcad8bddd34d5f4df611775e007981fd6ee",
+      "bytes": 3640,
+      "lines": 105,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/hardening-routes.test.ts",
+      "hash": "e3a369bcb1671d296d7349f89ab54d0c07b4abf800bedfd8624393fdba3c5baf",
+      "bytes": 3337,
+      "lines": 91,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/browser-reporter.ts",
+      "hash": "8e012cbf808cfcf5d4f6e4d1751eb2f205e56ae75bbcb573d701d9103717fbd0",
+      "bytes": 868,
+      "lines": 28,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/dodo-fixtures.ts",
+      "hash": "5cdb44e9484eead9be8ac5c53c7b492933aab53bf0918e70c032bdd4fa125270",
+      "bytes": 1411,
+      "lines": 59,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/foundation-db.ts",
+      "hash": "4e4c415e5b3514ecd0b450d4ff8e27646c9278060c452701786d3fd4b2f97130",
+      "bytes": 2554,
+      "lines": 68,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/premium-shine.ts",
+      "hash": "8d379d8a0ec8bb504f779630ff42a8db0e43a0de0f88913ee2287cf7df2fdd96",
+      "bytes": 2303,
+      "lines": 76,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/screenshot.css",
+      "hash": "88ae39a752cd1a1bae2ab4a22969a28828c9f6e8a2742259cd18519f934e88b1",
+      "bytes": 176,
+      "lines": 10,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/system-control-browser.ts",
+      "hash": "298820045c063b604dc28996ecb230792b40618a783e39510f16c6198476246d",
+      "bytes": 1684,
+      "lines": 45,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/theme-browser.ts",
+      "hash": "a0afda5657285472cb340540861eac3cbffe56117daf873919173c350148521a",
+      "bytes": 2503,
+      "lines": 80,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/helpers/theme-preferences.ts",
+      "hash": "70a3b4b23b3cbcaba694c9a287df762441b6f983dcba02ce936151aa27f2f877",
+      "bytes": 1652,
+      "lines": 55,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/history-actions.test.ts",
+      "hash": "142d7b84771e6a7c5757440b6ee9e7a12b959f79ff1734d676c00b52199cdb1a",
+      "bytes": 1797,
+      "lines": 50,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/history-allowance-pill.test.ts",
+      "hash": "5844b57351ebdeb736ecd62b42d422a3b76521d3081c5d0ac1fc6187d4625c4b",
+      "bytes": 4706,
+      "lines": 121,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/history-migration.db.test.ts",
+      "hash": "ba7493593c3e6818a86efdcbc9828af14a4f5cfa93fa794ce8c8a61470b09b0e",
+      "bytes": 4394,
+      "lines": 117,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/history-sent-time.test.ts",
+      "hash": "c25797a03acd9d975d9b9f6fe8ca64cd33f969ef0690456bc2a7d7667a712c81",
+      "bytes": 889,
+      "lines": 25,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/integration.db.test.ts",
+      "hash": "f25d7d066ddc43e351d55e97655f3119e4a1048e89e31f251e73fd1f1879e444",
+      "bytes": 34514,
+      "lines": 943,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/launch.db.test.ts",
+      "hash": "710445ef92fc28dde478bcb6ea740962713596700d0edd166963b8d500f2b8e9",
+      "bytes": 28510,
+      "lines": 797,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/limit-banner.test.ts",
+      "hash": "f7aa082d85e6de2e20ce6e527fcc7123dfa92bf150148b1633c07ff891d1236d",
+      "bytes": 2395,
+      "lines": 64,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/link-migration.db.test.ts",
+      "hash": "a30d30fb792028f25127e1a76cbbff76c332515e9ebbbfc0ab2742d389c9f27f",
+      "bytes": 5556,
+      "lines": 155,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/local-data-reset.db.test.ts",
+      "hash": "6c852fb5f2cd86d73415b74ee2a6d62f7f3efce2c0759796435957aea6219ebd",
+      "bytes": 3309,
+      "lines": 95,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/localized-price.test.ts",
+      "hash": "f74151cda4ca679ec180b650407c9b9d835d44c2094dab435426aa6a6f9088b2",
+      "bytes": 2448,
+      "lines": 69,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/maintenance.db.test.ts",
+      "hash": "79b7d5dc27d1eb971783ad18a0b2f3ebad7bc431031bb83bf566347bd9c423b9",
+      "bytes": 5449,
+      "lines": 143,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/observability.test.ts",
+      "hash": "990ca3e4fb42132dd6e0af145894df5be5c69d38d455c7fd99989512983dee9c",
+      "bytes": 2726,
+      "lines": 73,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/plan-features.test.ts",
+      "hash": "bc032ee7158f0fbb3569d04467056391f6562f6b9daff7d681687e9be82aacc2",
+      "bytes": 2750,
+      "lines": 87,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/plans.test.ts",
+      "hash": "46085703f942282dc46d85ac9941f746ff07819459e84577cb0767a2c01d0aef",
+      "bytes": 1586,
+      "lines": 55,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/progress.test.ts",
+      "hash": "333a8d297d1dfaeb9ecc705bd89bcaa7691c5dcdfea6a6d8821a8516b50e72ae",
+      "bytes": 1114,
+      "lines": 23,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/quota.test.ts",
+      "hash": "98a22a401131a145de5bc95bcc99f2d99b868508849e7931a965d4ecd6b75f9b",
+      "bytes": 1491,
+      "lines": 34,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/rate-limit-cleanup.db.test.ts",
+      "hash": "1f3ab7e49825f7455190979fe64dc0f9d6e237e7110e7fd2ab33d88115bb03a6",
+      "bytes": 2109,
+      "lines": 63,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/rate-limit.db.test.ts",
+      "hash": "8423b00d31e9c059884fe301c011460d33fd4592143db1462fbd84ffb64b9553",
+      "bytes": 4288,
+      "lines": 116,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/rate-limit.test.ts",
+      "hash": "0d2ce4fe4fbd806f7f33c947470125154a871c4dcbade7b42ef81d36a556daf6",
+      "bytes": 1931,
+      "lines": 55,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/recipient-actions.db.test.ts",
+      "hash": "4dd314361992d4a0b797dfff46acedda65c159ca03aa7110146f89e45ce7c3ca",
+      "bytes": 13049,
+      "lines": 376,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/redesign.test.ts",
+      "hash": "cb4ba19a75b117b3b1fce7b4956e4e9f79d64586384f51746009fdf490ffae5c",
+      "bytes": 2273,
+      "lines": 58,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/reply-schedule.test.ts",
+      "hash": "f5f72a39104d87a33e3e03037ba421275f5dd586d91cc798ca32f54da2f4f848",
+      "bytes": 8703,
+      "lines": 260,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/ring-completion.test.ts",
+      "hash": "4d5b3a1a7ddccc39a2423d19d7f64480328f34b1c3d5ceb7cc2d54c3888b5331",
+      "bytes": 3353,
+      "lines": 98,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/roles.test.ts",
+      "hash": "661a2ca765b88f542fa50a495f0448326da067d41a9f000ee14eb07732d560e4",
+      "bytes": 1980,
+      "lines": 53,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/send-only-migration.db.test.ts",
+      "hash": "20ba86e10ee17d1b0aa5ee601ce54d806ff92716a83bf371881be2a04fda1750",
+      "bytes": 3446,
+      "lines": 95,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/send-only.test.ts",
+      "hash": "69932614cca0b7edf889660b13e7df9dfccc87321f4663043d81d37bd309dddd",
+      "bytes": 2006,
+      "lines": 57,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/send-timing.test.ts",
+      "hash": "dfde82352f670689a1a94c4d7c382bb6ca866046f63ad74039a25b90ac826832",
+      "bytes": 2177,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/sending-status.test.ts",
+      "hash": "5674f053937a42fe28753548d2b5e07a012fe3efbc349f381e868c61682daebd",
+      "bytes": 1821,
+      "lines": 46,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/server-only.ts",
+      "hash": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+      "bytes": 11,
+      "lines": 2,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/subscription-foundation-migration.db.test.ts",
+      "hash": "781a4552ec41ed14be1a695f9bfd2780f4d165a4b326d3dbf2e5400f1c088bba",
+      "bytes": 18447,
+      "lines": 448,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/subscription-lifecycle-migration.db.test.ts",
+      "hash": "175432e170ccc4d2c9a30c9064600868486468ed08abb8b8f1c795ea311bd3f1",
+      "bytes": 2882,
+      "lines": 75,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/subscription-lifecycle.db.test.ts",
+      "hash": "780de8c520b37bd4808d0c9ad3dc307c52b098758a74b791b6d310e0d7958f5e",
+      "bytes": 9218,
+      "lines": 258,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/subscription-lifecycle.test.ts",
+      "hash": "5ff9e79a068a44ae48306d5629ef7c02d6924a58ccfaab670b688fd03bde5a8a",
+      "bytes": 3316,
+      "lines": 99,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/subscription-maintenance.test.ts",
+      "hash": "c00b4d44d807e9a9c7e32ee87a845480d2bd519e2d7ea7d947fc373edb82b069",
+      "bytes": 1681,
+      "lines": 50,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/suggest-name-from-email.test.ts",
+      "hash": "6ea40f671a8fa8db378a2da869093276f924d34c330f2be86bd82a280865f095",
+      "bytes": 987,
+      "lines": 30,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/theme-colors.test.ts",
+      "hash": "17892cb5fa7beed2ad52af3980679e9eb8d3cc18cf53c215a35e7be283fc6e75",
+      "bytes": 1491,
+      "lines": 41,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/token-encryption.test.ts",
+      "hash": "5bf16a32d7064060d640f316e00ab7ededfc63ac6e6c9d6855d5bd837b3c6a2a",
+      "bytes": 2980,
+      "lines": 72,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/token-rotation.db.test.ts",
+      "hash": "8637f5ec00fd9c348040dbe7a68e0183d3f4484a611e002d817413a8851e35a8",
+      "bytes": 5932,
+      "lines": 167,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/tutorial-content.test.ts",
+      "hash": "491bab2fbb7e03d43d971960c1001276c00ff2d05473bb69be94da6f9d1df06a",
+      "bytes": 7005,
+      "lines": 188,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/upload.test.ts",
+      "hash": "acf5d3b0cd920ab2269e4c1e00e523133648e21a1aab8eb12176d37469b22ce8",
+      "bytes": 1574,
+      "lines": 43,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/usage-allowance-state.test.ts",
+      "hash": "8293fc71570d4e98a215a5b552460779837a0045013a86fc584e614b3e291759",
+      "bytes": 797,
+      "lines": 19,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/usage-backfill.db.test.ts",
+      "hash": "b92c8b1a2779ad6c00401df14fcb061821bc16902484f1384e5cdd1dd4897f47",
+      "bytes": 5015,
+      "lines": 138,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-campaigns.db.test.ts",
+      "hash": "925554a70e83bea9d6bf6103e3395c8ba992fadae62b50c563a37397dafe957d",
+      "bytes": 8041,
+      "lines": 205,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-contact-save.db.test.ts",
+      "hash": "7c5a4df0390c8280abca40e411a28c844b9a7db3de24dc23aef2e4901f168d66",
+      "bytes": 7848,
+      "lines": 253,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-history.db.test.ts",
+      "hash": "b9111c929756cd486350a951bc2813e696dd60c6136219b0f6e9ed397de4e1b7",
+      "bytes": 3378,
+      "lines": 81,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/usage-ledger-migration.db.test.ts",
+      "hash": "c6ec6ade9e569f2acf39b868e65d345d8b454f240c1997c1eabcd34ff6f21423",
+      "bytes": 8744,
+      "lines": 215,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-ledger.db.test.ts",
+      "hash": "ba88c6baa5011edc4cb5691e727434e8762dd5096107f9ed48578cd10575956c",
+      "bytes": 31461,
+      "lines": 885,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-reconciliation.db.test.ts",
+      "hash": "ee8822c86fafd67fbca332e105df6f7772419db3a89d303eb09b18e043389e87",
+      "bytes": 6737,
+      "lines": 187,
+      "read": "complete byte/text scan",
+      "redacted": true
+    },
+    {
+      "path": "tests/usage-reporting.db.test.ts",
+      "hash": "b9eb31149c90565ce8d9372b5a2e035c25c7c12869496e88664709e3e9b2cee6",
+      "bytes": 2688,
+      "lines": 71,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/usage-rollout.db.test.ts",
+      "hash": "0e9e5742bd0c4e600ae0aea0b5bc2becaa505af31933da5297b4e0305b7283c2",
+      "bytes": 6402,
+      "lines": 165,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tests/usage-worker.db.test.ts",
+      "hash": "f7180327ff25869636e7a1135e4ad79569d2f1a5ff267111d7ade55e698216cf",
+      "bytes": 21026,
+      "lines": 572,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "tsconfig.json",
+      "hash": "4bda4ec923b2a125c4e9ac87eda6e975325a07d9a6a8c528ae08887463301b8c",
+      "bytes": 796,
+      "lines": 39,
+      "read": "complete byte/text scan",
+      "redacted": false
+    },
+    {
+      "path": "vitest.config.mts",
+      "hash": "cd552798f1344dd3b1392a07957d4210308251da90e124285842325f76b12c55",
+      "bytes": 284,
+      "lines": 12,
+      "read": "complete byte/text scan",
+      "redacted": false
+    }
+  ],
+  "history": "a4f1651 Fix billing test mode copy for live checkout\n2261cb7 Polish workspace themes and stabilize browser checks\n5753de5 Polish timer ring rendering and Premium pricing effects\n5af53f9 Align browser checks with current public and workspace UI\nb8e0d62 Fix footer creator link to X profile\nbcbc7a0 fix: compact public pricing cards on mobile\ndfad7df Fix missing emnapi dependencies in lockfile\n7893049 Match landing Google icon to monochrome reference\n5fe4ac9 Polish mobile landing layout and automate premium button shine\naf3c034 Refine landing pricing card sizing and stat hover states\n9252c85 Align pricing cards with Nightbloom reference\nc038850 fix canonical domain for SEO URLs"
+}

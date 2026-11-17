@@ -1,0 +1,296 @@
+[
+  {
+    "id": "oauth",
+    "term": "OAuth",
+    "definition": "Delegated authorization: Google grants this app selected permissions without sharing the user password.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "jwt",
+    "term": "JWT",
+    "definition": "A token-based session representation managed by Auth.js; this app puts owner identity in its callbacks.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "session",
+    "term": "session",
+    "definition": "The authenticated application identity; distinct from the refresh credential needed to send Gmail.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "refresh-token",
+    "term": "refresh token",
+    "definition": "A server-held credential used to obtain an access token; persisted encrypted in this implementation.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "access-token",
+    "term": "access token",
+    "definition": "A temporary provider credential prepared explicitly before the final send claim.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "scope",
+    "term": "scope",
+    "definition": "A named permission in the Google consent grant, such as gmail.send.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "entitlement",
+    "term": "entitlement",
+    "definition": "A present-tense decision about whether an owner may use a feature, based on policy and current state.",
+    "chapter": "payments"
+  },
+  {
+    "id": "idempotency",
+    "term": "idempotency",
+    "definition": "Repeated use of the same operation identity returns the same result or avoids repeating its effect.",
+    "chapter": "sending"
+  },
+  {
+    "id": "idempotency-key",
+    "term": "idempotency key",
+    "definition": "An owner-scoped UUID used to identify one campaign submission or checkout operation.",
+    "chapter": "sending"
+  },
+  {
+    "id": "snapshot",
+    "term": "snapshot",
+    "definition": "A stored copy of approved values, so later contact/template edits do not change a queued message.",
+    "chapter": "database"
+  },
+  {
+    "id": "mime",
+    "term": "MIME",
+    "definition": "The standard message format for text, HTML, headers and attachments; buildMime encodes it for Gmail.",
+    "chapter": "sending"
+  },
+  {
+    "id": "base64url",
+    "term": "base64url",
+    "definition": "A URL-safe base64 encoding used for the raw Gmail MIME message.",
+    "chapter": "sending"
+  },
+  {
+    "id": "message-id",
+    "term": "Message-ID",
+    "definition": "A stable message header identity; it is not proof of provider deduplication.",
+    "chapter": "sending"
+  },
+  {
+    "id": "outbox",
+    "term": "outbox",
+    "definition": "Durable local intent committed before publication to an external work system.",
+    "chapter": "architecture"
+  },
+  {
+    "id": "inbox",
+    "term": "inbox",
+    "definition": "A durable provider-event receipt stored before asynchronous processing.",
+    "chapter": "payments"
+  },
+  {
+    "id": "webhook",
+    "term": "webhook",
+    "definition": "An HTTP callback from a provider. This app verifies Dodo signatures rather than requiring a user session.",
+    "chapter": "payments"
+  },
+  {
+    "id": "reconciliation",
+    "term": "reconciliation",
+    "definition": "Comparing/rebuilding local evidence and provider observations, including repairing interrupted publication.",
+    "chapter": "inngest"
+  },
+  {
+    "id": "lease",
+    "term": "lease",
+    "definition": "A time-bounded claim on active work. Expiry does not prove the external effect did not happen.",
+    "chapter": "sending"
+  },
+  {
+    "id": "claim-token",
+    "term": "claim token",
+    "definition": "An unpredictable identity tying settlement to the exact claimed attempt.",
+    "chapter": "sending"
+  },
+  {
+    "id": "reservation",
+    "term": "reservation",
+    "definition": "Durable accounting capacity assigned to a delivery before external submission.",
+    "chapter": "database"
+  },
+  {
+    "id": "utc",
+    "term": "UTC",
+    "definition": "Coordinated Universal Time, used for daily usage boundaries and documented cron schedules.",
+    "chapter": "sending"
+  },
+  {
+    "id": "half-open",
+    "term": "half-open",
+    "definition": "A time range including its start and excluding its end, preventing overlap at boundaries.",
+    "chapter": "payments"
+  },
+  {
+    "id": "grace-period",
+    "term": "grace period",
+    "definition": "A verified extension of paid operational access that retains the same allowance identity.",
+    "chapter": "payments"
+  },
+  {
+    "id": "fail-closed",
+    "term": "fail closed",
+    "definition": "Deny or defer protected work when required authorization/accounting controls are unavailable.",
+    "chapter": "security-reliability"
+  },
+  {
+    "id": "tenant",
+    "term": "tenant",
+    "definition": "An owner whose data and operations must remain separate from other users.",
+    "chapter": "database"
+  },
+  {
+    "id": "row-lock",
+    "term": "row lock",
+    "definition": "A PostgreSQL transaction lock that serializes competing changes to the selected owner or budget.",
+    "chapter": "database"
+  },
+  {
+    "id": "transaction",
+    "term": "transaction",
+    "definition": "A database unit whose local changes commit together or roll back together; external provider calls are outside it.",
+    "chapter": "database"
+  },
+  {
+    "id": "prisma",
+    "term": "Prisma",
+    "definition": "The typed database client and schema/migration tooling used by this application.",
+    "chapter": "database"
+  },
+  {
+    "id": "app-router",
+    "term": "App Router",
+    "definition": "The Next.js route organization used for layouts, pages, loading/error boundaries and handlers.",
+    "chapter": "frontend"
+  },
+  {
+    "id": "server-action",
+    "term": "server action",
+    "definition": "A server-executed mutation entrypoint invoked by the UI; it still needs authentication and policy checks.",
+    "chapter": "frontend"
+  },
+  {
+    "id": "route-handler",
+    "term": "route handler",
+    "definition": "An HTTP endpoint implemented in an App Router route file.",
+    "chapter": "function-reference"
+  },
+  {
+    "id": "server-component",
+    "term": "server component",
+    "definition": "A React component rendered on the server; it can prepare data without making all UI code client-side.",
+    "chapter": "frontend"
+  },
+  {
+    "id": "client-component",
+    "term": "client component",
+    "definition": "A React component opting into browser interactivity with use client.",
+    "chapter": "frontend"
+  },
+  {
+    "id": "inngest",
+    "term": "Inngest",
+    "definition": "The event/workflow orchestration library registering the app\u2019s eight background functions.",
+    "chapter": "inngest"
+  },
+  {
+    "id": "durable-step",
+    "term": "durable step",
+    "definition": "An orchestration work boundary recorded by Inngest; replay semantics differ from another Gmail request.",
+    "chapter": "inngest"
+  },
+  {
+    "id": "cron",
+    "term": "cron",
+    "definition": "A schedule expression used by periodic maintenance registrations.",
+    "chapter": "inngest"
+  },
+  {
+    "id": "aes-256-gcm",
+    "term": "AES-256-GCM",
+    "definition": "Authenticated encryption used for refresh-token envelopes, with a random IV and integrity tag.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "aad",
+    "term": "AAD",
+    "definition": "Additional authenticated data binding a v2 credential to its version, key ID, purpose and owner UUID.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "iv",
+    "term": "IV",
+    "definition": "The random initialization value used by encryption; v2 uses 12 bytes.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "compare-and-swap",
+    "term": "compare-and-swap",
+    "definition": "Update only if an observed old value still matches, preserving concurrent reconnect/erasure changes.",
+    "chapter": "authentication"
+  },
+  {
+    "id": "tombstone",
+    "term": "tombstone",
+    "definition": "A retained deletion marker that blocks unsafe recreation or activation while cleanup is pending.",
+    "chapter": "walkthrough-deletion"
+  },
+  {
+    "id": "standard-webhooks",
+    "term": "Standard Webhooks",
+    "definition": "The signature/timestamp verification protocol used on the exact raw Dodo request body.",
+    "chapter": "payments"
+  },
+  {
+    "id": "minor-units",
+    "term": "minor units",
+    "definition": "Integer currency subunits; configured examples include USD 599 and INR 29900.",
+    "chapter": "payments"
+  },
+  {
+    "id": "rollout-guard",
+    "term": "rollout guard",
+    "definition": "A configuration or persisted control preventing activation before readiness is established.",
+    "chapter": "payments"
+  },
+  {
+    "id": "rate-limit",
+    "term": "rate limit",
+    "definition": "A request-frequency budget; separate from daily/monthly email allowance and Gmail provider limits.",
+    "chapter": "security-reliability"
+  },
+  {
+    "id": "uncertain",
+    "term": "UNCERTAIN",
+    "definition": "A delivery state where provider acceptance cannot be established; accounting remains and auto-resend is blocked.",
+    "chapter": "sending"
+  },
+  {
+    "id": "setnull",
+    "term": "SetNull",
+    "definition": "A relation deletion behavior preserving the dependent record while clearing its foreign key.",
+    "chapter": "database"
+  },
+  {
+    "id": "cascade",
+    "term": "Cascade",
+    "definition": "A relation deletion behavior removing dependent records, used for owner content but not every recovery record.",
+    "chapter": "database"
+  },
+  {
+    "id": "static-export",
+    "term": "static export",
+    "definition": "Prebuilt HTML and assets served without an application server; used by this handbook.",
+    "chapter": "cheat-sheet"
+  }
+]
