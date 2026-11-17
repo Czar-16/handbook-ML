@@ -1,5 +1,10 @@
 # MailLoop handbook
 
+Use the floating **Pen** control to draw temporary notes over the handbook and
+source. Choose a color, thickness and opacity; undo or clear strokes as needed.
+Press Escape to stop drawing. Ink stays aligned while scrolling and is discarded
+when leaving or refreshing the page; it is never saved with learning progress.
+
 ## Cloudflare Workers deployment
 
 This Next.js project uses `output: 'export'`. `npm run build` generates the
